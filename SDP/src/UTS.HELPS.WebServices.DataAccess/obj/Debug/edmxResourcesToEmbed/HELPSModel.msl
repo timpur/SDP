@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HELPSModelStoreContainer" CdmEntityContainer="HELPSEntities">
+    <FunctionImportMapping FunctionImportName="prcCreateStudent" FunctionName="HELPSModel.Store.prcCreateStudent" />
+    <FunctionImportMapping FunctionImportName="prcListSessionTypes" FunctionName="HELPSModel.Store.prcListSessionTypes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.SessionType">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="abbName" ColumnName="abbName" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="iscurrent" ColumnName="iscurrent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcSearchSessionBookings" FunctionName="HELPSModel.Store.prcSearchSessionBookings">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.SessionBooking">
+          <ScalarProperty Name="LecturerFirstName" ColumnName="LecturerFirstName" />
+          <ScalarProperty Name="LecturerLastName" ColumnName="LecturerLastName" />
+          <ScalarProperty Name="LecturerEmail" ColumnName="LecturerEmail" />
+          <ScalarProperty Name="SessionTypeAbb" ColumnName="SessionTypeAbb" />
+          <ScalarProperty Name="SessionType" ColumnName="SessionType" />
+          <ScalarProperty Name="AssignmentType" ColumnName="AssignmentType" />
+          <ScalarProperty Name="AppointmentType" ColumnName="AppointmentType" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Campus" ColumnName="Campus" />
+          <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+          <ScalarProperty Name="Assistance" ColumnName="Assistance" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Attended" ColumnName="Attended" />
+          <ScalarProperty Name="WaitingID" ColumnName="WaitingID" />
+          <ScalarProperty Name="IsGroup" ColumnName="IsGroup" />
+          <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
+          <ScalarProperty Name="LecturerComment" ColumnName="LecturerComment" />
+          <ScalarProperty Name="LearningIssues" ColumnName="LearningIssues" />
+          <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+          <ScalarProperty Name="AssignTypeOther" ColumnName="AssignTypeOther" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="AppointmentsOther" ColumnName="AppointmentsOther" />
+          <ScalarProperty Name="AssistanceText" ColumnName="AssistanceText" />
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcCancelWorkshopBooking" FunctionName="HELPSModel.Store.prcCancelWorkshopBooking" />
+    <FunctionImportMapping FunctionImportName="prcGetWorkshopBooking" FunctionName="HELPSModel.Store.prcGetWorkshopBooking">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.BasicWorkshopBooking">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="workshopID" ColumnName="workshopID" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="canceled" ColumnName="canceled" />
+          <ScalarProperty Name="attended" ColumnName="attended" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcGetStudent" FunctionName="HELPSModel.Store.prcGetStudent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.Student">
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="degree" ColumnName="degree" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="first_language" ColumnName="first_language" />
+          <ScalarProperty Name="country_origin" ColumnName="country_origin" />
+          <ScalarProperty Name="background" ColumnName="background" />
+          <ScalarProperty Name="HSC" ColumnName="HSC" />
+          <ScalarProperty Name="HSC_mark" ColumnName="HSC_mark" />
+          <ScalarProperty Name="IELTS" ColumnName="IELTS" />
+          <ScalarProperty Name="IELTS_mark" ColumnName="IELTS_mark" />
+          <ScalarProperty Name="TOEFL" ColumnName="TOEFL" />
+          <ScalarProperty Name="TOEFL_mark" ColumnName="TOEFL_mark" />
+          <ScalarProperty Name="TAFE" ColumnName="TAFE" />
+          <ScalarProperty Name="TAFE_mark" ColumnName="TAFE_mark" />
+          <ScalarProperty Name="CULT" ColumnName="CULT" />
+          <ScalarProperty Name="CULT_mark" ColumnName="CULT_mark" />
+          <ScalarProperty Name="InsearchDEEP" ColumnName="InsearchDEEP" />
+          <ScalarProperty Name="InsearchDEEP_mark" ColumnName="InsearchDEEP_mark" />
+          <ScalarProperty Name="InsearchDiploma" ColumnName="InsearchDiploma" />
+          <ScalarProperty Name="InsearchDiploma_mark" ColumnName="InsearchDiploma_mark" />
+          <ScalarProperty Name="foundationcourse" ColumnName="foundationcourse" />
+          <ScalarProperty Name="foundationcourse_mark" ColumnName="foundationcourse_mark" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="creatorID" ColumnName="creatorID" />
+          <ScalarProperty Name="degree_details" ColumnName="degree_details" />
+          <ScalarProperty Name="alternative_contact" ColumnName="alternative_contact" />
+          <ScalarProperty Name="preferred_name" ColumnName="preferred_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcGetWorkshop" FunctionName="HELPSModel.Store.prcGetWorkshop">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.BasicWorkshop">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="topic" ColumnName="topic" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="targetingGroup" ColumnName="targetingGroup" />
+          <ScalarProperty Name="campusID" ColumnName="campusID" />
+          <ScalarProperty Name="starting" ColumnName="starting" />
+          <ScalarProperty Name="ending" ColumnName="ending" />
+          <ScalarProperty Name="maximum" ColumnName="maximum" />
+          <ScalarProperty Name="cutoff" ColumnName="cutoff" />
+          <ScalarProperty Name="workshopsetid" ColumnName="workshopsetid" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="reminder_num" ColumnName="reminder_num" />
+          <ScalarProperty Name="reminder_sent" ColumnName="reminder_sent" />
+          <ScalarProperty Name="BookingCount" ColumnName="BookingCount" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcCreateWorkshopBooking" FunctionName="HELPSModel.Store.prcCreateWorkshopBooking" />
+    <FunctionImportMapping FunctionImportName="prcCreateWorkshopWaiting" FunctionName="HELPSModel.Store.prcCreateWorkshopWaiting" />
+    <FunctionImportMapping FunctionImportName="prcGetWorkshopWaiting" FunctionName="HELPSModel.Store.prcGetWorkshopWaiting">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.BasicWorkshopWaiting">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="workshopID" ColumnName="workshopID" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="priority" ColumnName="priority" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcGetSession" FunctionName="HELPSModel.Store.prcGetSession">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.BasicSession">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="starting" ColumnName="starting" />
+          <ScalarProperty Name="ending" ColumnName="ending" />
+          <ScalarProperty Name="campus" ColumnName="campus" />
+          <ScalarProperty Name="lecturer" ColumnName="lecturer" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcGetSessionBooking" FunctionName="HELPSModel.Store.prcGetSessionBooking">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.BasicSessionBooking">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+          <ScalarProperty Name="cancel" ColumnName="cancel" />
+          <ScalarProperty Name="assisstance" ColumnName="assisstance" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="attended" ColumnName="attended" />
+          <ScalarProperty Name="waitingID" ColumnName="waitingID" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+          <ScalarProperty Name="isgroup" ColumnName="isgroup" />
+          <ScalarProperty Name="numpeople" ColumnName="numpeople" />
+          <ScalarProperty Name="lecturercomment" ColumnName="lecturercomment" />
+          <ScalarProperty Name="learningissues" ColumnName="learningissues" />
+          <ScalarProperty Name="islocked" ColumnName="islocked" />
+          <ScalarProperty Name="assigntype" ColumnName="assigntype" />
+          <ScalarProperty Name="assigntypeOther" ColumnName="assigntypeOther" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="appointments" ColumnName="appointments" />
+          <ScalarProperty Name="appointmentsOther" ColumnName="appointmentsOther" />
+          <ScalarProperty Name="assisstanceText" ColumnName="assisstanceText" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcSearchWorkshopBookings" FunctionName="HELPSModel.Store.prcSearchWorkshopBookings">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.WorkshopBooking">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="workshopID" ColumnName="workshopID" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="topic" ColumnName="topic" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="targetingGroup" ColumnName="targetingGroup" />
+          <ScalarProperty Name="campusID" ColumnName="campusID" />
+          <ScalarProperty Name="starting" ColumnName="starting" />
+          <ScalarProperty Name="ending" ColumnName="ending" />
+          <ScalarProperty Name="maximum" ColumnName="maximum" />
+          <ScalarProperty Name="cutoff" ColumnName="cutoff" />
+          <ScalarProperty Name="canceled" ColumnName="canceled" />
+          <ScalarProperty Name="attended" ColumnName="attended" />
+          <ScalarProperty Name="WorkShopSetID" ColumnName="WorkShopSetID" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="reminder_num" ColumnName="reminder_num" />
+          <ScalarProperty Name="reminder_sent" ColumnName="reminder_sent" />
+          <ScalarProperty Name="WorkshopArchived" ColumnName="WorkshopArchived" />
+          <ScalarProperty Name="BookingArchived" ColumnName="BookingArchived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcSearchWorkshops" FunctionName="HELPSModel.Store.prcSearchWorkshops">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.Workshop">
+          <ScalarProperty Name="WorkshopId" ColumnName="WorkshopId" />
+          <ScalarProperty Name="topic" ColumnName="topic" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="targetingGroup" ColumnName="targetingGroup" />
+          <ScalarProperty Name="campus" ColumnName="campus" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="maximum" ColumnName="maximum" />
+          <ScalarProperty Name="WorkShopSetID" ColumnName="WorkShopSetID" />
+          <ScalarProperty Name="cutoff" ColumnName="cutoff" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="reminder_num" ColumnName="reminder_num" />
+          <ScalarProperty Name="reminder_sent" ColumnName="reminder_sent" />
+          <ScalarProperty Name="DaysOfWeek" ColumnName="DaysOfWeek" />
+          <ScalarProperty Name="BookingCount" ColumnName="BookingCount" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcUpdateSessionBooking" FunctionName="HELPSModel.Store.prcUpdateSessionBooking" />
+    <FunctionImportMapping FunctionImportName="prcUpdateWorkshopBooking" FunctionName="HELPSModel.Store.prcUpdateWorkshopBooking" />
+    <FunctionImportMapping FunctionImportName="prcListAppointments" FunctionName="HELPSModel.Store.prcListAppointments">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.Appointment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="orderItem" ColumnName="orderItem" />
+          <ScalarProperty Name="iscurrent" ColumnName="iscurrent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcListAssignments" FunctionName="HELPSModel.Store.prcListAssignments">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.Assignment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="orderItem" ColumnName="orderItem" />
+          <ScalarProperty Name="iscurrent" ColumnName="iscurrent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcListCampuses" FunctionName="HELPSModel.Store.prcListCampuses">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.Campus">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="campus" ColumnName="campus" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcListLecturers" FunctionName="HELPSModel.Store.prcListLecturers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.Lecturer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="staffID" ColumnName="staffID" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="inactive" ColumnName="inactive" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcListWorkShopSets" FunctionName="HELPSModel.Store.prcListWorkShopSets">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.WorkShopSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

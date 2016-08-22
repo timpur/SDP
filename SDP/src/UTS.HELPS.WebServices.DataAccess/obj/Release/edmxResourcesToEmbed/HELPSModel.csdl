@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HELPSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HELPSEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="prcCreateStudent">
+      <Parameter Name="studentID" Mode="In" Type="String" />
+      <Parameter Name="dob" Mode="In" Type="DateTime" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="degree" Mode="In" Type="String" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="first_language" Mode="In" Type="String" />
+      <Parameter Name="country_origin" Mode="In" Type="String" />
+      <Parameter Name="background" Mode="In" Type="String" />
+      <Parameter Name="HSC" Mode="In" Type="Boolean" />
+      <Parameter Name="HSC_mark" Mode="In" Type="String" />
+      <Parameter Name="IELTS" Mode="In" Type="Boolean" />
+      <Parameter Name="IELTS_mark" Mode="In" Type="String" />
+      <Parameter Name="TOEFL" Mode="In" Type="Boolean" />
+      <Parameter Name="TOEFL_mark" Mode="In" Type="String" />
+      <Parameter Name="TAFE" Mode="In" Type="Boolean" />
+      <Parameter Name="TAFE_mark" Mode="In" Type="String" />
+      <Parameter Name="CULT" Mode="In" Type="Boolean" />
+      <Parameter Name="CULT_mark" Mode="In" Type="String" />
+      <Parameter Name="InsearchDEEP" Mode="In" Type="Boolean" />
+      <Parameter Name="InsearchDEEP_mark" Mode="In" Type="String" />
+      <Parameter Name="InsearchDiploma" Mode="In" Type="Boolean" />
+      <Parameter Name="InsearchDiploma_mark" Mode="In" Type="String" />
+      <Parameter Name="foundationcourse" Mode="In" Type="Boolean" />
+      <Parameter Name="foundationcourse_mark" Mode="In" Type="String" />
+      <Parameter Name="creatorID" Mode="In" Type="Int32" />
+      <Parameter Name="degree_details" Mode="In" Type="String" />
+      <Parameter Name="alternative_contact" Mode="In" Type="String" />
+      <Parameter Name="preferred_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prcListSessionTypes" ReturnType="Collection(HELPSModel.SessionType)">
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="prcSearchSessionBookings" ReturnType="Collection(HELPSModel.SessionBooking)">
+      <Parameter Name="studentID" Mode="In" Type="String" />
+      <Parameter Name="startingDtBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="startingDtEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="endingDtBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="endingDtEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="campus" Mode="In" Type="String" />
+      <Parameter Name="lecturerID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+      <Parameter Name="page" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcCancelWorkshopBooking">
+      <Parameter Name="workshopId" Mode="In" Type="Int32" />
+      <Parameter Name="studentId" Mode="In" Type="String" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcGetWorkshopBooking" ReturnType="Collection(HELPSModel.BasicWorkshopBooking)">
+      <Parameter Name="workshopId" Mode="In" Type="Int32" />
+      <Parameter Name="studentId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prcGetStudent" ReturnType="Collection(HELPSModel.Student)">
+      <Parameter Name="studentID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prcGetWorkshop" ReturnType="Collection(HELPSModel.BasicWorkshop)">
+      <Parameter Name="workshopId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcCreateWorkshopBooking">
+      <Parameter Name="workshopId" Mode="In" Type="Int32" />
+      <Parameter Name="studentId" Mode="In" Type="String" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcCreateWorkshopWaiting">
+      <Parameter Name="workshopId" Mode="In" Type="Int32" />
+      <Parameter Name="studentId" Mode="In" Type="String" />
+      <Parameter Name="priority" Mode="In" Type="Int32" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcGetWorkshopWaiting" ReturnType="Collection(HELPSModel.BasicWorkshopWaiting)">
+      <Parameter Name="workshopId" Mode="In" Type="Int32" />
+      <Parameter Name="studentId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prcGetSession" ReturnType="Collection(HELPSModel.BasicSession)">
+      <Parameter Name="sessionId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcGetSessionBooking" ReturnType="Collection(HELPSModel.BasicSessionBooking)">
+      <Parameter Name="sessionId" Mode="In" Type="Int32" />
+      <Parameter Name="studentID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prcSearchWorkshopBookings" ReturnType="Collection(HELPSModel.WorkshopBooking)">
+      <Parameter Name="studentID" Mode="In" Type="String" />
+      <Parameter Name="startingDtBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="startingDtEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="endingDtBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="endingDtEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="campusId" Mode="In" Type="Int32" />
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+      <Parameter Name="page" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcSearchWorkshops" ReturnType="Collection(HELPSModel.Workshop)">
+      <Parameter Name="workshopSetId" Mode="In" Type="Int32" />
+      <Parameter Name="topic" Mode="In" Type="String" />
+      <Parameter Name="startingDtBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="startingDtEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="endingDtBegin" Mode="In" Type="DateTime" />
+      <Parameter Name="endingDtEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="campusID" Mode="In" Type="Int32" />
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+      <Parameter Name="page" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcUpdateSessionBooking">
+      <Parameter Name="sessionId" Mode="In" Type="Int32" />
+      <Parameter Name="studentId" Mode="In" Type="String" />
+      <Parameter Name="cancel" Mode="In" Type="Boolean" />
+      <Parameter Name="assisstance" Mode="In" Type="String" />
+      <Parameter Name="reason" Mode="In" Type="String" />
+      <Parameter Name="attended" Mode="In" Type="Int32" />
+      <Parameter Name="waitingID" Mode="In" Type="Int32" />
+      <Parameter Name="isgroup" Mode="In" Type="Int32" />
+      <Parameter Name="numpeople" Mode="In" Type="String" />
+      <Parameter Name="lecturercomment" Mode="In" Type="String" />
+      <Parameter Name="learningissues" Mode="In" Type="String" />
+      <Parameter Name="islocked" Mode="In" Type="Int32" />
+      <Parameter Name="assigntype" Mode="In" Type="String" />
+      <Parameter Name="assigntypeOther" Mode="In" Type="String" />
+      <Parameter Name="subject" Mode="In" Type="String" />
+      <Parameter Name="appointments" Mode="In" Type="String" />
+      <Parameter Name="appointmentsOther" Mode="In" Type="String" />
+      <Parameter Name="assisstanceText" Mode="In" Type="String" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcUpdateWorkshopBooking">
+      <Parameter Name="workshopId" Mode="In" Type="Int32" />
+      <Parameter Name="studentId" Mode="In" Type="String" />
+      <Parameter Name="canceled" Mode="In" Type="Int32" />
+      <Parameter Name="attended" Mode="In" Type="Int32" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prcListAppointments" ReturnType="Collection(HELPSModel.Appointment)">
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="prcListAssignments" ReturnType="Collection(HELPSModel.Assignment)">
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="prcListCampuses" ReturnType="Collection(HELPSModel.Campus)">
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="prcListLecturers" ReturnType="Collection(HELPSModel.Lecturer)">
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="prcListWorkShopSets" ReturnType="Collection(HELPSModel.WorkShopSet)">
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="SessionType">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="abbName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="iscurrent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="WorkShopSet">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="SessionBooking">
+    <Property Type="String" Name="LecturerFirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LecturerLastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LecturerEmail" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SessionTypeAbb" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="SessionType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AssignmentType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AppointmentType" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="BookingId" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Campus" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Cancel" Nullable="false" />
+    <Property Type="String" Name="Assistance" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Reason" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="Attended" Nullable="true" />
+    <Property Type="Int32" Name="WaitingID" Nullable="true" />
+    <Property Type="Int32" Name="IsGroup" Nullable="true" />
+    <Property Type="String" Name="NumPeople" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="LecturerComment" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="LearningIssues" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IsLocked" Nullable="true" />
+    <Property Type="String" Name="AssignTypeOther" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Subject" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AppointmentsOther" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AssistanceText" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="SessionId" Nullable="false" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="BasicWorkshopBooking">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="workshopID" Nullable="true" />
+    <Property Type="String" Name="studentID" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="canceled" Nullable="true" />
+    <Property Type="Int32" Name="attended" Nullable="true" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Student">
+    <Property Type="String" Name="studentID" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="dob" Nullable="true" Precision="23" />
+    <Property Type="String" Name="gender" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="degree" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="status" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="first_language" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="country_origin" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="background" Nullable="true" MaxLength="Max" />
+    <Property Type="Boolean" Name="HSC" Nullable="true" />
+    <Property Type="String" Name="HSC_mark" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="IELTS" Nullable="true" />
+    <Property Type="String" Name="IELTS_mark" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="TOEFL" Nullable="true" />
+    <Property Type="String" Name="TOEFL_mark" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="TAFE" Nullable="true" />
+    <Property Type="String" Name="TAFE_mark" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="CULT" Nullable="true" />
+    <Property Type="String" Name="CULT_mark" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="InsearchDEEP" Nullable="true" />
+    <Property Type="String" Name="InsearchDEEP_mark" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="InsearchDiploma" Nullable="true" />
+    <Property Type="String" Name="InsearchDiploma_mark" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="foundationcourse" Nullable="true" />
+    <Property Type="String" Name="foundationcourse_mark" Nullable="true" MaxLength="20" />
+    <Property Type="DateTime" Name="created" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="creatorID" Nullable="true" />
+    <Property Type="String" Name="degree_details" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="alternative_contact" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="preferred_name" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="BasicWorkshop">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="topic" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="targetingGroup" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="campusID" Nullable="true" />
+    <Property Type="DateTime" Name="starting" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ending" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="maximum" Nullable="true" />
+    <Property Type="Int32" Name="cutoff" Nullable="true" />
+    <Property Type="Int32" Name="workshopsetid" Nullable="true" />
+    <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="reminder_num" Nullable="true" />
+    <Property Type="Int32" Name="reminder_sent" Nullable="true" />
+    <Property Type="Int32" Name="BookingCount" Nullable="true" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="BasicWorkshopWaiting">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="workshopID" Nullable="true" />
+    <Property Type="String" Name="studentID" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="priority" Nullable="true" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="BasicSession">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="DateTime" Name="starting" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ending" Nullable="false" Precision="23" />
+    <Property Type="String" Name="campus" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="lecturer" Nullable="false" />
+    <Property Type="Int32" Name="type" Nullable="false" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="BasicSessionBooking">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="studentID" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="sessionId" Nullable="false" />
+    <Property Type="Boolean" Name="cancel" Nullable="false" />
+    <Property Type="String" Name="assisstance" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="reason" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="attended" Nullable="true" />
+    <Property Type="Int32" Name="waitingID" Nullable="true" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="isgroup" Nullable="true" />
+    <Property Type="String" Name="numpeople" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="lecturercomment" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="learningissues" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="islocked" Nullable="true" />
+    <Property Type="String" Name="assigntype" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="assigntypeOther" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="subject" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="appointments" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="appointmentsOther" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="assisstanceText" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="Campus">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="campus" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="WorkshopBooking">
+    <Property Type="Int32" Name="BookingId" Nullable="false" />
+    <Property Type="Int32" Name="workshopID" Nullable="true" />
+    <Property Type="String" Name="studentID" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="topic" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="targetingGroup" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="campusID" Nullable="true" />
+    <Property Type="DateTime" Name="starting" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ending" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="maximum" Nullable="true" />
+    <Property Type="Int32" Name="cutoff" Nullable="true" />
+    <Property Type="Int32" Name="canceled" Nullable="true" />
+    <Property Type="Int32" Name="attended" Nullable="true" />
+    <Property Type="Int32" Name="WorkShopSetID" Nullable="true" />
+    <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="reminder_num" Nullable="true" />
+    <Property Type="Int32" Name="reminder_sent" Nullable="true" />
+    <Property Type="DateTime" Name="WorkshopArchived" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="BookingArchived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Workshop">
+    <Property Type="Int32" Name="WorkshopId" Nullable="false" />
+    <Property Type="String" Name="topic" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="description" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="targetingGroup" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="campus" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="maximum" Nullable="true" />
+    <Property Type="Int32" Name="WorkShopSetID" Nullable="true" />
+    <Property Type="Int32" Name="cutoff" Nullable="true" />
+    <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="reminder_num" Nullable="true" />
+    <Property Type="Int32" Name="reminder_sent" Nullable="true" />
+    <Property Type="String" Name="DaysOfWeek" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="BookingCount" Nullable="true" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Appointment">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="orderItem" Nullable="true" />
+    <Property Type="Int32" Name="iscurrent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Assignment">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="orderItem" Nullable="true" />
+    <Property Type="Int32" Name="iscurrent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Lecturer">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="staffID" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="first_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="last_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="inactive" Nullable="true" />
+    <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+  </ComplexType>
+</Schema>

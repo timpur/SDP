@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{884202EB-E097-4DB0-BDCF-873A30FB38D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{58ACE918-CB83-48C2-8823-8C79735C7F0E}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTS.HELPS.WebServices.DataAccess", "src\UTS.HELPS.WebServices.DataAccess\UTS.HELPS.WebServices.DataAccess.csproj", "{D0A0141A-3AEF-428F-ABC2-BDDF2786F0D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTS.HELPS.WebServices.DataObjects", "src\UTS.HELPS.WebServices.DataObjects\UTS.HELPS.WebServices.DataObjects.csproj", "{A6505115-A0E7-453C-BB43-8951B5699754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTS.HELPS.WebServices.WebAPI", "src\UTS.HELPS.WebServices.WebAPI\UTS.HELPS.WebServices.WebAPI.csproj", "{57E90364-7BEC-46A0-B401-D0E6624C534C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{C2C2202C-7844-4D17-827A-CC5015060D5D}"
+	ProjectSection(SolutionItems) = preProject
+		src\SQL\CreateTables.sql = src\SQL\CreateTables.sql
+		src\SQL\prcCancelWorkshopBooking.sql = src\SQL\prcCancelWorkshopBooking.sql
+		src\SQL\prcCreateStudent.sql = src\SQL\prcCreateStudent.sql
+		src\SQL\prcCreateWorkshopBooking.sql = src\SQL\prcCreateWorkshopBooking.sql
+		src\SQL\prcCreateWorkshopWaiting.sql = src\SQL\prcCreateWorkshopWaiting.sql
+		src\SQL\prcGetSession.sql = src\SQL\prcGetSession.sql
+		src\SQL\prcGetSessionBooking.sql = src\SQL\prcGetSessionBooking.sql
+		src\SQL\prcGetStudent.sql = src\SQL\prcGetStudent.sql
+		src\SQL\prcGetWorkshop.sql = src\SQL\prcGetWorkshop.sql
+		src\SQL\prcGetWorkshopBooking.sql = src\SQL\prcGetWorkshopBooking.sql
+		src\SQL\prcGetWorkshopWaiting.sql = src\SQL\prcGetWorkshopWaiting.sql
+		src\SQL\prcListAppointments.sql = src\SQL\prcListAppointments.sql
+		src\SQL\prcListAssignments.sql = src\SQL\prcListAssignments.sql
+		src\SQL\prcListCampuses.sql = src\SQL\prcListCampuses.sql
+		src\SQL\prcListLecturers.sql = src\SQL\prcListLecturers.sql
+		src\SQL\prcListSessionTypes.sql = src\SQL\prcListSessionTypes.sql
+		src\SQL\prcListWorkShopSets.sql = src\SQL\prcListWorkShopSets.sql
+		src\SQL\prcSearchSessionBookings.sql = src\SQL\prcSearchSessionBookings.sql
+		src\SQL\prcSearchWorkshopBookings.sql = src\SQL\prcSearchWorkshopBookings.sql
+		src\SQL\prcSearchWorkshops.sql = src\SQL\prcSearchWorkshops.sql
+		src\SQL\prcUpdateSessionBooking.sql = src\SQL\prcUpdateSessionBooking.sql
+		src\SQL\prcUpdateWorkshopBooking.sql = src\SQL\prcUpdateWorkshopBooking.sql
+		src\SQL\ufnGetWaitingCount.sql = src\SQL\ufnGetWaitingCount.sql
+		src\SQL\ufnGetWorkshopBookingCount.sql = src\SQL\ufnGetWorkshopBookingCount.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "src\WebApp\WebApp.csproj", "{103A7E13-CF87-4AA9-AEA7-29BCCAAC1452}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0A0141A-3AEF-428F-ABC2-BDDF2786F0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0A0141A-3AEF-428F-ABC2-BDDF2786F0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0A0141A-3AEF-428F-ABC2-BDDF2786F0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0A0141A-3AEF-428F-ABC2-BDDF2786F0D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6505115-A0E7-453C-BB43-8951B5699754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6505115-A0E7-453C-BB43-8951B5699754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6505115-A0E7-453C-BB43-8951B5699754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6505115-A0E7-453C-BB43-8951B5699754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E90364-7BEC-46A0-B401-D0E6624C534C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E90364-7BEC-46A0-B401-D0E6624C534C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E90364-7BEC-46A0-B401-D0E6624C534C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E90364-7BEC-46A0-B401-D0E6624C534C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{103A7E13-CF87-4AA9-AEA7-29BCCAAC1452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{103A7E13-CF87-4AA9-AEA7-29BCCAAC1452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{103A7E13-CF87-4AA9-AEA7-29BCCAAC1452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{103A7E13-CF87-4AA9-AEA7-29BCCAAC1452}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0A0141A-3AEF-428F-ABC2-BDDF2786F0D0} = {884202EB-E097-4DB0-BDCF-873A30FB38D7}
+		{A6505115-A0E7-453C-BB43-8951B5699754} = {884202EB-E097-4DB0-BDCF-873A30FB38D7}
+		{57E90364-7BEC-46A0-B401-D0E6624C534C} = {884202EB-E097-4DB0-BDCF-873A30FB38D7}
+		{C2C2202C-7844-4D17-827A-CC5015060D5D} = {884202EB-E097-4DB0-BDCF-873A30FB38D7}
+		{103A7E13-CF87-4AA9-AEA7-29BCCAAC1452} = {884202EB-E097-4DB0-BDCF-873A30FB38D7}
+	EndGlobalSection
+EndGlobal
