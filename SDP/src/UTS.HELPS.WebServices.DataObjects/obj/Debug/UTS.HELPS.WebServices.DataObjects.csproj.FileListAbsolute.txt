@@ -1,5 +1,4 @@
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\bin\Debug\UTS.HELPS.WebServices.DataObjects.dll
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\bin\Debug\UTS.HELPS.WebServices.DataObjects.pdb
-C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\obj\Debug\UTS.HELPS.WebServices.DataObjects.csprojResolveAssemblyReference.cache
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\obj\Debug\UTS.HELPS.WebServices.DataObjects.dll
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\obj\Debug\UTS.HELPS.WebServices.DataObjects.pdb
