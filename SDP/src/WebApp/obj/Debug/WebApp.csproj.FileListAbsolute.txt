@@ -3,3 +3,4 @@ C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\bin\WebApp.dll
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\bin\WebApp.pdb
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\obj\Debug\WebApp.dll
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\obj\Debug\WebApp.pdb
+C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache
