@@ -47,4 +47,44 @@ var API = new function () {
         this.StartingDtBegin = null;
     };
 
+    //Student API
+
+    this.student = { url: this.baseUrl + "/student" };
+    this.student.register = function (data, success, error) {
+        var url = this.url + "/register";
+        API.callAPIPost(url, data, success, error);
+    };
+    this.student.register.dataObj = function () {
+        this.StudentId = null;
+        this.DateOfBirth = null;
+        this.Gender = null;
+        this.Degree = null;
+        this.Status = null;
+        this.FirstLanguage = null;
+        this.CountryOrigin = null;
+        this.Background = null;
+        this.DegreeDetails = null;
+        this.AltContact = null;
+        this.PreferredName = null;
+        this.HSC = null;
+        this.HSCMark = null;
+        this.IELTS = null;
+        this.IELTSMark = null;
+        this.TOEFLmark = null;
+        this.Tafe = null;
+        this.TafeMark = null;
+        this.Cult = null;
+        this.CultMark = null;
+        this.InsearchDEEP = null;
+        this.InsearchDEEPMark = null;
+        this.InsearchDiploma = null;
+        this.InsearchDiplomaMark = null;
+        this.FoundationCourse = null;
+        this.FoundationCourseMark = null;
+        this.CreatorId = null;
+
+    };
+
+    
+
 }
