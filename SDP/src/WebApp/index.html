@@ -19,7 +19,12 @@
 </head>
 <body ng-app="App">
     <div ng-controller="Test">
-        <h1>{{name}}</h1>
+        <h1>{{v}}</h1>
+
+        <div ng-repeat="result in results">
+            {{result.fullName}}
+        </div>
+
     </div>
 </body>
 </html>

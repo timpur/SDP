@@ -43,7 +43,8 @@ var API = new function () {
         API.callAPIGet(url, data, success, error);
     };
     this.session.booking.search.dataObj = function () {
-        this.StudentId = 0;
+        this.StudentId = null;
+        this.StartingDtBegin = null;
     };
 
 }

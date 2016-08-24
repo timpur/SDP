@@ -10,8 +10,19 @@ var app = angular.module("App", []);
 
 
 app.controller("Test", function ($scope) {
-    $scope.name = "This is a Test for Angular";
+    $scope.v = "This is a Test for Angular";
+
+    $scope.results = [];
 
 
 
+    function load() {
+        var success = function (data) {
+            $scope.results = data.Results;
+            $scope.$apply();
+        };
+
+        API.session.sessionTypes(true, success, null);
+    }
+    load();
 });
