@@ -82,7 +82,6 @@ var API = new function () {
         this.FoundationCourse = null;
         this.FoundationCourseMark = null;
         this.CreatorId = null;
-
     };
 
     

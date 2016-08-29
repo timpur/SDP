@@ -17,6 +17,7 @@
         public static readonly string SEARCH_WORKSHOP_BOOKING_ERROR = "Error searching for workshop bookings: {0}";
         public static readonly string SEARCH_WORKSHOP_ERROR = "Error searching for workshop: {0}";
 
+        public static readonly string STUDENT_GET_ERROR = "Error retrieving student: {0}";
         public static readonly string STUDENT_REGISTER_ERROR = "Error registering student: {0}";
         public static readonly string CREATE_WORKSHOP_BOOKING_ERROR = "Error creating workshop booking: {0}";
         public static readonly string CREATE_WORKSHOP_BOOKING_EXISTS_ERROR = "Error creating workshop booking: Booking already exists.";
