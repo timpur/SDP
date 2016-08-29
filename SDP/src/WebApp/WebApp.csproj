@@ -41,30 +41,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="css\bootstrap-theme.min.css" />
-    <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\ui-bootstrap-min.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="css\angular-material.min.css" />
+    <Content Include="img\icons\close.svg" />
+    <Content Include="img\icons\menu.svg" />
+    <Content Include="img\icons\more_vert.svg" />
     <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="css\bootstrap.min.css.map" />
-    <Content Include="css\bootstrap-theme.min.css.map" />
+    <Content Include="Scripts\angular\angular-animate.min.js" />
+    <Content Include="Scripts\angular\angular-aria.min.js" />
+    <Content Include="Scripts\angular\angular-material.min.js" />
+    <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\API.js" />
     <Content Include="Scripts\intellisense\angular.js" />
-    <Content Include="Scripts\libs\angular.min.js" />
-    <Content Include="Scripts\libs\angular.min.js.map" />
     <None Include="Scripts\intellisense\jquery-3.1.0.intellisense.js" />
-    <Content Include="Scripts\intellisense\ui-bootstrap.js" />
-    <Content Include="Scripts\libs\ui-bootstrap.min.js" />
-    <Content Include="Scripts\intellisense\bootstrap.js" />
-    <Content Include="Scripts\libs\bootstrap.min.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\intellisense\jquery-3.1.0.js" />
-    <Content Include="Scripts\libs\jquery-3.1.0.min.js" />
-    <Content Include="Scripts\libs\jquery-3.1.0.min.map" />
+    <Content Include="Scripts\jQuery\jquery-3.1.0.min.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -79,9 +70,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="content\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

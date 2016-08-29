@@ -1,28 +1,41 @@
-﻿/// <reference path="intellisense/angular.js" />
-/// <reference path="intellisense/bootstrap.js" />
+﻿/// <reference path="intellisense/jquery-3.1.0.js" />
 /// <reference path="intellisense/jquery-3.1.0.intellisense.js" />
-/// <reference path="intellisense/jquery-3.1.0.js" />
-/// <reference path="intellisense/ui-bootstrap.js" />
+/// <reference path="intellisense/angular.js" />
 /// <reference path="API.js" />
 
 
-var app = angular.module("App", []);
+//ICONS https://design.google.com/icons/
 
 
-app.controller("Test", function ($scope) {
-    $scope.v = "This is a Test for Angular";
-
-    $scope.results = [];
+var app = angular.module("App", ["ngMaterial"]);
 
 
+var Menu = app.controller('Menu', function ($scope, $timeout, $mdSidenav, $log) {
+    $scope.toggleLeft = buildDelayedToggler('left');
 
-    function load() {
-        var success = function (data) {
-            $scope.results = data.Results;
-            $scope.$apply();
+
+
+    function debounce(func, wait, context) {
+        var timer;
+        return function debounced() {
+            var context = $scope,
+                args = Array.prototype.slice.call(arguments);
+            $timeout.cancel(timer);
+            timer = $timeout(function () {
+                timer = undefined;
+                func.apply(context, args);
+            }, wait || 10);
         };
-
-        API.session.sessionTypes(true, success, null);
     }
-    load();
+    function buildDelayedToggler(navID) {
+        return debounce(function () {
+            $mdSidenav(navID).toggle();
+        }, 200);
+    }
+});
+
+var LeftSideBar = app.controller('LeftSideBar', function ($scope, $mdSidenav) {
+    $scope.close = function () {
+        $mdSidenav('left').close();
+    };
 });
