@@ -63,7 +63,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                     {
                         IsSuccess = false,
                         DisplayMessage = ErrorMessages.STUDENT_NOT_FOUND
-                    };                    
+                    };
                 }
 
                 // Check booking doesn't already exist
@@ -74,7 +74,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                     {
                         IsSuccess = false,
                         DisplayMessage = ErrorMessages.CREATE_WORKSHOP_BOOKING_EXISTS_ERROR
-                    };                      
+                    };
                 }
 
                 // Check there are booking spots available
@@ -84,7 +84,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                     {
                         IsSuccess = false,
                         DisplayMessage = ErrorMessages.MAXIMUM_WORKSHOP_BOOKINGS_ERROR
-                    };                      
+                    };
                 }
 
                 WorkshopDb.CreateWorkshopBooking(workshopId, studentId, userId);
@@ -154,7 +154,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                     {
                         IsSuccess = false,
                         DisplayMessage = ErrorMessages.CREATE_WORKSHOP_WAITING_EXISTS_ERROR
-                    };                    
+                    };
                 }
 
                 WorkshopDb.CreateWorkshopWaiting(workshopId, studentId, priority, userId);
@@ -166,7 +166,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 {
                     IsSuccess = false,
                     DisplayMessage = string.Format(ErrorMessages.CREATE_WORKSHOP_WAITING_ERROR, msg)
-                };                
+                };
             }
 
             return new Response()

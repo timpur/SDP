@@ -12,11 +12,9 @@ var API = new function () {
     this.callAPIGet = function (url, data, success, error) {
         this.callAPI(url, data, success, error, "GET");
     }
-
     this.callAPIPost = function (url, data, success, error) {
         this.callAPI(url, data, success, error, "POST");
     }
-
     this.callAPI = function (url, data, success, error, method) {
         jQuery.ajax({
             dataType: "json",
@@ -45,11 +43,24 @@ var API = new function () {
     this.session.booking.search.dataObj = function () {
         this.StudentId = null;
         this.StartingDtBegin = null;
+        this.StartingDtEnd
+        this.EndingDtBegin
+        this.EndingDtEnd
+        this.Campus
+        this.LecturerId
+        this.SessionTypeId
+        this.Active
+        this.Page
+        this.PageSize
     };
 
     //Student API
 
     this.student = { url: this.baseUrl + "/student" };
+    this.student.getStudent = function (ID, success, error) {
+        var url = this.url + "/" + JSON.parse(ID);
+        API.callAPIGet(url, null, success, error);
+    };
     this.student.register = function (data, success, error) {
         var url = this.url + "/register";
         API.callAPIPost(url, data, success, error);
@@ -84,6 +95,5 @@ var API = new function () {
         this.CreatorId = null;
     };
 
-    
 
 }
