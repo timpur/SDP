@@ -5,24 +5,33 @@
 
 
 var API = new function () {
+    this.header = { AppKey: "123456", Authorization: "" };
+
     this.baseUrl = "/webapi/api";
 
     this.callAPIGet = function (url, data, success, error) {
-        this.callAPI(url, data, success, error, "GET");
-    }
-    this.callAPIPost = function (url, data, success, error) {
-        this.callAPI(url, data, success, error, "POST");
-    }
-    this.callAPI = function (url, data, success, error, method) {
         jQuery.ajax({
             dataType: "json",
-            method: method,
+            method: "GET",
             url: url,
             data: data,
             success: success,
-            headers: { "AppKey": "123456" }
+            error: error,
+            headers: this.header
         });
-    }
+    };
+    this.callAPIPost = function (url, data, success, error) {
+        jQuery.ajax({
+            dataType: "json",
+            method: "POST",
+            contentType: "application/json",
+            url: url,
+            data: JSON.stringify(data),
+            success: success,
+            error: error,
+            headers: this.header
+        });
+    };
 
 
     //Session API
@@ -60,7 +69,7 @@ var API = new function () {
         API.callAPIGet(url, null, success, error);
     };
     this.student.register = function (data, success, error) {
-        var url = this.url + "/register";
+        var url = this.url + "/register2";
         API.callAPIPost(url, data, success, error);
     };
     this.student.register.dataObj = function () {
@@ -93,8 +102,37 @@ var API = new function () {
         this.CreatorId = null;
     };
 
-    this.student.Login = function (ID, Password, success, Error) {
 
+
+    this.Account = { url: this.baseUrl + "/account" };
+    this.Account.Reg = function (success, error) {
+        var data = {
+            "userName": "test",
+            "password": "PassPass",
+            "confirmPassword": "PassPass"
+        };
+        var url = this.url + "/register";
+        API.callAPIPost(url, data, success, error);
+    }
+    this.Account.Login = function (ID, Password, success, Error) {
+        var url = "/webapi/account/login"
+        var data = {
+            grant_type: "password",
+            username: ID,
+            password: Password
+        }
+
+        jQuery.ajax({
+            dataType: "json",
+            method: "post",
+            url: url,
+            data: data,
+            async:false,
+            success: function (data) {
+                API.header.Authorization = data.token_type + " " + data.access_token;
+                success();
+            }
+        });
     };
 
 }

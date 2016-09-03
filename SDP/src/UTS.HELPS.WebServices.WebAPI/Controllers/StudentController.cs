@@ -9,6 +9,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
 {
     public class StudentController : BaseController
     {
+        [Authorize]
         [HttpGet]
         [Route("api/student/{studentId}")]
         public StudentResponse GetStudent(string studentId)
@@ -18,15 +19,20 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             {
                 base.CheckApplicationKey();
                 studentResponse.Result = StudentDb.GetStudent(studentId);
+                return new StudentResponse()
+                {
+                    IsSuccess = true
+                };
             }
             catch (Exception e)
             {
                 string arg = base.CreateExceptionMessage(e);
-                studentResponse.IsSuccess = false;
-                studentResponse.DisplayMessage = string.Format(ErrorMessages.STUDENT_GET_ERROR, arg);
+                return new StudentResponse()
+                {
+                    IsSuccess = false,
+                    DisplayMessage = string.Format(ErrorMessages.STUDENT_GET_ERROR, arg)
+                };
             }
-            studentResponse.IsSuccess = true;
-            return studentResponse;
         }
 
         [HttpPost]
@@ -38,6 +44,10 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 base.CheckApplicationKey();
 
                 StudentDb.RegisterStudent(studentReg);
+                return new Response()
+                {
+                    IsSuccess = true
+                };
             }
             catch (Exception e)
             {
@@ -47,12 +57,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                     IsSuccess = false,
                     DisplayMessage = string.Format(ErrorMessages.STUDENT_REGISTER_ERROR, msg)
                 };
-            }
-
-            return new Response()
-            {
-                IsSuccess = true
-            };
+            }            
         }
     }
 }

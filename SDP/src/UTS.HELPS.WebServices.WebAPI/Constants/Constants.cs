@@ -29,5 +29,8 @@
         public static readonly string CANCEL_WORKSHOP_BOOKING_ERROR = "Error canceling workshop booking: {0}";
         public static readonly string UPDATE_SESSION_BOOKING_ERROR = "Error updating session booking: {0}";
         public static readonly string UPDATE_WORKSHOP_BOOKING_ERROR = "Error updating workshop booking: {0}";
+
+        public static readonly string AUTH_ERROR_REG = "An error occured during the registration of the Identity";
+        public static readonly string AUTH_ERROR_REG_CATCH = "An error ocured during registration: {0}";
     }
 }

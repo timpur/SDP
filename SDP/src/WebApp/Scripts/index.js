@@ -24,7 +24,7 @@ var MainController = app.controller("Main", function ($scope, $mdDialog) {
             parent: angular.element(document.body),
             clickOutsideToClose: false,
             escapeToClose: false,
-            fullscreen:true,
+            fullscreen: true,
             controller: Login_Reg_DialogController
         });
     };
@@ -82,7 +82,11 @@ function Login_Reg_DialogController($scope, $mdDialog) {
     $scope.RegisterData = new API.student.register.dataObj();
 
     $scope.Login = function () {
-        alert('log');
+        //alert('log');       
+
+        API.Account.Login("test", "PassPass", function () {}, null);
+
+        API.student.getStudent(1001, null, null);
     };
 
     $scope.Register = function () {
