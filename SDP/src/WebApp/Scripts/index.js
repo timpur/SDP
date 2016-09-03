@@ -5,16 +5,44 @@
 
 
 //ICONS https://design.google.com/icons/
+//UI https://material.angularjs.org/latest/
 
 
 var app = angular.module("App", ["ngMaterial"]);
 
 
-var Menu = app.controller('Menu', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.toggleLeft = buildDelayedToggler('left');
+var MainController = app.controller("Main", function ($scope, $mdDialog) {
+
+    angular.element(document).ready(function () {
+        $scope.ShowLogin_RegDialog()
+    });
+
+
+    $scope.ShowLogin_RegDialog = function () {
+        $mdDialog.show({
+            templateUrl: 'content/Login_Reg_Dialog.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: false,
+            escapeToClose: false,
+            fullscreen:true,
+            controller: Login_Reg_DialogController
+        });
+    };
+});
 
 
 
+
+
+var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSidenav) {
+    $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
+
+
+    function buildDelayedToggler(navID) {
+        return debounce(function () {
+            $mdSidenav(navID).toggle();
+        }, 200);
+    }
     function debounce(func, wait, context) {
         var timer;
         return function debounced() {
@@ -27,15 +55,37 @@ var Menu = app.controller('Menu', function ($scope, $timeout, $mdSidenav, $log) 
             }, wait || 10);
         };
     }
-    function buildDelayedToggler(navID) {
-        return debounce(function () {
-            $mdSidenav(navID).toggle();
-        }, 200);
-    }
 });
 
-var LeftSideBar = app.controller('LeftSideBar', function ($scope, $mdSidenav) {
+var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) {
     $scope.close = function () {
-        $mdSidenav('left').close();
+        $mdSidenav('LeftNav').close();
     };
 });
+
+var ContentController = app.controller('Content', function ($scope) {
+
+});
+
+function Login_Reg_DialogController($scope, $mdDialog) {
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+    $scope.User = {
+        ID: "",
+        Password: ""
+    };
+    $scope.RegisterData = new API.student.register.dataObj();
+
+    $scope.Login = function () {
+        alert('log');
+    };
+
+    $scope.Register = function () {
+        alert('reg');
+    };
+}

@@ -93,5 +93,8 @@ var API = new function () {
         this.CreatorId = null;
     };
 
+    this.student.Login = function (ID, Password, success, Error) {
+
+    };
 
 }

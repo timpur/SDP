@@ -16,52 +16,49 @@
     <title>Home</title>
     <meta charset="utf-8" />
 </head>
-<body ng-app="App" ng-cloak layout="column">
+<body ng-app="App" ng-controller="Main" ng-cloak layout="column">
+
     <md-toolbar layout="row" class="md-hue-2" ng-controller="Menu">
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()" ng-disabled="false">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeftNav()" hide-gt-md>
                 <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
             </md-button>
             <h2 style="padding-left:20px;">UTS HELPS</h2>
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="More">
+            <md-button class="md-icon-button" aria-label="More" hide>
                 <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
+
     <section layout="row" flex>
-        <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
-            <div ng-controller="LeftSideBar">
+        <md-sidenav class="md-sidenav-left" md-component-id="LeftNav" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+            <div ng-controller="LeftNav">
                 <md-toolbar>
                     <div class="md-toolbar-tools">
                         <h1>Navigation</h1>
                         <span flex></span>
-                        <md-button class="md-icon-button" hide-gt-md ng-click="close()">
+                        <md-button class="md-icon-button" aria-label="Close" ng-click="close()" hide-gt-md>
                             <md-icon md-svg-icon="img/icons/close.svg"></md-icon>
                         </md-button>
                     </div>
                 </md-toolbar>
                 <md-content layout-padding>
-                    <p>
-                        This sidenav is locked open on your device. To go back to the default behavior,
-                        narrow your display.
-                    </p>
+                    Nav Content
+
+
                 </md-content>
             </div>
         </md-sidenav>
-        <md-content flex layout-padding>
+        <md-content flex layout-padding ng-controller="Content">
             <div layout="column" layout-align="top center">
-                <p>
-                    The left sidenav will 'lock open' on a medium (>=960px wide) device.
-                </p>
-                <p>
-                    The right sidenav will focus on a specific child element.
-                </p>
+                Body Content
 
 
             </div>
             <div flex></div>
         </md-content>
     </section>
+
 </body>
 </html>
