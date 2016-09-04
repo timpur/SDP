@@ -14,11 +14,11 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
     [RoutePrefix("api/account")]
     public class AccountController : BaseController
     {
-        private AuthRepository _repo = null;
+        private AuthRepository auth = null;
 
         public AccountController()
         {
-            _repo = new AuthRepository();
+            auth = new AuthRepository();
         }
 
         // POST api/Account/Register
@@ -29,7 +29,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
             try
             {
                 base.CheckApplicationKey();
-                IdentityResult result = await _repo.RegisterUser(userModel);
+                IdentityResult result = await auth.RegisterUser(userModel);
                 return GetResponse(result);
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
         {
             if (disposing)
             {
-                _repo.Dispose();
+                auth.Dispose();
             }
 
             base.Dispose(disposing);

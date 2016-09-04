@@ -10,14 +10,14 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
 {
     public class AuthRepository : IDisposable
     {
-        private AuthContext _ctx;
+        private AuthContext authContext;
 
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<IdentityUser> userManager;
 
         public AuthRepository()
         {
-            _ctx = new AuthContext();
-            _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(_ctx));
+            authContext = new AuthContext();
+            userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(authContext));
         }
 
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
@@ -26,24 +26,20 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
             {
                 UserName = userModel.UserName
             };
-
-            var result = await _userManager.CreateAsync(user, userModel.Password);
-
+            var result = await userManager.CreateAsync(user, userModel.Password);
             return result;
         }
 
         public async Task<IdentityUser> FindUser(string userName, string password)
         {
-            IdentityUser user = await _userManager.FindAsync(userName, password);
-
+            IdentityUser user = await userManager.FindAsync(userName, password);
             return user;
         }
 
         public void Dispose()
         {
-            _ctx.Dispose();
-            _userManager.Dispose();
-
+            authContext.Dispose();
+            userManager.Dispose();
         }
     }
 }

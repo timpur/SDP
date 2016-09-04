@@ -21,16 +21,15 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            using (AuthRepository _repo = new AuthRepository())
+            using (AuthRepository auth = new AuthRepository())
             {
-                IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+                IdentityUser user = await auth.FindUser(context.UserName, context.Password);
 
                 if (user == null)
                 {                   
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
                     return;
                 }
-                //user.Logins.Add(new IdentityUserLogin() { LoginProvider = "SDP", UserId = user.Id });
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
