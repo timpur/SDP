@@ -10,13 +10,13 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
 {
     public class AuthRepository : IDisposable
     {
-        private AuthContext authContext;
+        private AuthDBContext authContext;
 
         private UserManager<IdentityUser> userManager;
 
         public AuthRepository()
         {
-            authContext = new AuthContext();
+            authContext = new AuthDBContext();
             userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(authContext));
         }
 

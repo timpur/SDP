@@ -46,16 +46,23 @@
                     </div>
                 </md-toolbar>
                 <md-content layout-padding>
-                    Nav Content
-
-
+                    <md-list>
+                        <md-list-item ng-repeat="page in Pages" ng-click="changePage($index)">
+                            <img ng-src="{{page.icon}}" class="md-avatar" alt="Page Icon" />
+                            <div class="md-list-item-text" layout="column">
+                                {{page.name}}
+                            </div>
+                        </md-list-item>
+                    </md-list>
                 </md-content>
             </div>
         </md-sidenav>
         <md-content flex layout-padding ng-controller="Content">
             <div layout="column" layout-align="top center">
-                Body Content
-
+                {{ContentURL()}}
+                <div>
+                    <ng-include src="ContentURL()"></ng-include>
+                </div>
 
             </div>
             <div flex></div>

@@ -1,0 +1,26 @@
+﻿<div ng-controller="Register">
+    <p>Enter your Student ID and Password</p>
+    <div layout-gt-xs="row">
+        <md-input-container>
+            <label>ID</label>
+            <input ng-model="RegisterData.StudentId">
+        </md-input-container>
+        <md-input-container>
+            <label>Password</label>
+            <input ng-model="RegisterData.Password" type="password">
+        </md-input-container>
+    </div>
+    <div layout-gt-xs="row">
+        <md-input-container>
+            <label>FistName</label>
+            <input ng-model="RegisterData.FirstName">
+        </md-input-container>
+        <md-input-container>
+            <label>LastName</label>
+            <input ng-model="RegisterData.LastName">
+        </md-input-container>
+    </div>
+    <md-button class="md-raised md-primary" layout="column" ng-click="Register()">
+        Register
+    </md-button>
+</div>

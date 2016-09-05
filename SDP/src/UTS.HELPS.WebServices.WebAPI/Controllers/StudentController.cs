@@ -42,7 +42,6 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             try
             {
                 base.CheckApplicationKey();
-
                 StudentDb.RegisterStudent(studentReg);
                 return new Response()
                 {

@@ -14,18 +14,18 @@ var app = angular.module("App", ["ngMaterial"]);
 var MainController = app.controller("Main", function ($scope, $mdDialog) {
 
     angular.element(document).ready(function () {
-        $scope.ShowLogin_RegDialog()
+        $scope.ShowLoginDialog()
     });
 
 
-    $scope.ShowLogin_RegDialog = function () {
+    $scope.ShowLoginDialog = function () {
         $mdDialog.show({
-            templateUrl: 'content/Login_Reg_Dialog.html',
+            templateUrl: 'content/LoginDialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: false,
             escapeToClose: false,
             fullscreen: true,
-            controller: Login_Reg_DialogController
+            controller: Login_DialogController
         });
     };
 });
@@ -57,39 +57,69 @@ var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSiden
     }
 });
 
-var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) {
+
+
+
+var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, $mdSidenav) {
     $scope.close = function () {
         $mdSidenav('LeftNav').close();
     };
+
+    $scope.Pages = [
+        { name: "Test Page", URL: "content/Register.html", icon: "img/icons/more_vert.svg" },
+        { name: "Test Page", URL: "content/test2.html" }
+    ];
+
+    $scope.changePage = function (index) {
+        $rootScope.contentURL = $scope.Pages[index].URL;
+    };
+
+    function LoadPage() {
+        $rootScope.contentURL = $scope.Pages[0].URL;
+    };
+    //LoadPage();
+
 });
 
-var ContentController = app.controller('Content', function ($scope) {
+
+
+
+var ContentController = app.controller('Content', function ($scope, $rootScope) {
+    $scope.ContentURL = function () {
+        return $rootScope.contentURL;
+    };
 
 });
 
-function Login_Reg_DialogController($scope, $mdDialog) {
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
 
-    $scope.User = {
-        ID: "",
-        Password: ""
-    };
+
+
+var RegisterController = app.controller('Register', function ($scope) {
     $scope.RegisterData = new API.student.register.dataObj();
-
-    $scope.Login = function () {
-        //alert('log');       
-
-        API.Account.Login("test", "PassPass", function () {}, null);
-
-        API.student.getStudent(1001, null, null);
-    };
 
     $scope.Register = function () {
         alert('reg');
+    };
+});
+
+
+
+
+function Login_DialogController($scope, $mdDialog) {
+    $scope.close = function () {
+        $mdDialog.hide();
+    };
+
+    $scope.User = { ID: "", Password: "" };
+
+    $scope.errorMsg = "";
+
+    $scope.Login = function () {
+        API.Account.Login($scope.User.ID, $scope.User.Password, function () {
+            $scope.close();
+        }, function (data) {
+            data = JSON.parse(data.responseText);
+            $scope.errorMsg = data.error_description;
+        });
     };
 }

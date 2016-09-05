@@ -69,7 +69,7 @@ var API = new function () {
         API.callAPIGet(url, null, success, error);
     };
     this.student.register = function (data, success, error) {
-        var url = this.url + "/register2";
+        var url = this.url + "/register";
         API.callAPIPost(url, data, success, error);
     };
     this.student.register.dataObj = function () {
@@ -105,16 +105,16 @@ var API = new function () {
 
 
     this.Account = { url: this.baseUrl + "/account" };
-    this.Account.Reg = function (success, error) {
+    this.Account.Reg = function (ID, Password, Password2, success, error) {
         var data = {
-            "userName": "test",
-            "password": "PassPass",
-            "confirmPassword": "PassPass"
+            userName: "test",
+            password: "PassPass",
+            confirmPassword: "PassPass"
         };
         var url = this.url + "/register";
         API.callAPIPost(url, data, success, error);
     }
-    this.Account.Login = function (ID, Password, success, Error) {
+    this.Account.Login = function (ID, Password, success, error) {
         var url = "/webapi/account/login"
         var data = {
             grant_type: "password",
@@ -127,7 +127,7 @@ var API = new function () {
             method: "post",
             url: url,
             data: data,
-            async:false,
+            error:error,
             success: function (data) {
                 API.header.Authorization = data.token_type + " " + data.access_token;
                 success();

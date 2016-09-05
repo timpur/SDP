@@ -6,10 +6,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
 {
-    public class AuthContext : IdentityDbContext<IdentityUser>
+    public class AuthDBContext : IdentityDbContext<IdentityUser>
     {
-        public AuthContext()
-            : base("AuthContext")
+        public AuthDBContext()
+            : base("AuthDB")
         {
 
         }
