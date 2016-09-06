@@ -66,12 +66,13 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
     };
 
     $scope.Pages = [
-        { name: "Test Page", URL: "content/Register.html", icon: "img/icons/more_vert.svg" },
+        { name: "My Information", URL: "content/Register.html", icon: "img/icons/account.svg" },
         { name: "Test Page", URL: "content/test2.html" }
     ];
 
     $scope.changePage = function (index) {
         $rootScope.contentURL = $scope.Pages[index].URL;
+        $scope.close();
     };
 
     function LoadPage() {
