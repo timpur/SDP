@@ -15,6 +15,7 @@
           <Parameter Name="dob" Type="datetime" Mode="In" />
           <Parameter Name="gender" Type="char" Mode="In" />
           <Parameter Name="degree" Type="char" Mode="In" />
+          <Parameter Name="year" Type="char" Mode="In" />
           <Parameter Name="status" Type="char" Mode="In" />
           <Parameter Name="first_language" Type="nvarchar" Mode="In" />
           <Parameter Name="country_origin" Type="nvarchar" Mode="In" />
@@ -147,6 +148,35 @@
           <Parameter Name="assisstanceText" Type="ntext" Mode="In" />
           <Parameter Name="userId" Type="int" Mode="In" />
         </Function>
+        <Function Name="prcUpdateStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentID" Type="char" Mode="In" />
+          <Parameter Name="preferred_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="alternative_contact" Type="text" Mode="In" />
+          <Parameter Name="gender" Type="char" Mode="In" />
+          <Parameter Name="degree" Type="char" Mode="In" />
+          <Parameter Name="year" Type="char" Mode="In" />
+          <Parameter Name="status" Type="char" Mode="In" />
+          <Parameter Name="first_language" Type="nvarchar" Mode="In" />
+          <Parameter Name="country_origin" Type="nvarchar" Mode="In" />
+          <Parameter Name="modifierID" Type="int" Mode="In" />
+          <Parameter Name="background" Type="ntext" Mode="In" />
+          <Parameter Name="HSC" Type="bit" Mode="In" />
+          <Parameter Name="HSC_mark" Type="char" Mode="In" />
+          <Parameter Name="IELTS" Type="bit" Mode="In" />
+          <Parameter Name="IELTS_mark" Type="char" Mode="In" />
+          <Parameter Name="TOEFL" Type="bit" Mode="In" />
+          <Parameter Name="TOEFL_mark" Type="char" Mode="In" />
+          <Parameter Name="TAFE" Type="bit" Mode="In" />
+          <Parameter Name="TAFE_mark" Type="char" Mode="In" />
+          <Parameter Name="CULT" Type="bit" Mode="In" />
+          <Parameter Name="CULT_mark" Type="char" Mode="In" />
+          <Parameter Name="InsearchDEEP" Type="bit" Mode="In" />
+          <Parameter Name="InsearchDEEP_mark" Type="char" Mode="In" />
+          <Parameter Name="InsearchDiploma" Type="bit" Mode="In" />
+          <Parameter Name="InsearchDiploma_mark" Type="char" Mode="In" />
+          <Parameter Name="foundationcourse" Type="bit" Mode="In" />
+          <Parameter Name="foundationcourse_mark" Type="char" Mode="In" />
+        </Function>
         <Function Name="prcUpdateWorkshopBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="workshopId" Type="int" Mode="In" />
           <Parameter Name="studentId" Type="char" Mode="In" />
@@ -165,6 +195,7 @@
             <Parameter Name="dob" Mode="In" Type="DateTime" />
             <Parameter Name="gender" Mode="In" Type="String" />
             <Parameter Name="degree" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="String" />
             <Parameter Name="status" Mode="In" Type="String" />
             <Parameter Name="first_language" Mode="In" Type="String" />
             <Parameter Name="country_origin" Mode="In" Type="String" />
@@ -295,19 +326,48 @@
             <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prcListAppointments" ReturnType="Collection(HELPSModel.Appointment)">
-            <Parameter Name="active" Mode="In" Type="Boolean" />
+          <Parameter Name="active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="prcListAssignments" ReturnType="Collection(HELPSModel.Assignment)">
-            <Parameter Name="active" Mode="In" Type="Boolean" />
+          <Parameter Name="active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="prcListCampuses" ReturnType="Collection(HELPSModel.Campus)">
-            <Parameter Name="active" Mode="In" Type="Boolean" />
+          <Parameter Name="active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="prcListLecturers" ReturnType="Collection(HELPSModel.Lecturer)">
-            <Parameter Name="active" Mode="In" Type="Boolean" />
+          <Parameter Name="active" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="prcListWorkShopSets" ReturnType="Collection(HELPSModel.WorkShopSet)">
-            <Parameter Name="active" Mode="In" Type="Boolean" />
+          <Parameter Name="active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="prcUpdateStudent">
+            <Parameter Name="studentID" Mode="In" Type="String" />
+            <Parameter Name="preferred_name" Mode="In" Type="String" />
+            <Parameter Name="alternative_contact" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="degree" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="first_language" Mode="In" Type="String" />
+            <Parameter Name="country_origin" Mode="In" Type="String" />
+            <Parameter Name="modifierID" Mode="In" Type="Int32" />
+            <Parameter Name="background" Mode="In" Type="String" />
+            <Parameter Name="HSC" Mode="In" Type="Boolean" />
+            <Parameter Name="HSC_mark" Mode="In" Type="String" />
+            <Parameter Name="IELTS" Mode="In" Type="Boolean" />
+            <Parameter Name="IELTS_mark" Mode="In" Type="String" />
+            <Parameter Name="TOEFL" Mode="In" Type="Boolean" />
+            <Parameter Name="TOEFL_mark" Mode="In" Type="String" />
+            <Parameter Name="TAFE" Mode="In" Type="Boolean" />
+            <Parameter Name="TAFE_mark" Mode="In" Type="String" />
+            <Parameter Name="CULT" Mode="In" Type="Boolean" />
+            <Parameter Name="CULT_mark" Mode="In" Type="String" />
+            <Parameter Name="InsearchDEEP" Mode="In" Type="Boolean" />
+            <Parameter Name="InsearchDEEP_mark" Mode="In" Type="String" />
+            <Parameter Name="InsearchDiploma" Mode="In" Type="Boolean" />
+            <Parameter Name="InsearchDiploma_mark" Mode="In" Type="String" />
+            <Parameter Name="foundationcourse" Mode="In" Type="Boolean" />
+            <Parameter Name="foundationcourse_mark" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SessionType">
@@ -388,6 +448,7 @@
           <Property Type="String" Name="degree_details" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="alternative_contact" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="preferred_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="year" Nullable="true" MaxLength="4" />
         </ComplexType>
         <ComplexType Name="BasicWorkshop">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -604,6 +665,7 @@
                 <ScalarProperty Name="degree_details" ColumnName="degree_details" />
                 <ScalarProperty Name="alternative_contact" ColumnName="alternative_contact" />
                 <ScalarProperty Name="preferred_name" ColumnName="preferred_name" />
+                <ScalarProperty Name="year" ColumnName="year" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -780,6 +842,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcUpdateStudent" FunctionName="HELPSModel.Store.prcUpdateStudent" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

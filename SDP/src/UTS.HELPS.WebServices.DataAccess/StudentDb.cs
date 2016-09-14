@@ -12,7 +12,7 @@ namespace UTS.HELPS.WebServices.DataAccess
             using (HELPSEntities ctx = new HELPSEntities())
             {
                 ctx.prcCreateStudent(studentReg.StudentId, studentReg.DateOfBirth, gender, studentReg.Degree.ToString(),
-                    studentReg.Status.ToString(), studentReg.FirstLanguage, studentReg.CountryOrigin,
+                    studentReg.Year.ToString(), studentReg.Status.ToString(), studentReg.FirstLanguage, studentReg.CountryOrigin,
                     studentReg.Background,
                     studentReg.HSC, studentReg.HSCMark, studentReg.IELTS, studentReg.IELTSMark,
                     studentReg.TOEFL, studentReg.TOEFLMark, studentReg.TAFE, studentReg.TAFEMark,
@@ -28,6 +28,22 @@ namespace UTS.HELPS.WebServices.DataAccess
             using (HELPSEntities ctx = new HELPSEntities())
             {
                 return ctx.prcGetStudent(studentId).FirstOrDefault();
+            }
+        }
+
+        public static void UpdateStudentInformation(StudentUpdate student)
+        {
+            using (HELPSEntities ctx = new HELPSEntities())
+            {
+                ctx.prcUpdateStudent(
+                    student.StudentId, student.PreferredName, student.AltContact, student.GenderString(), student.Degree.ToString(),
+                    student.Year.ToString(), student.Status.ToString(), student.FirstLanguage, 
+                    student.CountryOrigin, student.ModifierID, student.Background,
+                    student.HSC, student.HSCMark, student.IELTS, student.IELTSMark, student.TOEFL, 
+                    student.TOEFLMark, student.TAFE, student.TAFEMark,
+                    student.CULT, student.CULTMark, student.InsearchDEEP, student.InsearchDEEPMark,
+                    student.InsearchDiploma, student.InsearchDiplomaMark, student.FoundationCourse, student.FoundationCourseMark
+                    );
             }
         }
     }

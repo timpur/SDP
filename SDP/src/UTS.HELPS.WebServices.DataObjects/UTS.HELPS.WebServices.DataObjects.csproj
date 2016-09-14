@@ -42,6 +42,7 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\SessionBookingSearch.cs" />
+    <Compile Include="Requests\StudentUpdate.cs" />
     <Compile Include="Requests\StudentReg.cs" />
     <Compile Include="Requests\UpdateSessionBooking.cs" />
     <Compile Include="Requests\UpdateWorkshopBooking.cs" />

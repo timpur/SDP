@@ -9,6 +9,7 @@ namespace UTS.HELPS.WebServices.DataObjects.Requests
         public DateTime? DateOfBirth { get; set; }
         public Gender? Gender { get; set; }
         public Degree Degree { get; set; }
+        public Year Year { get; set; }
         public Status Status { get; set; }
         public string FirstLanguage { get; set; }
         public string CountryOrigin { get; set; }
