@@ -1,0 +1,27 @@
+﻿<form ng-controller="MyInfo">
+    <h1>My Information</h1>
+    <p>Enter your Student ID and Password</p>
+    <div layout-gt-xs="row">
+        <md-input-container>
+            <label>ID</label>
+            <input ng-model="myInfo.StudentId">
+        </md-input-container>
+        <md-input-container>
+            <label>Password</label>
+            <input ng-model="myInfo.Password" type="password">
+        </md-input-container>
+    </div>
+    <div layout-gt-xs="row">
+        <md-input-container>
+            <label>FistName</label>
+            <input ng-model="myInfo.FirstName">
+        </md-input-container>
+        <md-input-container>
+            <label>LastName</label>
+            <input ng-model="myInfo.LastName">
+        </md-input-container>
+    </div>
+    <md-button type="submit" class="md-raised md-primary" layout="column" ng-click="updateMyInfo()">
+        Update Information
+    </md-button>
+</form>

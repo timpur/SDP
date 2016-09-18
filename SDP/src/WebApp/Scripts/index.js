@@ -1,4 +1,6 @@
-﻿/// <reference path="intellisense/jquery-3.1.0.js" />
+﻿/// <reference path="C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\content/Register.html" />
+/// <reference path="C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\content/Register.html" />
+/// <reference path="intellisense/jquery-3.1.0.js" />
 /// <reference path="intellisense/jquery-3.1.0.intellisense.js" />
 /// <reference path="intellisense/angular.js" />
 /// <reference path="API.js" />
@@ -8,13 +10,22 @@
 //UI https://material.angularjs.org/latest/
 
 
-var app = angular.module("App", ["ngMaterial"]);
+var app = angular.module("App", ["ngMaterial", "ngRoute"]);
+
+app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+
+    $routeProvider.when("/myinfo", {
+        templateUrl: "content/myinfo.html"
+    })
+}]);
 
 
-var MainController = app.controller("Main", function ($scope, $mdDialog) {
+var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog) {
 
     angular.element(document).ready(function () {
-        $scope.ShowLoginDialog()
+        API.key.load();
+        if (!API.key.validKey) $scope.ShowLoginDialog();
+        $scope.$apply();
     });
 
 
@@ -28,14 +39,16 @@ var MainController = app.controller("Main", function ($scope, $mdDialog) {
             controller: Login_DialogController
         });
     };
+
+    $rootScope.myInfo = new API.student.register.dataObj();
 });
-
-
 
 
 
 var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSidenav) {
     $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
+
+    $scope.user = function () { return API.key.user };
 
 
     function buildDelayedToggler(navID) {
@@ -59,50 +72,35 @@ var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSiden
 
 
 
-
-var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, $mdSidenav) {
+var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) {
     $scope.close = function () {
         $mdSidenav('LeftNav').close();
     };
 
     $scope.Pages = [
-        { name: "My Information", URL: "content/Register.html", icon: "img/icons/account.svg" },
-        { name: "Test Page", URL: "content/test2.html" }
+        { name: "Dashboard", URL: "#", icon: "img/icons/account.svg" },
+        { name: "My Information", URL: "#myinfo", icon: "img/icons/account.svg" },
+        { name: "WorkShops", URL: "#workshops", icon: "img/icons/account.svg" }
     ];
 
-    $scope.changePage = function (index) {
-        $rootScope.contentURL = $scope.Pages[index].URL;
-        $scope.close();
-    };
-
-    function LoadPage() {
-        $rootScope.contentURL = $scope.Pages[0].URL;
-    };
-    //LoadPage();
-
 });
 
 
 
 
-var ContentController = app.controller('Content', function ($scope, $rootScope) {
-    $scope.ContentURL = function () {
-        return $rootScope.contentURL;
-    };
+var ContentController = app.controller('Content', function ($scope) {
 
 });
 
 
 
+var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
+    $scope.myInfo = $rootScope.myInfo;
 
-var RegisterController = app.controller('Register', function ($scope) {
-    $scope.RegisterData = new API.student.register.dataObj();
-
-    $scope.Register = function () {
+    $scope.updateMyInfo = function () {
         alert('reg');
     };
 });
-
 
 
 
@@ -116,11 +114,12 @@ function Login_DialogController($scope, $mdDialog) {
     $scope.errorMsg = "";
 
     $scope.Login = function () {
-        API.Account.Login($scope.User.ID, $scope.User.Password, function () {
+        API.account.Login($scope.User.ID, $scope.User.Password, function () {
             $scope.close();
         }, function (data) {
             data = JSON.parse(data.responseText);
             $scope.errorMsg = data.error_description;
+            $scope.$apply();
         });
     };
 }

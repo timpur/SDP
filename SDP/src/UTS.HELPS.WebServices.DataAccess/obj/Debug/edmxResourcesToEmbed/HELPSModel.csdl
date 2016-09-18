@@ -6,6 +6,7 @@
       <Parameter Name="dob" Mode="In" Type="DateTime" />
       <Parameter Name="gender" Mode="In" Type="String" />
       <Parameter Name="degree" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="String" />
       <Parameter Name="status" Mode="In" Type="String" />
       <Parameter Name="first_language" Mode="In" Type="String" />
       <Parameter Name="country_origin" Mode="In" Type="String" />
@@ -150,6 +151,35 @@
     <FunctionImport Name="prcListWorkShopSets" ReturnType="Collection(HELPSModel.WorkShopSet)">
       <Parameter Name="active" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="prcUpdateStudent">
+      <Parameter Name="studentID" Mode="In" Type="String" />
+      <Parameter Name="preferred_name" Mode="In" Type="String" />
+      <Parameter Name="alternative_contact" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="degree" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="String" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="first_language" Mode="In" Type="String" />
+      <Parameter Name="country_origin" Mode="In" Type="String" />
+      <Parameter Name="modifierID" Mode="In" Type="Int32" />
+      <Parameter Name="background" Mode="In" Type="String" />
+      <Parameter Name="HSC" Mode="In" Type="Boolean" />
+      <Parameter Name="HSC_mark" Mode="In" Type="String" />
+      <Parameter Name="IELTS" Mode="In" Type="Boolean" />
+      <Parameter Name="IELTS_mark" Mode="In" Type="String" />
+      <Parameter Name="TOEFL" Mode="In" Type="Boolean" />
+      <Parameter Name="TOEFL_mark" Mode="In" Type="String" />
+      <Parameter Name="TAFE" Mode="In" Type="Boolean" />
+      <Parameter Name="TAFE_mark" Mode="In" Type="String" />
+      <Parameter Name="CULT" Mode="In" Type="Boolean" />
+      <Parameter Name="CULT_mark" Mode="In" Type="String" />
+      <Parameter Name="InsearchDEEP" Mode="In" Type="Boolean" />
+      <Parameter Name="InsearchDEEP_mark" Mode="In" Type="String" />
+      <Parameter Name="InsearchDiploma" Mode="In" Type="Boolean" />
+      <Parameter Name="InsearchDiploma_mark" Mode="In" Type="String" />
+      <Parameter Name="foundationcourse" Mode="In" Type="Boolean" />
+      <Parameter Name="foundationcourse_mark" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SessionType">
     <Property Type="Int32" Name="id" Nullable="false" />
@@ -229,6 +259,7 @@
     <Property Type="String" Name="degree_details" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="alternative_contact" Nullable="true" MaxLength="Max" />
     <Property Type="String" Name="preferred_name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="year" Nullable="true" MaxLength="4" />
   </ComplexType>
   <ComplexType Name="BasicWorkshop">
     <Property Type="Int32" Name="id" Nullable="false" />

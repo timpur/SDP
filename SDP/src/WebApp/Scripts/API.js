@@ -8,30 +8,84 @@ var API = new function () {
     this.header = { AppKey: "123456", Authorization: "" };
 
     this.baseUrl = "/webapi/api";
-
     this.callAPIGet = function (url, data, success, error) {
+        var apiSuccess = function (data) {
+            if (!data.IsSuccess) {
+                if (error)
+                    error(data);
+            }
+            else {
+                if (success)
+                    success(data);
+            }
+        };
+        var apiError = function (data) {
+            if (error) error(data);
+        };
+
         jQuery.ajax({
             dataType: "json",
             method: "GET",
             url: url,
             data: data,
-            success: success,
-            error: error,
+            success: apiSuccess,
+            error: apiError,
             headers: this.header
         });
     };
     this.callAPIPost = function (url, data, success, error) {
+        var apiSuccess = function (data) {
+            if (!data.IsSuccess) {
+                if (error)
+                    error(data);
+            }
+            else {
+                if (success)
+                    success(data);
+            }
+        };
+        var apiError = function (data) {
+            if (error) error(data);
+        };
+
         jQuery.ajax({
             dataType: "json",
             method: "POST",
             contentType: "application/json",
             url: url,
             data: JSON.stringify(data),
-            success: success,
-            error: error,
+            success: apiSuccess,
+            error: apiError,
             headers: this.header
         });
     };
+
+    this.key = { validKey: false, user: "" };
+    this.key.set = function (key) {
+        this.validKey = true;
+        API.header.Authorization = key;
+    }
+    this.key.load = function () {
+        var keyobj = JSON.parse(localStorage.getItem("AuthKey"));
+        if (keyobj != null) {
+            var now = new Date();
+            var time = new Date(keyobj.time);
+            if (now < time) {
+                if (keyobj.key != null && keyobj.key != "") {
+                    this.set(keyobj.key);
+                    this.user = keyobj.user;
+                }
+            }
+        }
+    }
+    this.key.save = function (key, time, user) {
+        var exspireTime = new Date()
+        exspireTime.setSeconds(exspireTime.getSeconds() + time);
+        exspireTime = exspireTime.getTime();
+        var keyobj = { key: key, time: exspireTime, user: user };
+        localStorage.setItem("AuthKey", JSON.stringify(keyobj));
+        this.set(key);
+    }
 
 
     //Session API
@@ -104,8 +158,8 @@ var API = new function () {
 
 
 
-    this.Account = { url: this.baseUrl + "/account" };
-    this.Account.Reg = function (ID, Password, Password2, success, error) {
+    this.account = { url: this.baseUrl + "/account" };
+    this.account.Reg = function (ID, Password, Password2, success, error) {
         var data = {
             userName: "test",
             password: "PassPass",
@@ -114,7 +168,7 @@ var API = new function () {
         var url = this.url + "/register";
         API.callAPIPost(url, data, success, error);
     }
-    this.Account.Login = function (ID, Password, success, error) {
+    this.account.Login = function (ID, Password, success, error) {
         var url = "/webapi/account/login"
         var data = {
             grant_type: "password",
@@ -127,9 +181,11 @@ var API = new function () {
             method: "post",
             url: url,
             data: data,
-            error:error,
+            error: error,
             success: function (data) {
-                API.header.Authorization = data.token_type + " " + data.access_token;
+                var key = data.token_type + " " + data.access_token;
+                var time = data.expires_in;
+                API.key.save(key, time, ID);
                 success();
             }
         });

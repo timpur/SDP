@@ -26,7 +26,7 @@ namespace UTS.HELPS.WebServices.WebAPI
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/account/login"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
                 Provider = new SimpleAuthorizationServerProvider()
             };
 
