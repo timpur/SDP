@@ -21,17 +21,24 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
 
 var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog) {
-
-    angular.element(document).ready(function () {
-        API.key.load();
-        if (!API.key.validKey) $scope.ShowLoginDialog();
-        $scope.$apply();
+    $(document).ready(function () {
+        Authenticate();
     });
 
+    var Authenticate = function () {
+        API.key.load();
+        if (!API.key.validKey) {
+            $scope.ShowLoginDialog();
+        }
+        else {
+            $(document).trigger("Authenticated");
+        }
+        $scope.$apply();
+    };
 
     $scope.ShowLoginDialog = function () {
         $mdDialog.show({
-            templateUrl: 'content/LoginDialog.html',
+            templateUrl: 'content/logindialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: false,
             escapeToClose: false,
@@ -39,8 +46,6 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             controller: Login_DialogController
         });
     };
-
-    $rootScope.myInfo = new API.student.register.dataObj();
 });
 
 
@@ -48,7 +53,7 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
 var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSidenav) {
     $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
 
-    $scope.user = function () { return API.key.user };
+    $scope.user = function () { return API.key.FirstName };
 
 
     function buildDelayedToggler(navID) {
@@ -95,11 +100,26 @@ var ContentController = app.controller('Content', function ($scope) {
 
 
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
-    $scope.myInfo = $rootScope.myInfo;
-
+    $scope.myInfo = {};
+    $scope.options = {
+        gender: [{ name: "Indeterminate / Unspecified / Intersex", value: "X" }, { name: "Male", value: "M" }, { name: "Female", value: "F" }],
+        degree: [],
+        year: [],
+        status: []
+    };
     $scope.updateMyInfo = function () {
         alert('reg');
     };
+
+    function GetMyInfo() {
+        API.student.getStudent(API.key.ID, function (data) {
+            $scope.myInfo = data.Result;
+            $scope.myInfo.firstName = API.key.FirstName;
+            $scope.myInfo.lastName = API.key.LastName;
+            $scope.$apply();
+        }, null);
+    }
+    $(document).on("Authenticated", GetMyInfo);
 });
 
 
@@ -108,14 +128,13 @@ function Login_DialogController($scope, $mdDialog) {
     $scope.close = function () {
         $mdDialog.hide();
     };
-
     $scope.User = { ID: "", Password: "" };
-
     $scope.errorMsg = "";
-
     $scope.Login = function () {
         API.account.Login($scope.User.ID, $scope.User.Password, function () {
             $scope.close();
+            $(document).trigger("Authenticated");
+            $scope.$apply();
         }, function (data) {
             data = JSON.parse(data.responseText);
             $scope.errorMsg = data.error_description;

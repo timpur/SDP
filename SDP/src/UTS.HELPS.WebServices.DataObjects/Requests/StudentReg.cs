@@ -5,7 +5,7 @@ namespace UTS.HELPS.WebServices.DataObjects.Requests
 {
     public class StudentReg
     {
-        public string StudentId { get; set; }
+        public string StudentID { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public Gender? Gender { get; set; }
         public Degree Degree { get; set; }

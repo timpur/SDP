@@ -1,24 +1,29 @@
 ﻿<form ng-controller="MyInfo">
     <h1>My Information</h1>
     <p>Enter your Student ID and Password</p>
+    <p>{{myInfo}}</p>
     <div layout-gt-xs="row">
         <md-input-container>
             <label>ID</label>
-            <input ng-model="myInfo.StudentId">
+            <input ng-model="myInfo.studentID" ng-readonly="true">
         </md-input-container>
         <md-input-container>
-            <label>Password</label>
-            <input ng-model="myInfo.Password" type="password">
+            <label>Name</label>
+            <input value="{{myInfo.firstName}} {{myInfo.lastName}}" ng-readonly="true">
         </md-input-container>
     </div>
     <div layout-gt-xs="row">
         <md-input-container>
-            <label>FistName</label>
-            <input ng-model="myInfo.FirstName">
+            <label>Data of Birth</label>
+            <input ng-readonly="true" value="{{myInfo.dob | date:'d/M/y'}}">
         </md-input-container>
         <md-input-container>
-            <label>LastName</label>
-            <input ng-model="myInfo.LastName">
+            <label>Gender</label>
+            <md-select ng-model="myInfo.gender">
+                <md-option ng-repeat="option in options.gender" ng-value="option.value">
+                    {{option.name}}
+                </md-option>
+            </md-select>
         </md-input-container>
     </div>
     <md-button type="submit" class="md-raised md-primary" layout="column" ng-click="updateMyInfo()">

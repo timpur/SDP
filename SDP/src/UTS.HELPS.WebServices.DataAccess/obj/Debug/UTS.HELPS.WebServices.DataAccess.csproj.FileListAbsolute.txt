@@ -10,3 +10,5 @@ C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAcce
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\obj\Debug\UTS.HELPS.WebServices.DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\obj\Debug\UTS.HELPS.WebServices.DataAccess.dll
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\obj\Debug\UTS.HELPS.WebServices.DataAccess.pdb
+C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\Newtonsoft.Json.dll
+C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\Newtonsoft.Json.xml

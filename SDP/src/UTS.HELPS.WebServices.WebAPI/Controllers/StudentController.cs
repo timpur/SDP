@@ -14,14 +14,13 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
         [Route("api/student/{studentId}")]
         public StudentResponse GetStudent(string studentId)
         {
-            StudentResponse studentResponse = new StudentResponse();
             try
             {
                 base.CheckApplicationKey();
-                studentResponse.Result = StudentDb.GetStudent(studentId);
                 return new StudentResponse()
                 {
-                    IsSuccess = true
+                    IsSuccess = true,
+                    Result = StudentDb.GetStudent(studentId)
                 };
             }
             catch (Exception e)
@@ -56,7 +55,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                     IsSuccess = false,
                     DisplayMessage = string.Format(ErrorMessages.STUDENT_REGISTER_ERROR, msg)
                 };
-            }            
+            }
         }
 
         [HttpPost]

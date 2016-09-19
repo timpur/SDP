@@ -74,7 +74,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
         {
             StudentReg reg = new StudentReg()
             {
-                StudentId = user.UserName,
+                StudentID = user.UserName,
                 CreatorId = 0,
                 Degree = user.Degree,
                 Year = user.Year,

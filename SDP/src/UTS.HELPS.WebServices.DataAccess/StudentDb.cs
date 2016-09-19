@@ -11,7 +11,7 @@ namespace UTS.HELPS.WebServices.DataAccess
 
             using (HELPSEntities ctx = new HELPSEntities())
             {
-                ctx.prcCreateStudent(studentReg.StudentId, studentReg.DateOfBirth, gender, studentReg.Degree.ToString(),
+                ctx.prcCreateStudent(studentReg.StudentID, studentReg.DateOfBirth, gender, studentReg.Degree.ToString(),
                     studentReg.Year.ToString(), studentReg.Status.ToString(), studentReg.FirstLanguage, studentReg.CountryOrigin,
                     studentReg.Background,
                     studentReg.HSC, studentReg.HSCMark, studentReg.IELTS, studentReg.IELTSMark,
@@ -36,7 +36,7 @@ namespace UTS.HELPS.WebServices.DataAccess
             using (HELPSEntities ctx = new HELPSEntities())
             {
                 ctx.prcUpdateStudent(
-                    student.StudentId, student.PreferredName, student.AltContact, student.GenderString(), student.Degree.ToString(),
+                    student.StudentID, student.PreferredName, student.AltContact, student.GenderString(), student.Degree.ToString(),
                     student.Year.ToString(), student.Status.ToString(), student.FirstLanguage, 
                     student.CountryOrigin, student.ModifierID, student.Background,
                     student.HSC, student.HSCMark, student.IELTS, student.IELTSMark, student.TOEFL, 

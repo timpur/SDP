@@ -60,12 +60,13 @@ var API = new function () {
         });
     };
 
-    this.key = { validKey: false, user: "" };
-    this.key.set = function (key, user, firstname) {
+    this.key = { validKey: false, ID: "", FirstName: "", LastName: "" };
+    this.key.set = function (key, ID, FirstName, LastName) {
         this.validKey = true;
         API.header.Authorization = key;
-        this.user = user;
-        this.firstname = firstname;
+        this.ID = ID;
+        this.FirstName = FirstName;
+        this.LastName = LastName
     }
     this.key.load = function () {
         var keyobj = JSON.parse(localStorage.getItem("AuthKey"));
@@ -74,18 +75,18 @@ var API = new function () {
             var time = new Date(keyobj.time);
             if (now < time) {
                 if (keyobj.key != null && keyobj.key != "") {
-                    this.set(keyobj.key, keyobj.user, keyobj.firsname);
+                    this.set(keyobj.key, keyobj.ID, keyobj.FirstName, keyobj.LastName);
                 }
             }
         }
     }
-    this.key.save = function (key, time, user, firsname) {
+    this.key.save = function (key, time, ID, FirstName, LastName) {
         var exspireTime = new Date()
         exspireTime.setSeconds(exspireTime.getSeconds() + time);
         exspireTime = exspireTime.getTime();
-        var keyobj = { key: key, time: exspireTime, user: user, firsname: firsname };
+        var keyobj = { key: key, time: exspireTime, ID: ID, FirstName: FirstName, LastName: LastName };
         localStorage.setItem("AuthKey", JSON.stringify(keyobj));
-        this.set(key, user, firsname);
+        this.set(key, ID, FirstName, LastName);
     }
 
 
@@ -120,9 +121,42 @@ var API = new function () {
 
     this.student = { url: this.baseUrl + "/student" };
     this.student.getStudent = function (ID, success, error) {
-        var url = this.url + "/" + JSON.parse(ID);
+        var url = this.url + "/" + ID;
         API.callAPIGet(url, null, success, error);
     };
+    this.student.update = function (data, success, error) {
+        var url = this.url + "/update";
+        API.callAPIPost(url, data, success, error);
+    };
+    this.student.update.dataObj = function () {
+        this.StudentId = null;
+        this.PreferredName = null;
+        this.AltContact = null;
+        this.Gender = null;
+        this.Degree = null;
+        this.Year = null;
+        this.Status = null;
+        this.FirstLanguage = null;
+        this.CountryOrigin = null;
+        this.ModifierID = null;
+        this.Background = null;
+        this.HSC = null;
+        this.HSCMark = null;
+        this.IELTS = null;
+        this.IELTSMark = null;
+        this.TOEFL = null;
+        this.TOEFLMark = null;
+        this.TAFE = null;
+        this.TAFEMark = null;
+        this.CULT = null;
+        this.CULTMark = null;
+        this.InsearchDEEP = null;
+        this.InsearchDEEPMark = null;
+        this.InsearchDiploma = null;
+        this.InsearchDiplomaMark = null;
+        this.FoundationCourse = null;
+        this.FoundationCourseMark = null;
+    }
     this.student.register = function (data, success, error) {
         var url = this.url + "/register";
         API.callAPIPost(url, data, success, error);
@@ -160,9 +194,9 @@ var API = new function () {
 
 
     this.account = { url: this.baseUrl + "/account" };
-    this.account.Register = function (dataObj, success, error) {
+    this.account.Register = function (data, success, error) {
         var url = this.url + "/register";
-        API.callAPIPost(url, dataObj, success, error);
+        API.callAPIPost(url, data, success, error);
     }
     this.account.Register.dataObj = function () {
         this.UserName = null;
@@ -193,7 +227,7 @@ var API = new function () {
             success: function (data) {
                 var key = data.token_type + " " + data.access_token;
                 var time = data.expires_in;
-                API.key.save(key, time, data.UserName, data.FirstName);
+                API.key.save(key, time, data.UserName, data.FirstName, data.LastName);
                 success();
             }
         });
