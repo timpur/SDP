@@ -123,3 +123,21 @@ function Login_DialogController($scope, $mdDialog) {
         });
     };
 }
+
+
+// Admin only
+
+function createUser() {
+    var dataObj = new API.account.Register.dataObj();
+    dataObj.UserName = "98077175";
+    dataObj.Password = "testtest";
+    dataObj.ConfirmPassword = "testtest";
+    dataObj.FirstName = "Timothy"
+    dataObj.LastName = "Purchas";
+    dataObj.Degree = 1;
+    dataObj.Year = 2;
+    dataObj.Status = 0;
+    dataObj.FirstLanguage = "English";
+    dataObj.CountryOrigin = "Australia";
+    API.account.Register(dataObj, null, null);
+}

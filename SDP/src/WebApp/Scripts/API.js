@@ -61,9 +61,11 @@ var API = new function () {
     };
 
     this.key = { validKey: false, user: "" };
-    this.key.set = function (key) {
+    this.key.set = function (key, user, firstname) {
         this.validKey = true;
         API.header.Authorization = key;
+        this.user = user;
+        this.firstname = firstname;
     }
     this.key.load = function () {
         var keyobj = JSON.parse(localStorage.getItem("AuthKey"));
@@ -72,19 +74,18 @@ var API = new function () {
             var time = new Date(keyobj.time);
             if (now < time) {
                 if (keyobj.key != null && keyobj.key != "") {
-                    this.set(keyobj.key);
-                    this.user = keyobj.user;
+                    this.set(keyobj.key, keyobj.user, keyobj.firsname);
                 }
             }
         }
     }
-    this.key.save = function (key, time, user) {
+    this.key.save = function (key, time, user, firsname) {
         var exspireTime = new Date()
         exspireTime.setSeconds(exspireTime.getSeconds() + time);
         exspireTime = exspireTime.getTime();
-        var keyobj = { key: key, time: exspireTime, user: user };
+        var keyobj = { key: key, time: exspireTime, user: user, firsname: firsname };
         localStorage.setItem("AuthKey", JSON.stringify(keyobj));
-        this.set(key);
+        this.set(key, user, firsname);
     }
 
 
@@ -159,14 +160,21 @@ var API = new function () {
 
 
     this.account = { url: this.baseUrl + "/account" };
-    this.account.Reg = function (ID, Password, Password2, success, error) {
-        var data = {
-            userName: "test",
-            password: "PassPass",
-            confirmPassword: "PassPass"
-        };
+    this.account.Register = function (dataObj, success, error) {
         var url = this.url + "/register";
-        API.callAPIPost(url, data, success, error);
+        API.callAPIPost(url, dataObj, success, error);
+    }
+    this.account.Register.dataObj = function () {
+        this.UserName = null;
+        this.Password = null;
+        this.ConfirmPassword = null;
+        this.FirstName = null;
+        this.LastName = null;
+        this.Degree = null;
+        this.Year = null;
+        this.Status = null;
+        this.FirstLanguage = null;
+        this.CountryOrigin = null;
     }
     this.account.Login = function (ID, Password, success, error) {
         var url = "/webapi/account/login"
@@ -185,7 +193,7 @@ var API = new function () {
             success: function (data) {
                 var key = data.token_type + " " + data.access_token;
                 var time = data.expires_in;
-                API.key.save(key, time, ID);
+                API.key.save(key, time, data.UserName, data.FirstName);
                 success();
             }
         });
