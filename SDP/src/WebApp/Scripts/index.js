@@ -101,12 +101,17 @@ var ContentController = app.controller('Content', function ($scope) {
 
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
     $scope.myInfo = {};
+
     $scope.options = {
         gender: [{ name: "Indeterminate / Unspecified / Intersex", value: "X" }, { name: "Male", value: "M" }, { name: "Female", value: "F" }],
-        degree: [],
-        year: [],
-        status: []
+        degree: [{ name: "None", value: "N" }, { name: "UG", value: "UG" }, { name: "PG", value: "PG" }],
+        year: [{ name: "Not Set", value: "NotSet" }, { name: "1st Year", value: "Year1" }, { name: "2nd Year", value: "Year2" },
+        { name: "3rd Year", value: "Year3" }, { name: "4th Year", value: "Year4" }, { name: "5th Year", value: "Year5" }],
+        status: [{ name: "Permanent", value: "Permanent" }, { name: "International", value: "International" }],
+        language: ["English", "Test"],
+        country: ["Australia", "Test"]
     };
+
     $scope.updateMyInfo = function () {
         alert('reg');
     };

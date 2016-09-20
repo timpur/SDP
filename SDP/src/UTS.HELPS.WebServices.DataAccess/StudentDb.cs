@@ -7,6 +7,7 @@ namespace UTS.HELPS.WebServices.DataAccess
     {
         public static void RegisterStudent(StudentReg studentReg)
         {
+            studentReg.Trim();
             string gender = studentReg.Gender.HasValue ? studentReg.Gender.ToString() : null;
 
             using (HELPSEntities ctx = new HELPSEntities())
@@ -27,12 +28,13 @@ namespace UTS.HELPS.WebServices.DataAccess
         {
             using (HELPSEntities ctx = new HELPSEntities())
             {
-                return ctx.prcGetStudent(studentId).FirstOrDefault();
+                return ctx.prcGetStudent(studentId).FirstOrDefault().Trim();
             }
         }
 
         public static void UpdateStudentInformation(StudentUpdate student)
         {
+            student.Trim();
             using (HELPSEntities ctx = new HELPSEntities())
             {
                 ctx.prcUpdateStudent(

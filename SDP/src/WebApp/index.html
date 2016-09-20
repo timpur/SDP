@@ -59,11 +59,9 @@
                 </md-content>
             </div>
         </md-sidenav>
-        <md-content flex layout-padding ng-controller="Content">
-            <div layout="column" layout-align="top center">
-                <ng-view> </ng-view>
-            </div>
-            <div flex></div>
+        <md-content layout="column" layout-padding flex ng-controller="Content">
+            <ng-view flex>
+            </ng-view>
         </md-content>
     </section>
 
