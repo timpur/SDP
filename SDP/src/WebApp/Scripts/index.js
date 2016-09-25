@@ -1,4 +1,6 @@
-﻿/// <reference path="intellisense/jquery-3.1.0.js" />
+﻿/// <reference path="C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\content/Register.html" />
+/// <reference path="C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\WebApp\content/Register.html" />
+/// <reference path="intellisense/jquery-3.1.0.js" />
 /// <reference path="intellisense/jquery-3.1.0.intellisense.js" />
 /// <reference path="intellisense/angular.js" />
 /// <reference path="API.js" />
@@ -8,19 +10,35 @@
 //UI https://material.angularjs.org/latest/
 
 
-var app = angular.module("App", ["ngMaterial"]);
+var app = angular.module("App", ["ngMaterial", "ngRoute"]);
+
+app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+
+    $routeProvider.when("/myinfo", {
+        templateUrl: "content/myinfo.html"
+    })
+}]);
 
 
-var MainController = app.controller("Main", function ($scope, $mdDialog) {
-
-    angular.element(document).ready(function () {
-        $scope.ShowLoginDialog()
+var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog) {
+    $(document).ready(function () {
+        Authenticate();
     });
 
+    var Authenticate = function () {
+        API.key.load();
+        if (!API.key.validKey) {
+            $scope.ShowLoginDialog();
+        }
+        else {
+            $(document).trigger("Authenticated");
+        }
+        $scope.$apply();
+    };
 
     $scope.ShowLoginDialog = function () {
         $mdDialog.show({
-            templateUrl: 'content/LoginDialog.html',
+            templateUrl: 'content/logindialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: false,
             escapeToClose: false,
@@ -32,10 +50,10 @@ var MainController = app.controller("Main", function ($scope, $mdDialog) {
 
 
 
-
-
 var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSidenav) {
     $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
+
+    $scope.user = function () { return API.key.FirstName };
 
 
     function buildDelayedToggler(navID) {
@@ -59,49 +77,55 @@ var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSiden
 
 
 
-
-var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, $mdSidenav) {
+var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) {
     $scope.close = function () {
         $mdSidenav('LeftNav').close();
     };
 
     $scope.Pages = [
-        { name: "Test Page", URL: "content/Register.html", icon: "img/icons/more_vert.svg" },
-        { name: "Test Page", URL: "content/test2.html" }
+        { name: "Dashboard", URL: "#", icon: "img/icons/account.svg" },
+        { name: "My Information", URL: "#myinfo", icon: "img/icons/account.svg" },
+        { name: "WorkShops", URL: "#workshops", icon: "img/icons/account.svg" }
     ];
 
-    $scope.changePage = function (index) {
-        $rootScope.contentURL = $scope.Pages[index].URL;
-    };
-
-    function LoadPage() {
-        $rootScope.contentURL = $scope.Pages[0].URL;
-    };
-    //LoadPage();
-
 });
 
 
 
 
-var ContentController = app.controller('Content', function ($scope, $rootScope) {
-    $scope.ContentURL = function () {
-        return $rootScope.contentURL;
-    };
+var ContentController = app.controller('Content', function ($scope) {
 
 });
 
 
 
+var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
+    $scope.myInfo = {};
 
-var RegisterController = app.controller('Register', function ($scope) {
-    $scope.RegisterData = new API.student.register.dataObj();
+    $scope.options = {
+        gender: [{ name: "Indeterminate / Unspecified / Intersex", value: "X" }, { name: "Male", value: "M" }, { name: "Female", value: "F" }],
+        degree: [{ name: "None", value: "N" }, { name: "UG", value: "UG" }, { name: "PG", value: "PG" }],
+        year: [{ name: "Not Set", value: "NotSet" }, { name: "1st Year", value: "Year1" }, { name: "2nd Year", value: "Year2" },
+        { name: "3rd Year", value: "Year3" }, { name: "4th Year", value: "Year4" }, { name: "5th Year", value: "Year5" }],
+        status: [{ name: "Permanent", value: "Permanent" }, { name: "International", value: "International" }],
+        language: ["English", "Test"],
+        country: ["Australia", "Test"]
+    };
 
-    $scope.Register = function () {
+    $scope.updateMyInfo = function () {
         alert('reg');
     };
-});
 
+    function GetMyInfo() {
+        API.student.getStudent(API.key.ID, function (data) {
+            $scope.myInfo = data.Result;
+            $scope.myInfo.firstName = API.key.FirstName;
+            $scope.myInfo.lastName = API.key.LastName;
+            $scope.$apply();
+        }, null);
+    }
+    $(document).on("Authenticated", GetMyInfo);
+});
 
 
 
@@ -109,17 +133,35 @@ function Login_DialogController($scope, $mdDialog) {
     $scope.close = function () {
         $mdDialog.hide();
     };
-
     $scope.User = { ID: "", Password: "" };
-
     $scope.errorMsg = "";
-
     $scope.Login = function () {
-        API.Account.Login($scope.User.ID, $scope.User.Password, function () {
+        API.account.Login($scope.User.ID, $scope.User.Password, function () {
             $scope.close();
+            $(document).trigger("Authenticated");
+            $scope.$apply();
         }, function (data) {
             data = JSON.parse(data.responseText);
             $scope.errorMsg = data.error_description;
+            $scope.$apply();
         });
     };
+}
+
+
+// Admin only
+
+function createUser() {
+    var dataObj = new API.account.Register.dataObj();
+    dataObj.UserName = "98077175";
+    dataObj.Password = "testtest";
+    dataObj.ConfirmPassword = "testtest";
+    dataObj.FirstName = "Timothy"
+    dataObj.LastName = "Purchas";
+    dataObj.Degree = 1;
+    dataObj.Year = 2;
+    dataObj.Status = 0;
+    dataObj.FirstLanguage = "English";
+    dataObj.CountryOrigin = "Australia";
+    API.account.Register(dataObj, null, null);
 }

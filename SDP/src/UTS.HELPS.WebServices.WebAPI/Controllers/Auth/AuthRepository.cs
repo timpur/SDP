@@ -11,29 +11,42 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
     public class AuthRepository : IDisposable
     {
         private AuthDBContext authContext;
-
-        private UserManager<IdentityUser> userManager;
+        private UserManager<HELPSIdentityUser> userManager;
+        private RoleManager<IdentityRole> roleManager;
 
         public AuthRepository()
         {
             authContext = new AuthDBContext();
-            userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(authContext));
+            userManager = new UserManager<HELPSIdentityUser>(new UserStore<HELPSIdentityUser>(authContext));
+            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(authContext));
+
         }
 
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
         {
-            IdentityUser user = new IdentityUser
+            HELPSIdentityUser user = new HELPSIdentityUser
             {
-                UserName = userModel.UserName
+                UserName = userModel.UserName,
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName
             };
-            var result = await userManager.CreateAsync(user, userModel.Password);
+            IdentityResult result = await userManager.CreateAsync(user, userModel.Password);
+            if (result.Succeeded)
+            {
+                userManager.AddToRole(user.Id, "User");
+            }
             return result;
         }
 
-        public async Task<IdentityUser> FindUser(string userName, string password)
+        public async Task<HELPSIdentityUser> FindUser(string userName, string password)
         {
-            IdentityUser user = await userManager.FindAsync(userName, password);
+            HELPSIdentityUser user = await userManager.FindAsync(userName, password);
             return user;
+        }
+
+        public async Task<string> GetRoleName(string id)
+        {
+            return (await roleManager.FindByIdAsync(id)).Name;
         }
 
         public void Dispose()

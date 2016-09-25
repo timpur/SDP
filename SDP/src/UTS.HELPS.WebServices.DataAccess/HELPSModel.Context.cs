@@ -28,7 +28,7 @@ namespace UTS.HELPS.WebServices.DataAccess
         }
     
     
-        public virtual int prcCreateStudent(string studentID, Nullable<System.DateTime> dob, string gender, string degree, string status, string first_language, string country_origin, string background, Nullable<bool> hSC, string hSC_mark, Nullable<bool> iELTS, string iELTS_mark, Nullable<bool> tOEFL, string tOEFL_mark, Nullable<bool> tAFE, string tAFE_mark, Nullable<bool> cULT, string cULT_mark, Nullable<bool> insearchDEEP, string insearchDEEP_mark, Nullable<bool> insearchDiploma, string insearchDiploma_mark, Nullable<bool> foundationcourse, string foundationcourse_mark, Nullable<int> creatorID, string degree_details, string alternative_contact, string preferred_name)
+        public virtual int prcCreateStudent(string studentID, Nullable<System.DateTime> dob, string gender, string degree, string year, string status, string first_language, string country_origin, string background, Nullable<bool> hSC, string hSC_mark, Nullable<bool> iELTS, string iELTS_mark, Nullable<bool> tOEFL, string tOEFL_mark, Nullable<bool> tAFE, string tAFE_mark, Nullable<bool> cULT, string cULT_mark, Nullable<bool> insearchDEEP, string insearchDEEP_mark, Nullable<bool> insearchDiploma, string insearchDiploma_mark, Nullable<bool> foundationcourse, string foundationcourse_mark, Nullable<int> creatorID, string degree_details, string alternative_contact, string preferred_name)
         {
             var studentIDParameter = studentID != null ?
                 new ObjectParameter("studentID", studentID) :
@@ -45,6 +45,10 @@ namespace UTS.HELPS.WebServices.DataAccess
             var degreeParameter = degree != null ?
                 new ObjectParameter("degree", degree) :
                 new ObjectParameter("degree", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(string));
     
             var statusParameter = status != null ?
                 new ObjectParameter("status", status) :
@@ -142,7 +146,7 @@ namespace UTS.HELPS.WebServices.DataAccess
                 new ObjectParameter("preferred_name", preferred_name) :
                 new ObjectParameter("preferred_name", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcCreateStudent", studentIDParameter, dobParameter, genderParameter, degreeParameter, statusParameter, first_languageParameter, country_originParameter, backgroundParameter, hSCParameter, hSC_markParameter, iELTSParameter, iELTS_markParameter, tOEFLParameter, tOEFL_markParameter, tAFEParameter, tAFE_markParameter, cULTParameter, cULT_markParameter, insearchDEEPParameter, insearchDEEP_markParameter, insearchDiplomaParameter, insearchDiploma_markParameter, foundationcourseParameter, foundationcourse_markParameter, creatorIDParameter, degree_detailsParameter, alternative_contactParameter, preferred_nameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcCreateStudent", studentIDParameter, dobParameter, genderParameter, degreeParameter, yearParameter, statusParameter, first_languageParameter, country_originParameter, backgroundParameter, hSCParameter, hSC_markParameter, iELTSParameter, iELTS_markParameter, tOEFLParameter, tOEFL_markParameter, tAFEParameter, tAFE_markParameter, cULTParameter, cULT_markParameter, insearchDEEPParameter, insearchDEEP_markParameter, insearchDiplomaParameter, insearchDiploma_markParameter, foundationcourseParameter, foundationcourse_markParameter, creatorIDParameter, degree_detailsParameter, alternative_contactParameter, preferred_nameParameter);
         }
     
         public virtual ObjectResult<SessionType> prcListSessionTypes(Nullable<bool> active)
@@ -559,6 +563,119 @@ namespace UTS.HELPS.WebServices.DataAccess
                 new ObjectParameter("active", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WorkShopSet>("prcListWorkShopSets", activeParameter);
+        }
+    
+        public virtual int prcUpdateStudent(string studentID, string preferred_name, string alternative_contact, string gender, string degree, string year, string status, string first_language, string country_origin, Nullable<int> modifierID, string background, Nullable<bool> hSC, string hSC_mark, Nullable<bool> iELTS, string iELTS_mark, Nullable<bool> tOEFL, string tOEFL_mark, Nullable<bool> tAFE, string tAFE_mark, Nullable<bool> cULT, string cULT_mark, Nullable<bool> insearchDEEP, string insearchDEEP_mark, Nullable<bool> insearchDiploma, string insearchDiploma_mark, Nullable<bool> foundationcourse, string foundationcourse_mark)
+        {
+            var studentIDParameter = studentID != null ?
+                new ObjectParameter("studentID", studentID) :
+                new ObjectParameter("studentID", typeof(string));
+    
+            var preferred_nameParameter = preferred_name != null ?
+                new ObjectParameter("preferred_name", preferred_name) :
+                new ObjectParameter("preferred_name", typeof(string));
+    
+            var alternative_contactParameter = alternative_contact != null ?
+                new ObjectParameter("alternative_contact", alternative_contact) :
+                new ObjectParameter("alternative_contact", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("gender", gender) :
+                new ObjectParameter("gender", typeof(string));
+    
+            var degreeParameter = degree != null ?
+                new ObjectParameter("degree", degree) :
+                new ObjectParameter("degree", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(string));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            var first_languageParameter = first_language != null ?
+                new ObjectParameter("first_language", first_language) :
+                new ObjectParameter("first_language", typeof(string));
+    
+            var country_originParameter = country_origin != null ?
+                new ObjectParameter("country_origin", country_origin) :
+                new ObjectParameter("country_origin", typeof(string));
+    
+            var modifierIDParameter = modifierID.HasValue ?
+                new ObjectParameter("modifierID", modifierID) :
+                new ObjectParameter("modifierID", typeof(int));
+    
+            var backgroundParameter = background != null ?
+                new ObjectParameter("background", background) :
+                new ObjectParameter("background", typeof(string));
+    
+            var hSCParameter = hSC.HasValue ?
+                new ObjectParameter("HSC", hSC) :
+                new ObjectParameter("HSC", typeof(bool));
+    
+            var hSC_markParameter = hSC_mark != null ?
+                new ObjectParameter("HSC_mark", hSC_mark) :
+                new ObjectParameter("HSC_mark", typeof(string));
+    
+            var iELTSParameter = iELTS.HasValue ?
+                new ObjectParameter("IELTS", iELTS) :
+                new ObjectParameter("IELTS", typeof(bool));
+    
+            var iELTS_markParameter = iELTS_mark != null ?
+                new ObjectParameter("IELTS_mark", iELTS_mark) :
+                new ObjectParameter("IELTS_mark", typeof(string));
+    
+            var tOEFLParameter = tOEFL.HasValue ?
+                new ObjectParameter("TOEFL", tOEFL) :
+                new ObjectParameter("TOEFL", typeof(bool));
+    
+            var tOEFL_markParameter = tOEFL_mark != null ?
+                new ObjectParameter("TOEFL_mark", tOEFL_mark) :
+                new ObjectParameter("TOEFL_mark", typeof(string));
+    
+            var tAFEParameter = tAFE.HasValue ?
+                new ObjectParameter("TAFE", tAFE) :
+                new ObjectParameter("TAFE", typeof(bool));
+    
+            var tAFE_markParameter = tAFE_mark != null ?
+                new ObjectParameter("TAFE_mark", tAFE_mark) :
+                new ObjectParameter("TAFE_mark", typeof(string));
+    
+            var cULTParameter = cULT.HasValue ?
+                new ObjectParameter("CULT", cULT) :
+                new ObjectParameter("CULT", typeof(bool));
+    
+            var cULT_markParameter = cULT_mark != null ?
+                new ObjectParameter("CULT_mark", cULT_mark) :
+                new ObjectParameter("CULT_mark", typeof(string));
+    
+            var insearchDEEPParameter = insearchDEEP.HasValue ?
+                new ObjectParameter("InsearchDEEP", insearchDEEP) :
+                new ObjectParameter("InsearchDEEP", typeof(bool));
+    
+            var insearchDEEP_markParameter = insearchDEEP_mark != null ?
+                new ObjectParameter("InsearchDEEP_mark", insearchDEEP_mark) :
+                new ObjectParameter("InsearchDEEP_mark", typeof(string));
+    
+            var insearchDiplomaParameter = insearchDiploma.HasValue ?
+                new ObjectParameter("InsearchDiploma", insearchDiploma) :
+                new ObjectParameter("InsearchDiploma", typeof(bool));
+    
+            var insearchDiploma_markParameter = insearchDiploma_mark != null ?
+                new ObjectParameter("InsearchDiploma_mark", insearchDiploma_mark) :
+                new ObjectParameter("InsearchDiploma_mark", typeof(string));
+    
+            var foundationcourseParameter = foundationcourse.HasValue ?
+                new ObjectParameter("foundationcourse", foundationcourse) :
+                new ObjectParameter("foundationcourse", typeof(bool));
+    
+            var foundationcourse_markParameter = foundationcourse_mark != null ?
+                new ObjectParameter("foundationcourse_mark", foundationcourse_mark) :
+                new ObjectParameter("foundationcourse_mark", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcUpdateStudent", studentIDParameter, preferred_nameParameter, alternative_contactParameter, genderParameter, degreeParameter, yearParameter, statusParameter, first_languageParameter, country_originParameter, modifierIDParameter, backgroundParameter, hSCParameter, hSC_markParameter, iELTSParameter, iELTS_markParameter, tOEFLParameter, tOEFL_markParameter, tAFEParameter, tAFE_markParameter, cULTParameter, cULT_markParameter, insearchDEEPParameter, insearchDEEP_markParameter, insearchDiplomaParameter, insearchDiploma_markParameter, foundationcourseParameter, foundationcourse_markParameter);
         }
     }
 }

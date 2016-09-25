@@ -41,8 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="content\Register.html" />
+    <Content Include="content\myinfo.html" />
     <Content Include="css\angular-material.min.css" />
+    <Content Include="img\icons\account.svg" />
     <Content Include="img\icons\close.svg" />
     <Content Include="img\icons\menu.svg" />
     <Content Include="img\icons\more_vert.svg" />
@@ -50,6 +51,7 @@
     <Content Include="Scripts\angular\angular-animate.min.js" />
     <Content Include="Scripts\angular\angular-aria.min.js" />
     <Content Include="Scripts\angular\angular-material.min.js" />
+    <Content Include="Scripts\angular\angular-route.min.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\API.js" />
     <Content Include="Scripts\intellisense\angular.js" />
@@ -66,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="content\LoginDialog.html" />
+    <Content Include="content\logindialog.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

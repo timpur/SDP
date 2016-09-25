@@ -7,19 +7,21 @@
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content">
-            <p>Enter your Student ID and Password</p>
-            <p ng-bind="errorMsg"></p>
-            <md-input-container>
-                <label>ID</label>
-                <input ng-model="User.ID">
-            </md-input-container>
-            <md-input-container>
-                <label>Password</label>
-                <input ng-model="User.Password" type="password">
-            </md-input-container>
-            <md-button class="md-raised md-primary" layout="column" ng-click="Login()">
-                Login
-            </md-button>
+            <form>
+                <p style="margin-top:0;">Enter your Student ID and Password</p>
+                <p ng-bind="errorMsg" md-colors="{color:'red'}"></p>
+                <md-input-container>
+                    <label>ID</label>
+                    <input ng-model="User.ID">
+                </md-input-container>
+                <md-input-container>
+                    <label>Password</label>
+                    <input ng-model="User.Password" type="password">
+                </md-input-container>
+                <md-button type="submit" class="md-raised md-primary" layout="column" ng-click="Login()">
+                    Login
+                </md-button>
+            </form>
         </div>
     </md-dialog-content>
 </md-dialog>

@@ -32,5 +32,7 @@
 
         public static readonly string AUTH_ERROR_REG = "An error occured during the registration of the Identity";
         public static readonly string AUTH_ERROR_REG_CATCH = "An error ocured during registration: {0}";
+
+        public static readonly string STUDENT_UPDATE_ERROR = "Error Updating student Information: {0}";
     }
 }

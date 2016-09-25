@@ -6,6 +6,7 @@
 
     <script src="Scripts/jQuery/jquery-3.1.0.min.js"></script>
     <script src="Scripts/angular/angular.min.js"></script>
+    <script src="Scripts/angular/angular-route.min.js"></script>
     <script src="Scripts/angular/angular-animate.min.js"></script>
     <script src="Scripts/angular/angular-aria.min.js"></script>
     <script src="Scripts/angular/angular-material.min.js"></script>
@@ -26,6 +27,7 @@
                 <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
             </md-button>
             <h2 style="padding-left:20px;">UTS HELPS</h2>
+            <span class="md-subhead" style="padding-left:20px;">User: {{user()}}</span>
             <span flex></span>
             <md-button class="md-icon-button" aria-label="More" hide>
                 <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
@@ -47,7 +49,7 @@
                 </md-toolbar>
                 <md-content layout-padding>
                     <md-list>
-                        <md-list-item ng-repeat="page in Pages" ng-click="changePage($index)">
+                        <md-list-item ng-repeat="page in Pages" ng-href="{{page.URL}}" ng-click="close()">
                             <img ng-src="{{page.icon}}" class="md-avatar" alt="Page Icon" />
                             <div class="md-list-item-text" layout="column">
                                 {{page.name}}
@@ -57,15 +59,9 @@
                 </md-content>
             </div>
         </md-sidenav>
-        <md-content flex layout-padding ng-controller="Content">
-            <div layout="column" layout-align="top center">
-                {{ContentURL()}}
-                <div>
-                    <ng-include src="ContentURL()"></ng-include>
-                </div>
-
-            </div>
-            <div flex></div>
+        <md-content layout="column" layout-padding flex ng-controller="Content">
+            <ng-view flex>
+            </ng-view>
         </md-content>
     </section>
 

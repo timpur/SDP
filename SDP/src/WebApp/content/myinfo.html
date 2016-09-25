@@ -1,0 +1,92 @@
+﻿<form ng-controller="MyInfo">
+    <h1>My Information</h1>
+    <p>This page displays your profile. Please update it whenever necessary (especially your contact details).</p>
+    <div layout="row" layout-xs="column">
+        <md-input-container flex>
+            <label>ID</label>
+            <input ng-model="myInfo.studentID" ng-readonly="true">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Name</label>
+            <input value="{{myInfo.firstName}} {{myInfo.lastName}}" ng-readonly="true">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Preferred First Name</label>
+            <input ng-model="myInfo.preferred_name">
+        </md-input-container>
+    </div>
+    <div layout="row">
+        <md-input-container flex>
+            <label>Data of Birth</label>
+            <input ng-readonly="true" value="{{myInfo.dob | date:'d/M/y'}}">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Gender</label>
+            <md-select ng-model="myInfo.gender">
+                <md-option ng-repeat="option in options.gender" ng-value="option.value">
+                    {{option.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Best Contact Number</label>
+            <input ng-model="myInfo.alternative_contact">
+        </md-input-container>
+    </div>
+    <div layout="row">
+        <md-input-container flex>
+            <label>Degree</label>
+            <md-select ng-model="myInfo.degree">
+                <md-option ng-repeat="option in options.degree" ng-value="option.value">
+                    {{option.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Year</label>
+            <md-select ng-model="myInfo.year">
+                <md-option ng-repeat="option in options.year" ng-value="option.value">
+                    {{option.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Degree</label>
+            <md-select ng-model="myInfo.status">
+                <md-option ng-repeat="option in options.status" ng-value="option.value">
+                    {{option.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div layout="row">
+        <md-input-container flex>
+            <label>First Language</label>
+            <md-select ng-model="myInfo.first_language">
+                <md-option ng-repeat="option in options.language" ng-value="option">
+                    {{option}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Country of Origin</label>
+            <md-select ng-model="myInfo.country_origin">
+                <md-option ng-repeat="option in options.country" ng-value="option">
+                    {{option}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div layout="row">
+        <md-input-container flex>
+            <md-checkbox ng-model="myInfo.HSC" aria-label="HSC">HSC</md-checkbox>
+        </md-input-container>
+        <md-input-container ng-show="myInfo.HSC" flex>
+            <label>HSC Mark</label>
+            <input ng-model="myInfo.HSC_mark" >
+        </md-input-container>
+    </div>
+    <md-button type="submit" class="md-raised md-primary" layout="column" ng-click="updateMyInfo()">
+        Update Information
+    </md-button>
+</form>

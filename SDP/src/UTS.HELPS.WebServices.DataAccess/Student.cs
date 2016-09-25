@@ -42,5 +42,6 @@ namespace UTS.HELPS.WebServices.DataAccess
         public string degree_details { get; set; }
         public string alternative_contact { get; set; }
         public string preferred_name { get; set; }
+        public string year { get; set; }
     }
 }

@@ -8,6 +8,8 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using UTS.HELPS.WebServices.WebAPI.Responses;
 using UTS.HELPS.WebServices.WebAPI.Constants;
+using UTS.HELPS.WebServices.DataObjects.Requests;
+using UTS.HELPS.WebServices.DataAccess;
 
 namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
 {
@@ -22,7 +24,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
         }
 
         // POST api/Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [Route("register")]
         public async Task<AuthResponse> Register(UserModel userModel)
         {
@@ -30,6 +32,13 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
             {
                 base.CheckApplicationKey();
                 IdentityResult result = await auth.RegisterUser(userModel);
+
+                if (result.Succeeded)
+                {
+                    StudentReg regObj = ConvertUserModel(userModel);
+                    StudentDb.RegisterStudent(regObj);
+                }
+
                 return GetResponse(result);
             }
             catch (Exception ex)
@@ -59,6 +68,21 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers.Auth
                     response.errors.Add(error);
             }
             return response;
+        }
+
+        private StudentReg ConvertUserModel(UserModel user)
+        {
+            StudentReg reg = new StudentReg()
+            {
+                StudentID = user.UserName,
+                CreatorId = 0,
+                Degree = user.Degree,
+                Year = user.Year,
+                Status = user.Status,
+                FirstLanguage = user.FirstLanguage,
+                CountryOrigin = user.CountryOrigin
+            };
+            return reg;
         }
 
         protected override void Dispose(bool disposing)
