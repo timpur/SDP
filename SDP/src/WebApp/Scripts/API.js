@@ -108,7 +108,7 @@ var API = new function () {
     this.Account.Reg = function (ID, Password, Password2, success, error) {
         var data = {
             userName: "test",
-            password: "p",
+            password: "PassPass",
             confirmPassword: "PassPass"
         };
         var url = this.url + "/register";

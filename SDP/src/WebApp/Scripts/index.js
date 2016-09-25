@@ -14,7 +14,7 @@ var app = angular.module("App", ["ngMaterial"]);
 var MainController = app.controller("Main", function ($scope, $mdDialog) {
 
     angular.element(document).ready(function () {
-        $scope.ShowLoginDialog();
+        $scope.ShowLoginDialog()
     });
 
 
@@ -66,8 +66,8 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
     };
 
     $scope.Pages = [
-        { name: "Book", URL: "content/Register.html", icon: "img/icons/cal.svg" },
-        { name: "Update Information", URL: "content/test2.html" }
+        { name: "Test Page", URL: "content/Register.html", icon: "img/icons/more_vert.svg" },
+        { name: "Test Page", URL: "content/test2.html" }
     ];
 
     $scope.changePage = function (index) {
@@ -76,7 +76,7 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
 
     function LoadPage() {
         $rootScope.contentURL = $scope.Pages[0].URL;
-    }
+    };
     //LoadPage();
 
 });

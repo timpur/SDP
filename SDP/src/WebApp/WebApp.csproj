@@ -44,7 +44,6 @@
     <Content Include="content\Register.html" />
     <Content Include="css\angular-material.min.css" />
     <Content Include="img\icons\close.svg" />
-    <Content Include="img\icons\cal.svg" />
     <Content Include="img\icons\menu.svg" />
     <Content Include="img\icons\more_vert.svg" />
     <Content Include="packages.config" />

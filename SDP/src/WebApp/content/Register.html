@@ -1,106 +1,26 @@
 ﻿<div ng-controller="Register">
-    <p>This page displays your profile. Please update it whenever necessary (especially your contact details).</p>
-    <div>
-
-        <div layout-gt-xs="row">
-            
-            <md-input-container>
-                <label>Student Name</label>
-                <input ng-model="RegisterData.StudentName"> <!--Needs to be pre set from database-->
-            </md-input-container>
-            <md-input-container>
-                <label>Date Of Birth</label>
-                <input ng-model="RegisterData.DateOfBirth"> <!--Needs to be pre set from database-->
-            </md-input-container>
-
-        </div>
-
-        <div layout-gt-xs="row">
-            <md-input-container>
-                <label>Preferred First Name</label>
-                <input ng-model="RegisterData.PreferredName">
-            </md-input-container>
-
-            <md-input-container>
-                <label>Email</label>
-                <input ng-model="RegisterData.StudentEmail"> <!--Needs to be pre set from database-->
-            </md-input-container>
-
-        </div>
-
-        <div layout-gt-xs="row">
-            <md-input-container>
-                <label>Mobile</label>
-                <input ng-model="RegisterData.AltContact">
-            </md-input-container>
-
-            <md-input-container>
-                <label>Home phone</label>
-                <input ng-model="RegisterData.StudentHomePhone">
-            </md-input-container>
-
-        </div>
-
-        <div layout-gt-xs="row">
-            <p>Gender:  </p>
-            <md-radio-group ng-model="RegisterData.Gender" layout="row">
-                <md-radio-button value="Male">Male</md-radio-button>
-                <md-radio-button value="Female">Female</md-radio-button>
-                <md-radio-button value="X">X</md-radio-button>
-            </md-radio-group>
-        </div>
-       
-
-        <div layout-gt-xs="row">
-            <md-input-container>
-                <label>Faculty</label>
-                <input ng-model="RegisterData.Faculty"> <!--Needs to be pre set from database-->
-            </md-input-container>
-
-        </div>
-
-        <div layout-gt-xs="row">
-            <md-input-container>
-                <label>Course</label>
-                <input ng-model="RegisterData.Course"> <!--Needs to be pre set from database-->
-            </md-input-container>
-
-        </div>
-
-        <div layout-gt-xs="row">
-            <md-input-container>
-                <p>Degree</p>
-                <md-radio-group ng-model="RegisterData.DegreeDetails" layout="row">
-                    <md-radio-button onclick="javascript: clearSelect(document.forms[0].rdoUGDegreeDetails); clearRadio(document.forms[0].rdoPGDegreeDetails); showContainer('UGdetails'); hideContainer('PGdetails');"  value="Undergrad" checked>Undergraduate</md-radio-button>
-                    <md-radio-button onclick="javascript: clearSelect(document.forms[0].rdoUGDegreeDetails); clearRadio(document.forms[0].rdoPGDegreeDetails); showContainer('PGdetails'); hideContainer('UGdetails');" value="Postgrad">Postgraduate</md-radio-button>
-                </md-radio-group>
-            </md-input-container>
-
-            <p id="UGdetails">
-                Year:
-                <md-select name="rdoUGDegreeDetails" ng-model="RegisterData.Year">
-                    <md-option value="1st" selected  >1 <sup>st</sup> year</md-option>
-                    <md-option value="2nd"  >2 <sup>nd</sup> year</md-option>
-                    <md-option value="3rd" >3 <sup>rd</sup> year</md-option>
-                    <md-option value="4th" >4 <sup>th</sup> year</md-option>
-                    <md-option value="5th" >5 <sup>th</sup> year</md-option>
-                </md-select>
-            </p>
-
-            <p id="PGdetails" style="display:none;">
-                Type:
-                <input type="Radio" name="rdoPGDegreeDetails" value="course work" />Course work &nbsp;&nbsp;
-                <input type="Radio" name="rdoPGDegreeDetails" value="research" />Research &nbsp;&nbsp;
-            </p>
-
-
-
-        </div>
-
-     
-        <md-button class="md-raised md-primary" layout="column" ng-click="Register()">
-            Register
-        </md-button>
+    <p>Enter your Student ID and Password</p>
+    <div layout-gt-xs="row">
+        <md-input-container>
+            <label>ID</label>
+            <input ng-model="RegisterData.StudentId">
+        </md-input-container>
+        <md-input-container>
+            <label>Password</label>
+            <input ng-model="RegisterData.Password" type="password">
+        </md-input-container>
     </div>
-  
+    <div layout-gt-xs="row">
+        <md-input-container>
+            <label>FistName</label>
+            <input ng-model="RegisterData.FirstName">
+        </md-input-container>
+        <md-input-container>
+            <label>LastName</label>
+            <input ng-model="RegisterData.LastName">
+        </md-input-container>
+    </div>
+    <md-button class="md-raised md-primary" layout="column" ng-click="Register()">
+        Register
+    </md-button>
 </div>
