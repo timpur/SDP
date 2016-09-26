@@ -56,6 +56,7 @@
     <Content Include="Scripts\angular\angular-animate.min.js" />
     <Content Include="Scripts\angular\angular-aria.min.js" />
     <Content Include="Scripts\angular\angular-material.min.js" />
+    <Content Include="Scripts\angular\angular-messages.min.js" />
     <Content Include="Scripts\angular\angular-route.min.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\API.js" />

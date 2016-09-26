@@ -1,5 +1,6 @@
-﻿<form ng-controller="MyInfo">
+﻿<form name="infoForm" ng-controller="MyInfo">
     <h1>My Information</h1>
+    <p md-colors="{color:'red'}" ng-hide="key.active">Please Update your Information to Activate your Account</p>
     <p>This page displays your profile. Please update it whenever necessary (especially your contact details).</p>
     <div layout="row" layout-xs="column">
         <md-input-container flex>
@@ -30,7 +31,11 @@
         </md-input-container>
         <md-input-container flex>
             <label>Best Contact Number</label>
-            <input ng-model="myInfo.alternative_contact">
+            <input name="number" ng-model="myInfo.alternative_contact" ng-pattern="/^[0-9]*$/" md-maxlength="10">
+            <div ng-messages="infoForm.number.$error">
+                <div ng-message="pattern">Please enter a valid phone number.</div>
+                <div ng-message="md-maxlength">Max 10 didgets</div>
+            </div>
         </md-input-container>
     </div>
     <div layout="row">
@@ -83,10 +88,14 @@
         </md-input-container>
         <md-input-container ng-show="myInfo.HSC" flex>
             <label>HSC Mark</label>
-            <input ng-model="myInfo.HSC_mark" >
+            <input name="HSCMark" ng-model="myInfo.HSC_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+            <div ng-messages="infoForm.HSCMark.$error">
+                <div ng-message="pattern">Please enter a valid phone number. 0 to 100</div>
+            </div>
         </md-input-container>
     </div>
-    <md-button type="submit" class="md-raised md-primary" layout="column" ng-click="updateMyInfo()">
-        Update Information
+    <md-button type="submit" aria-label="Submit" class="md-raised md-primary" layout="column" ng-click="updateMyInfo()" ng-switch="key.active">
+        <span ng-switch-when="true">Update Information</span>
+        <span ng-switch-when="false">Activate Account</span>
     </md-button>
 </form>

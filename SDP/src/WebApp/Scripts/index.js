@@ -10,7 +10,7 @@
 //UI https://material.angularjs.org/latest/
 
 
-var app = angular.module("App", ["ngMaterial", "ngRoute"]);
+var app = angular.module("App", ["ngMaterial", "ngRoute", "ngMessages"]);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
@@ -37,7 +37,6 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             $scope.ShowLoginDialog();
         }
         else {
-            CheckAccountActive();
             $(document).trigger("Authenticated");
         }
         $scope.$apply();
@@ -48,10 +47,11 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             API.key.active = active;
             if (!active) {
                 $location.path("/myinfo");
-                $scope.$apply();
             }
+            $scope.$apply();
         });
     };
+    $(document).on("Authenticated", CheckAccountActive);
 
     $scope.ShowLoginDialog = function () {
         $mdDialog.show({
@@ -116,9 +116,9 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) 
 
     $scope.Pages = [
         { name: "Dashboard", URL: "#", icon: "img/icons/dashboard.svg", enable: activeFunction },
-        { name: "My Information", URL: "#myinfo", icon: "img/icons/info.svg", enable: enableFunction},
+        { name: "My Information", URL: "#myinfo", icon: "img/icons/info.svg", enable: enableFunction },
         { name: "WorkShops", URL: "#workshops", icon: "img/icons/find.svg", enable: activeFunction }
-    ];    
+    ];
 });
 
 
@@ -131,11 +131,14 @@ var ContentController = app.controller('Content', function ($scope) {
 
 
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
+    $scope.infoForm = {};
     $scope.myInfo = {};
+    $scope.updateInfo = new API.student.update.dataObj();
+    $scope.key = API.key;
 
     $scope.options = {
         gender: [{ name: "Indeterminate / Unspecified / Intersex", value: "X" }, { name: "Male", value: "M" }, { name: "Female", value: "F" }],
-        degree: [{ name: "None", value: "N" }, { name: "UG", value: "UG" }, { name: "PG", value: "PG" }],
+        degree: [{ name: "None", value: "N" }, { name: "Undergraduate", value: "UG" }, { name: "Postgraduate", value: "PG" }],
         year: [{ name: "Not Set", value: "NotSet" }, { name: "1st Year", value: "Year1" }, { name: "2nd Year", value: "Year2" },
         { name: "3rd Year", value: "Year3" }, { name: "4th Year", value: "Year4" }, { name: "5th Year", value: "Year5" }],
         status: [{ name: "Permanent", value: "Permanent" }, { name: "International", value: "International" }],
@@ -144,7 +147,14 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
     };
 
     $scope.updateMyInfo = function () {
-        alert('reg');
+        $scope.updateInfo.Map($scope.myInfo);
+        var valid = !$scope.infoForm.$invalid;
+        if (valid) {
+            API.student.update($scope.updateInfo, function (data) {
+                alert("Success");
+                // Use angular UI Toast to diplay success
+            });
+        }
     };
 
     function GetMyInfo() {
@@ -152,7 +162,6 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
             $(document).on("Authenticated", GetMyInfo);
         }
         else {
-
             API.student.getStudent(API.key.ID, function (data) {
                 $scope.myInfo = data.Result;
                 $scope.myInfo.firstName = API.key.FirstName;
