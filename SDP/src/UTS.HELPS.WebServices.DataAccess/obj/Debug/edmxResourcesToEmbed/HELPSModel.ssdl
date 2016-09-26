@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="HELPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+<Schema Namespace="HELPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <Function Name="prcCancelWorkshopBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="workshopId" Type="int" Mode="In" />
     <Parameter Name="studentId" Type="char" Mode="In" />
@@ -121,6 +121,9 @@
     <Parameter Name="active" Type="bit" Mode="In" />
     <Parameter Name="page" Type="int" Mode="In" />
     <Parameter Name="pageSize" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prcStudentActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="studentID" Type="char" Mode="In" />
   </Function>
   <Function Name="prcUpdateSessionBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="sessionId" Type="int" Mode="In" />

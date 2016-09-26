@@ -60,7 +60,7 @@ var API = new function () {
         });
     };
 
-    this.key = { validKey: false, ID: "", FirstName: "", LastName: "" };
+    this.key = { validKey: false, active: null, ID: "", FirstName: "", LastName: "" };
     this.key.set = function (key, ID, FirstName, LastName) {
         this.validKey = true;
         API.header.Authorization = key;
@@ -87,6 +87,14 @@ var API = new function () {
         var keyobj = { key: key, time: exspireTime, ID: ID, FirstName: FirstName, LastName: LastName };
         localStorage.setItem("AuthKey", JSON.stringify(keyobj));
         this.set(key, ID, FirstName, LastName);
+    }
+    this.key.remove = function () {
+        localStorage.removeItem("AuthKey");
+        this.validKey = false;
+        this.active = null;
+        this.ID = "";
+        this.FirstName = "";
+        this.LastName = "";
     }
 
 
@@ -189,6 +197,10 @@ var API = new function () {
         this.FoundationCourse = null;
         this.FoundationCourseMark = null;
         this.CreatorId = null;
+    };
+    this.student.active = function (ID, success, error) {
+        var url = this.url + "/active/" + ID;
+        API.callAPIGet(url, null, success, error);
     };
 
 

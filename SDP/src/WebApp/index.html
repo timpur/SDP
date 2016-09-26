@@ -3,6 +3,7 @@
 <head>
     <link href="css/angular-material.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link href="css/index.css" rel="stylesheet" />
 
     <script src="Scripts/jQuery/jquery-3.1.0.min.js"></script>
     <script src="Scripts/angular/angular.min.js"></script>
@@ -21,13 +22,12 @@
 </head>
 <body ng-app="App" ng-controller="Main" ng-cloak layout="column">
 
-    <md-toolbar layout="row" class="md-hue-2" ng-controller="Menu">
+    <md-toolbar layout="row" class="md-hue-2" ng-controller="Menubar">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeftNav()" hide-gt-md>
                 <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
             </md-button>
-            <h2 style="padding-left:20px;">UTS HELPS</h2>
-            <span class="md-subhead" style="padding-left:20px;">User: {{user()}}</span>
+            <h2 class="menubar-heading">UTS HELPS - <span>{{location}}</span></h2>
             <span flex></span>
             <md-button class="md-icon-button" aria-label="More" hide>
                 <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
@@ -38,7 +38,7 @@
     <section layout="row" flex>
         <md-sidenav class="md-sidenav-left" md-component-id="LeftNav" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
             <div ng-controller="LeftNav">
-                <md-toolbar>
+                <md-toolbar class="md-tall">
                     <div class="md-toolbar-tools">
                         <h1>Navigation</h1>
                         <span flex></span>
@@ -46,14 +46,23 @@
                             <md-icon md-svg-icon="img/icons/close.svg"></md-icon>
                         </md-button>
                     </div>
+                    <div class="leftnav-profile">
+                        <div class="heading">
+                            <md-icon class="profileicon" md-svg-icon="img/icons/account.svg"></md-icon>
+                            <p class="ID">{{User().ID}}</p>
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Logout" ng-click="logout()">
+                                <md-icon md-svg-icon="img/icons/exit.svg"></md-icon>
+                            </md-button>
+                        </div>                        
+                        <div class="info"><span>{{User().FirstName}}</span> <span>{{User().LastName}}</span></div>
+                    </div>
                 </md-toolbar>
                 <md-content layout-padding>
                     <md-list>
-                        <md-list-item ng-repeat="page in Pages" ng-href="{{page.URL}}" ng-click="close()">
+                        <md-list-item ng-repeat="page in Pages" ng-href="{{page.URL}}" ng-click="close()" ng-show="page.enable()">
                             <img ng-src="{{page.icon}}" class="md-avatar" alt="Page Icon" />
-                            <div class="md-list-item-text" layout="column">
-                                {{page.name}}
-                            </div>
+                            <div class="md-list-item-text" layout="column">{{page.name}}</div>
                         </md-list-item>
                     </md-list>
                 </md-content>

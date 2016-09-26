@@ -19,8 +19,14 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     })
 }]);
 
+app.config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('red')
+      .accentPalette('orange');
+});
 
-var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog) {
+
+var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog, $location) {
     $(document).ready(function () {
         Authenticate();
     });
@@ -31,9 +37,20 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             $scope.ShowLoginDialog();
         }
         else {
+            CheckAccountActive();
             $(document).trigger("Authenticated");
         }
         $scope.$apply();
+    };
+    var CheckAccountActive = function () {
+        API.student.active(API.key.ID, function (data) {
+            var active = data.isStudentAccountActive;
+            API.key.active = active;
+            if (!active) {
+                $location.path("/myinfo");
+                $scope.$apply();
+            }
+        });
     };
 
     $scope.ShowLoginDialog = function () {
@@ -50,11 +67,10 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
 
 
 
-var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSidenav) {
+var MenuController = app.controller('Menubar', function ($scope, $timeout, $mdSidenav) {
     $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
 
-    $scope.user = function () { return API.key.FirstName };
-
+    $scope.location = "loc";
 
     function buildDelayedToggler(navID) {
         return debounce(function () {
@@ -82,12 +98,27 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) 
         $mdSidenav('LeftNav').close();
     };
 
-    $scope.Pages = [
-        { name: "Dashboard", URL: "#", icon: "img/icons/account.svg" },
-        { name: "My Information", URL: "#myinfo", icon: "img/icons/account.svg" },
-        { name: "WorkShops", URL: "#workshops", icon: "img/icons/account.svg" }
-    ];
+    $scope.User = function () { return API.key; };
+    $scope.logout = function () {
+        API.key.remove();
+        location.reload();
+    }
 
+    var activeFunction = function () {
+        return API.key.active;
+    }
+    var enableFunction = function () {
+        return true;
+    }
+    var disableFunction = function () {
+        return false;
+    }
+
+    $scope.Pages = [
+        { name: "Dashboard", URL: "#", icon: "img/icons/dashboard.svg", enable: activeFunction },
+        { name: "My Information", URL: "#myinfo", icon: "img/icons/info.svg", enable: enableFunction},
+        { name: "WorkShops", URL: "#workshops", icon: "img/icons/find.svg", enable: activeFunction }
+    ];    
 });
 
 
@@ -117,14 +148,20 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
     };
 
     function GetMyInfo() {
-        API.student.getStudent(API.key.ID, function (data) {
-            $scope.myInfo = data.Result;
-            $scope.myInfo.firstName = API.key.FirstName;
-            $scope.myInfo.lastName = API.key.LastName;
-            $scope.$apply();
-        }, null);
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", GetMyInfo);
+        }
+        else {
+
+            API.student.getStudent(API.key.ID, function (data) {
+                $scope.myInfo = data.Result;
+                $scope.myInfo.firstName = API.key.FirstName;
+                $scope.myInfo.lastName = API.key.LastName;
+                $scope.$apply();
+            }, null);
+        }
     }
-    $(document).on("Authenticated", GetMyInfo);
+    GetMyInfo();
 });
 
 

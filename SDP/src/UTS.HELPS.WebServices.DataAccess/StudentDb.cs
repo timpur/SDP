@@ -39,13 +39,21 @@ namespace UTS.HELPS.WebServices.DataAccess
             {
                 ctx.prcUpdateStudent(
                     student.StudentID, student.PreferredName, student.AltContact, student.GenderString(), student.Degree.ToString(),
-                    student.Year.ToString(), student.Status.ToString(), student.FirstLanguage, 
+                    student.Year.ToString(), student.Status.ToString(), student.FirstLanguage,
                     student.CountryOrigin, student.ModifierID, student.Background,
-                    student.HSC, student.HSCMark, student.IELTS, student.IELTSMark, student.TOEFL, 
+                    student.HSC, student.HSCMark, student.IELTS, student.IELTSMark, student.TOEFL,
                     student.TOEFLMark, student.TAFE, student.TAFEMark,
                     student.CULT, student.CULTMark, student.InsearchDEEP, student.InsearchDEEPMark,
                     student.InsearchDiploma, student.InsearchDiplomaMark, student.FoundationCourse, student.FoundationCourseMark
                     );
+            }
+        }
+
+        public static bool? isStudentAccountActive(string studentID)
+        {
+            using (HELPSEntities ctx = new HELPSEntities())
+            {
+                return ctx.prcStudentActive(studentID).FirstOrDefault();
             }
         }
     }

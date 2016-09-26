@@ -43,8 +43,13 @@
   <ItemGroup>
     <Content Include="content\myinfo.html" />
     <Content Include="css\angular-material.min.css" />
+    <Content Include="css\index.css" />
+    <Content Include="img\icons\dashboard.svg" />
+    <Content Include="img\icons\exit.svg" />
     <Content Include="img\icons\account.svg" />
     <Content Include="img\icons\close.svg" />
+    <Content Include="img\icons\find.svg" />
+    <Content Include="img\icons\info.svg" />
     <Content Include="img\icons\menu.svg" />
     <Content Include="img\icons\more_vert.svg" />
     <Content Include="packages.config" />
