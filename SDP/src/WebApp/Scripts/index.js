@@ -10,7 +10,7 @@
 //UI https://material.angularjs.org/latest/
 
 
-var app = angular.module("App", ["ngMaterial", "ngRoute"]);
+var app = angular.module("App", ["ngMaterial", "ngRoute", "ngMessages"]);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
@@ -19,8 +19,14 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     })
 }]);
 
+app.config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('red')
+      .accentPalette('orange');
+});
 
-var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog) {
+
+var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog, $mdToast, $location) {
     $(document).ready(function () {
         Authenticate();
     });
@@ -31,10 +37,33 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             $scope.ShowLoginDialog();
         }
         else {
+            $(document).trigger("CheckAccountActive");
             $(document).trigger("Authenticated");
         }
         $scope.$apply();
     };
+    var CheckAccountActive = function () {
+        API.student.active(API.key.ID, function (data) {
+            var active = data.isStudentAccountActive;
+            API.key.active = active;
+            if (!active) {
+                $location.path("/myinfo");
+            }
+            $scope.$apply();
+        });
+    };
+    $(document).on("CheckAccountActive", CheckAccountActive);
+
+    $scope.showSimpleToast = function () {
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent('Simple Toast!')
+            .position("top right")
+            .hideDelay(3000)
+        );
+    };
+
+    $scope.showSimpleToast();
 
     $scope.ShowLoginDialog = function () {
         $mdDialog.show({
@@ -50,11 +79,10 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
 
 
 
-var MenuController = app.controller('Menu', function ($scope, $timeout, $mdSidenav) {
+var MenuController = app.controller('Menubar', function ($scope, $timeout, $mdSidenav) {
     $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
 
-    $scope.user = function () { return API.key.FirstName };
-
+    $scope.location = "loc";
 
     function buildDelayedToggler(navID) {
         return debounce(function () {
@@ -82,12 +110,27 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) 
         $mdSidenav('LeftNav').close();
     };
 
-    $scope.Pages = [
-        { name: "Dashboard", URL: "#", icon: "img/icons/account.svg" },
-        { name: "My Information", URL: "#myinfo", icon: "img/icons/account.svg" },
-        { name: "WorkShops", URL: "#workshops", icon: "img/icons/account.svg" }
-    ];
+    $scope.User = function () { return API.key; };
+    $scope.logout = function () {
+        API.key.remove();
+        location.reload();
+    }
 
+    var activeFunction = function () {
+        return API.key.active;
+    }
+    var enableFunction = function () {
+        return true;
+    }
+    var disableFunction = function () {
+        return false;
+    }
+
+    $scope.Pages = [
+        { name: "Dashboard", URL: "#", icon: "img/icons/dashboard.svg", enable: activeFunction },
+        { name: "My Information", URL: "#myinfo", icon: "img/icons/info.svg", enable: enableFunction },
+        { name: "WorkShops", URL: "#workshops", icon: "img/icons/find.svg", enable: activeFunction }
+    ];
 });
 
 
@@ -100,11 +143,14 @@ var ContentController = app.controller('Content', function ($scope) {
 
 
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
+    $scope.infoForm = {};
     $scope.myInfo = {};
+    $scope.updateInfo = new API.student.update.dataObj();
+    $scope.key = API.key;
 
     $scope.options = {
         gender: [{ name: "Indeterminate / Unspecified / Intersex", value: "X" }, { name: "Male", value: "M" }, { name: "Female", value: "F" }],
-        degree: [{ name: "None", value: "N" }, { name: "UG", value: "UG" }, { name: "PG", value: "PG" }],
+        degree: [{ name: "None", value: "N" }, { name: "Undergraduate", value: "UG" }, { name: "Postgraduate", value: "PG" }],
         year: [{ name: "Not Set", value: "NotSet" }, { name: "1st Year", value: "Year1" }, { name: "2nd Year", value: "Year2" },
         { name: "3rd Year", value: "Year3" }, { name: "4th Year", value: "Year4" }, { name: "5th Year", value: "Year5" }],
         status: [{ name: "Permanent", value: "Permanent" }, { name: "International", value: "International" }],
@@ -113,18 +159,31 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
     };
 
     $scope.updateMyInfo = function () {
-        alert('reg');
+        $scope.updateInfo.Map($scope.myInfo);
+        var valid = !$scope.infoForm.$invalid;
+        if (valid) {
+            API.student.update($scope.updateInfo, function (data) {
+                if (!API.key.active) $(document).trigger("CheckAccountActive");
+                alert("Success");
+                // Use angular UI Toast to diplay success
+            });
+        }
     };
 
     function GetMyInfo() {
-        API.student.getStudent(API.key.ID, function (data) {
-            $scope.myInfo = data.Result;
-            $scope.myInfo.firstName = API.key.FirstName;
-            $scope.myInfo.lastName = API.key.LastName;
-            $scope.$apply();
-        }, null);
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", GetMyInfo);
+        }
+        else {
+            API.student.getStudent(API.key.ID, function (data) {
+                $scope.myInfo = data.Result;
+                $scope.myInfo.firstName = API.key.FirstName;
+                $scope.myInfo.lastName = API.key.LastName;
+                $scope.$apply();
+            }, null);
+        }
     }
-    $(document).on("Authenticated", GetMyInfo);
+    GetMyInfo();
 });
 
 
@@ -138,6 +197,7 @@ function Login_DialogController($scope, $mdDialog) {
     $scope.Login = function () {
         API.account.Login($scope.User.ID, $scope.User.Password, function () {
             $scope.close();
+            $(document).trigger("CheckAccountActive");
             $(document).trigger("Authenticated");
             $scope.$apply();
         }, function (data) {

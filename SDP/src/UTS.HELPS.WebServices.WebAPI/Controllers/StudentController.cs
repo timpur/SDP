@@ -81,5 +81,35 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 };
             }
         }
+        [HttpGet]
+        [Route("api/student/active/{studentID}")]
+        public StudnetAccountActive isStudentAccountActive(string studentID)
+        {
+            try
+            {
+                base.CheckApplicationKey();
+                bool? active = StudentDb.isStudentAccountActive(studentID);
+                if (active.HasValue)
+                {
+                    return new StudnetAccountActive()
+                    {
+                        isStudentAccountActive = active.Value,
+                        IsSuccess = true
+                    };
+                }
+                else
+                {
+                    throw new Exception("Account Does Not Exist");
+                }
+            }
+            catch (Exception e)
+            {
+                return new StudnetAccountActive()
+                {
+                    IsSuccess = false,
+                    DisplayMessage = String.Format(ErrorMessages.STUDENT_ACCOUNT_ACTIVE_ERROR, e.Message)
+                };
+            }
+        }
     }
 }

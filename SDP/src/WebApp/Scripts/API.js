@@ -60,7 +60,7 @@ var API = new function () {
         });
     };
 
-    this.key = { validKey: false, ID: "", FirstName: "", LastName: "" };
+    this.key = { validKey: false, active: null, ID: "", FirstName: "", LastName: "" };
     this.key.set = function (key, ID, FirstName, LastName) {
         this.validKey = true;
         API.header.Authorization = key;
@@ -87,6 +87,14 @@ var API = new function () {
         var keyobj = { key: key, time: exspireTime, ID: ID, FirstName: FirstName, LastName: LastName };
         localStorage.setItem("AuthKey", JSON.stringify(keyobj));
         this.set(key, ID, FirstName, LastName);
+    }
+    this.key.remove = function () {
+        localStorage.removeItem("AuthKey");
+        this.validKey = false;
+        this.active = null;
+        this.ID = "";
+        this.FirstName = "";
+        this.LastName = "";
     }
 
 
@@ -129,7 +137,7 @@ var API = new function () {
         API.callAPIPost(url, data, success, error);
     };
     this.student.update.dataObj = function () {
-        this.StudentId = null;
+        this.StudentID = null;
         this.PreferredName = null;
         this.AltContact = null;
         this.Gender = null;
@@ -156,6 +164,36 @@ var API = new function () {
         this.InsearchDiplomaMark = null;
         this.FoundationCourse = null;
         this.FoundationCourseMark = null;
+
+        this.Map = function (obj) {
+            this.StudentID = obj.studentID;
+            this.PreferredName = obj.preferred_name;
+            this.AltContact = obj.alternative_contact;
+            this.Gender = obj.gender;
+            this.Degree = obj.degree;
+            this.Year = obj.year;
+            this.Status = obj.status;
+            this.FirstLanguage = obj.first_language;
+            this.CountryOrigin = obj.country_origin;
+            this.ModifierID = this.StudentID;
+            this.Background = obj.background;
+            this.HSC = obj.HSC;
+            this.HSCMark = obj.HSC_mark;
+            this.IELTS = obj.IELTS;
+            this.IELTSMark = obj.IELTS_mark;
+            this.TOEFL = obj.TOEFL;
+            this.TOEFLMark = obj.TOEFL_mark;
+            this.TAFE = obj.TAFE;
+            this.TAFEMark = obj.TAFE_mark;
+            this.CULT = obj.CULT;
+            this.CULTMark = obj.CULT_mark;
+            this.InsearchDEEP = obj.InsearchDEEP;
+            this.InsearchDEEPMark = obj.InsearchDEEP_mark;
+            this.InsearchDiploma = obj.InsearchDiploma;
+            this.InsearchDiplomaMark = obj.InsearchDiploma_mark;
+            this.FoundationCourse = obj.FoundationCourse;
+            this.FoundationCourseMark = obj.FoundationCourse_mark;
+        };
     }
     this.student.register = function (data, success, error) {
         var url = this.url + "/register";
@@ -189,6 +227,10 @@ var API = new function () {
         this.FoundationCourse = null;
         this.FoundationCourseMark = null;
         this.CreatorId = null;
+    };
+    this.student.active = function (ID, success, error) {
+        var url = this.url + "/active/" + ID;
+        API.callAPIGet(url, null, success, error);
     };
 
 
@@ -233,4 +275,12 @@ var API = new function () {
         });
     };
 
+    this.util = {};
+    this.util.copyObjectPrams = function (srcObj, destObj) {
+        for (var key in destObj) {
+            if (destObj.hasOwnProperty(key) && srcObj.hasOwnProperty(key)) {
+                destObj[key] = srcObj[key];
+            }
+        }
+    };
 }

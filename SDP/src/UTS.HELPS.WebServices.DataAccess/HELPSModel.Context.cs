@@ -677,5 +677,14 @@ namespace UTS.HELPS.WebServices.DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcUpdateStudent", studentIDParameter, preferred_nameParameter, alternative_contactParameter, genderParameter, degreeParameter, yearParameter, statusParameter, first_languageParameter, country_originParameter, modifierIDParameter, backgroundParameter, hSCParameter, hSC_markParameter, iELTSParameter, iELTS_markParameter, tOEFLParameter, tOEFL_markParameter, tAFEParameter, tAFE_markParameter, cULTParameter, cULT_markParameter, insearchDEEPParameter, insearchDEEP_markParameter, insearchDiplomaParameter, insearchDiploma_markParameter, foundationcourseParameter, foundationcourse_markParameter);
         }
+    
+        public virtual ObjectResult<Nullable<bool>> prcStudentActive(string studentID)
+        {
+            var studentIDParameter = studentID != null ?
+                new ObjectParameter("studentID", studentID) :
+                new ObjectParameter("studentID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("prcStudentActive", studentIDParameter);
+        }
     }
 }

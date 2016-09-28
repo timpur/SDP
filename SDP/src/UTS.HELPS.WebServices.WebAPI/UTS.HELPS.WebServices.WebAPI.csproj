@@ -231,6 +231,7 @@
     <Compile Include="Responses\Response.cs" />
     <Compile Include="Responses\SessionTypeListResponse.cs" />
     <Compile Include="Responses\StudentResponse.cs" />
+    <Compile Include="Responses\StudnetAccountActive.cs" />
     <Compile Include="Responses\WorkshopBookingListResponse.cs" />
     <Compile Include="Responses\WorkshopListResponse.cs" />
     <Compile Include="Responses\WorkshopResponse.cs" />

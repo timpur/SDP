@@ -268,5 +268,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="prcUpdateStudent" FunctionName="HELPSModel.Store.prcUpdateStudent" />
+    <FunctionImportMapping FunctionImportName="prcStudentActive" FunctionName="HELPSModel.Store.prcStudentActive" />
   </EntityContainerMapping>
 </Mapping>
