@@ -26,7 +26,7 @@ app.config(function ($mdThemingProvider) {
 });
 
 
-var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog, $location) {
+var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog, $mdToast, $location) {
     $(document).ready(function () {
         Authenticate();
     });
@@ -37,6 +37,7 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             $scope.ShowLoginDialog();
         }
         else {
+            $(document).trigger("CheckAccountActive");
             $(document).trigger("Authenticated");
         }
         $scope.$apply();
@@ -51,7 +52,18 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             $scope.$apply();
         });
     };
-    $(document).on("Authenticated", CheckAccountActive);
+    $(document).on("CheckAccountActive", CheckAccountActive);
+
+    $scope.showSimpleToast = function () {
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent('Simple Toast!')
+            .position("top right")
+            .hideDelay(3000)
+        );
+    };
+
+    $scope.showSimpleToast();
 
     $scope.ShowLoginDialog = function () {
         $mdDialog.show({
@@ -151,6 +163,7 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
         var valid = !$scope.infoForm.$invalid;
         if (valid) {
             API.student.update($scope.updateInfo, function (data) {
+                if (!API.key.active) $(document).trigger("CheckAccountActive");
                 alert("Success");
                 // Use angular UI Toast to diplay success
             });
@@ -184,6 +197,7 @@ function Login_DialogController($scope, $mdDialog) {
     $scope.Login = function () {
         API.account.Login($scope.User.ID, $scope.User.Password, function () {
             $scope.close();
+            $(document).trigger("CheckAccountActive");
             $(document).trigger("Authenticated");
             $scope.$apply();
         }, function (data) {
