@@ -12,3 +12,17 @@ C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAcce
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\obj\Debug\UTS.HELPS.WebServices.DataAccess.pdb
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\Newtonsoft.Json.dll
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\Newtonsoft.Json.xml
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\UTS.HELPS.WebServices.DataAccess.dll.config
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\UTS.HELPS.WebServices.DataAccess.dll
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\UTS.HELPS.WebServices.DataAccess.pdb
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\UTS.HELPS.WebServices.DataObjects.dll
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\Newtonsoft.Json.dll
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\UTS.HELPS.WebServices.DataObjects.pdb
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\bin\Debug\Newtonsoft.Json.xml
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\obj\Debug\UTS.HELPS.WebServices.DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\obj\Debug\UTS.HELPS.WebServices.DataAccess.dll
+C:\Users\David\Source\Repos\SDP\SDP\src\UTS.HELPS.WebServices.DataAccess\obj\Debug\UTS.HELPS.WebServices.DataAccess.pdb
