@@ -10,6 +10,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
 {
     public class WorkshopController : BaseController
     {
+        [Authorize]
         [HttpGet]
         [Route("api/workshop/workshopSets/{active?}")]
         public WorkShopSetListResponse ListWorkShopSets(bool? active = null)
@@ -36,6 +37,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/workshop/booking/create")]
         public Response CreateWorkshopBooking(int workshopId, string studentId, int userId)
@@ -105,6 +107,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             };
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/workshop/wait/create")]
         public Response CreateWorkshopWaiting(int workshopId, string studentId, int userId, int? priority = null)
@@ -175,6 +178,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             };
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/workshop/booking/cancel")]
         public Response CancelWorkshopBooking(int workshopId, string studentId, int userId)
@@ -212,6 +216,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             };
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/workshop/booking/search")]
         public WorkshopBookingListResponse SearchWorkshopBookings([FromUri] WorkshopBookingSearch bookingSearch)
@@ -247,6 +252,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("api/workshop/search")]
         public WorkshopListResponse SearchWorkshops([FromUri] WorkshopSearch workshopSearch)
@@ -282,6 +288,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("api/workshop/booking/update")]
         public Response UpdateWorkshopBooking(UpdateWorkshopBooking update)

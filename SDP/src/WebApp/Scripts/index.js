@@ -10,12 +10,14 @@
 //UI https://material.angularjs.org/latest/
 
 
-var app = angular.module("App", ["ngMaterial", "ngRoute", "ngMessages"]);
+var app = angular.module("App", ["ngMaterial", "md.data.table", "ngRoute", "ngMessages"]);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-
     $routeProvider.when("/myinfo", {
         templateUrl: "content/myinfo.html"
+    })
+    $routeProvider.when("/workshops", {
+        templateUrl: "content/findworkshops.html"
     })
 }]);
 
@@ -54,17 +56,15 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
     };
     $(document).on("CheckAccountActive", CheckAccountActive);
 
-    $scope.showSimpleToast = function () {
+
+    $rootScope.showMessage = function (message) {
         $mdToast.show(
           $mdToast.simple()
-            .textContent('Simple Toast!')
-            .position("top right")
+            .textContent(message)
+            .position("bottom right")
             .hideDelay(3000)
         );
     };
-
-    $scope.showSimpleToast();
-
     $scope.ShowLoginDialog = function () {
         $mdDialog.show({
             templateUrl: 'content/logindialog.html',
@@ -79,7 +79,7 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
 
 
 
-var MenuController = app.controller('Menubar', function ($scope, $timeout, $mdSidenav) {
+var MenuController = app.controller('Menubar', function ($scope, $rootScope, $timeout, $mdSidenav) {
     $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
 
     $scope.location = "loc";
@@ -105,7 +105,7 @@ var MenuController = app.controller('Menubar', function ($scope, $timeout, $mdSi
 
 
 
-var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) {
+var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, $mdSidenav) {
     $scope.close = function () {
         $mdSidenav('LeftNav').close();
     };
@@ -136,7 +136,8 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $mdSidenav) 
 
 
 
-var ContentController = app.controller('Content', function ($scope) {
+var ContentController = app.controller('Content', function ($scope, $rootScope) {
+
 
 });
 
@@ -163,16 +164,20 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
         var valid = !$scope.infoForm.$invalid;
         if (valid) {
             API.student.update($scope.updateInfo, function (data) {
-                if (!API.key.active) $(document).trigger("CheckAccountActive");
-                alert("Success");
-                // Use angular UI Toast to diplay success
+                if (API.key.active) {
+                    $rootScope.showMessage("Updating Information was SUCCESSFUL.");
+                }
+                else {
+                    $rootScope.showMessage("Activating Account was SUCCESSFUL.");
+                    $(document).trigger("CheckAccountActive");
+                }
             });
         }
     };
 
-    function GetMyInfo() {
+    $scope.GetMyInfo = function () {
         if (!API.key.validKey) {
-            $(document).on("Authenticated", GetMyInfo);
+            $(document).on("Authenticated", $scope.GetMyInfo);
         }
         else {
             API.student.getStudent(API.key.ID, function (data) {
@@ -183,12 +188,12 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
             }, null);
         }
     }
-    GetMyInfo();
+    $scope.GetMyInfo();
 });
 
 
 
-function Login_DialogController($scope, $mdDialog) {
+function Login_DialogController($scope, $rootScope, $mdDialog) {
     $scope.close = function () {
         $mdDialog.hide();
     };
@@ -207,6 +212,31 @@ function Login_DialogController($scope, $mdDialog) {
         });
     };
 }
+
+
+app.controller("workshops", function ($scope, $rootScope) {
+
+    $scope.workshops = [];
+    $scope.filter = new API.workshop.search.dataObj();
+    $scope.tableOptions = {
+        order: 'topic'
+    }
+
+
+    $scope.loadWorkshops = function () {
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", $scope.loadWorkshops);
+        }
+        else {
+            API.workshop.search($scope.filter, function (data) {
+                $scope.workshops = data.Results;
+                $scope.$apply();
+            }, null);
+        }
+    }
+    $scope.loadWorkshops();
+
+})
 
 
 // Admin only

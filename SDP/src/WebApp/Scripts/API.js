@@ -5,6 +5,7 @@
 
 
 var API = new function () {
+    // API Stuff
     this.header = { AppKey: "123456", Authorization: "" };
 
     this.baseUrl = "/webapi/api";
@@ -233,7 +234,27 @@ var API = new function () {
         API.callAPIGet(url, null, success, error);
     };
 
+    //Workshop API
 
+    this.workshop = { url: this.baseUrl + "/workshop" };
+    this.workshop.search = function (data, success, error) {
+        var url = this.url + "/search";
+        API.callAPIGet(url, data, success, error);
+    };
+    this.workshop.search.dataObj = function () {
+        this.WorkshopSetId = null;
+        this.Topic = null;
+        this.StartingDtBegin = null;
+        this.StartingDtEnd = null;
+        this.EndingDtBegin = null;
+        this.EndingDtEnd = null;
+        this.CampusId = null;
+        this.Active = null;
+        this.Page = null;
+        this.PageSize = null;
+    };
+
+    //Account OAUTH
 
     this.account = { url: this.baseUrl + "/account" };
     this.account.Register = function (data, success, error) {

@@ -1,0 +1,25 @@
+﻿<div ng-controller="workshops">
+
+    <md-card>
+        <md-table-container>
+            <table md-table>
+                <thead md-head md-order="tableOptions.order">
+                    <tr md-row>
+                        <th md-column md-order-by="topic">Topic</th>
+                        <th md-column md-order-by="type">Type</th>
+                        <th md-column md-order-by="campus">Campus</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <!-- we can let ng-repeat sort the columns for us -->
+                    <tr md-row ng-repeat="workshop in workshops | orderBy: tableOptions.order">
+                        <td md-cell>{{workshop.topic}}</td>
+                        <td md-cell>{{workshop.type}}</td>
+                        <td md-cell>{{workshop.campus}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-card>
+
+</div>
