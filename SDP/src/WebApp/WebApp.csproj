@@ -41,9 +41,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="content\findworkshops.html" />
     <Content Include="content\myinfo.html" />
     <Content Include="css\angular-material.min.css" />
     <Content Include="css\index.css" />
+    <Content Include="css\md-data-table.min.css" />
     <Content Include="img\icons\dashboard.svg" />
     <Content Include="img\icons\exit.svg" />
     <Content Include="img\icons\account.svg" />
@@ -59,6 +61,7 @@
     <Content Include="Scripts\angular\angular-messages.min.js" />
     <Content Include="Scripts\angular\angular-route.min.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\md-data-table.min.js" />
     <Content Include="Scripts\API.js" />
     <Content Include="Scripts\intellisense\angular.js" />
     <None Include="Scripts\intellisense\jquery-3.1.0.intellisense.js" />

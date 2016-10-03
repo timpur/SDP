@@ -9,7 +9,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
 {
     public class StudentController : BaseController
     {
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         [Route("api/student/{studentId}")]
         public StudentResponse GetStudent(string studentId)
@@ -34,6 +34,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("api/student/register")]
         public Response RegisterStudent(StudentReg studentReg)
@@ -58,6 +59,8 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             }
         }
 
+
+        [Authorize]
         [HttpPost]
         [Route("api/student/update")]
         public Response UpdateStudent(StudentUpdate student)
@@ -81,6 +84,8 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 };
             }
         }
+
+        [Authorize]
         [HttpGet]
         [Route("api/student/active/{studentID}")]
         public StudnetAccountActive isStudentAccountActive(string studentID)
