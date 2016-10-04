@@ -1,52 +1,25 @@
-﻿.menubar-heading {
-    padding-left: 20px;
+﻿.menubar-heading{
+    padding-left:20px;
 }
 
-.leftnav-profile {
-    padding-left: 20px;
-    width: 100%;
+.leftnav-profile{
+    padding-left:20px;
+    width:100%;
 }
-
-    .leftnav-profile .heading {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-    }
-
-        .leftnav-profile .heading .ID {
-            margin: auto;
-        }
-
-        .leftnav-profile .heading .profileicon {
-            height: 40px;
-            width: 40px;
-            margin-right: 5px;
-        }
-
-    .leftnav-profile .info {
-        margin-left: 45px;
-        font-size: 0.8em;
-    }
-
-.UserCard .card-media {
-    margin-right: 16px;
-    margin-top:-10px;
-    border-radius: 50%;
-    overflow: hidden;
-    height: 50px;
-    width: 50px;
+.leftnav-profile .heading{
+    width:100%;
+    display:flex;
+    flex-direction:row;
 }
-
-.UserCard .md-subhead.description {
-    color: rgba(255, 255, 255, 0.7);
+.leftnav-profile .heading .ID{
+    margin:auto;
 }
-
-.UserCard .card-media md-icon {
-    width: 40px;
-    height: 40px;
-    color: rgba(255, 255, 255, 0.87);
+.leftnav-profile .heading .profileicon{
+    height:40px;
+    width:40px;
+    margin-right:5px;
 }
-
-.UserCard md-card-title-text {
-    margin-top: -20px;
+.leftnav-profile .info{
+    margin-left:45px;
+    font-size:0.8em;
 }

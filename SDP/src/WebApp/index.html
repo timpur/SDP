@@ -5,11 +5,10 @@
     <link href="css/md-data-table.min.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-
+    
 
     <script src="Scripts/jQuery/jquery-3.1.0.min.js"></script>
     <script src="Scripts/angular/angular.min.js"></script>
-    <script src="Scripts/angular/angular-locale_en-au.js"></script>
     <script src="Scripts/angular/angular-route.min.js"></script>
     <script src="Scripts/angular/angular-animate.min.js"></script>
     <script src="Scripts/angular/angular-aria.min.js"></script>
@@ -51,24 +50,17 @@
                             <md-icon md-svg-icon="img/icons/close.svg"></md-icon>
                         </md-button>
                     </div>
-                    <md-card class="UserCard" md-colors="::{backgroundColor: 'default-primary-700'}">
-                        <md-card-title>
-                            <md-card-title-media>
-                                <div class="md-media-sm card-media" layout md-colors="::{background: 'default-accent'}">
-                                    <md-icon md-svg-icon="img/icons/account.svg"></md-icon>
-                                </div>
-                            </md-card-title-media>
-                            <md-card-title-text>
-                                <span class="md-headline">{{User().ID}}</span>
-                                <span class="md-subhead description">{{User().FirstName}} {{User().LastName}}</span>
-                            </md-card-title-text>
-                            <md-card-title-media>
-                                <md-button class="md-icon-button" aria-label="Logout" ng-click="logout()">
-                                    <md-icon md-svg-icon="img/icons/exit.svg"></md-icon>
-                                </md-button>
-                            </md-card-title-media>
-                        </md-card-title>
-                    </md-card>
+                    <div class="leftnav-profile">
+                        <div class="heading">
+                            <md-icon class="profileicon" md-svg-icon="img/icons/account.svg"></md-icon>
+                            <p class="ID">{{User().ID}}</p>
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Logout" ng-click="logout()">
+                                <md-icon md-svg-icon="img/icons/exit.svg"></md-icon>
+                            </md-button>
+                        </div>                        
+                        <div class="info"><span>{{User().FirstName}}</span> <span>{{User().LastName}}</span></div>
+                    </div>
                 </md-toolbar>
                 <md-content layout-padding>
                     <md-list>

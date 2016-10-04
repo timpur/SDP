@@ -57,7 +57,6 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
     <Content Include="Scripts\angular\angular-aria.min.js" />
-    <Content Include="Scripts\angular\angular-locale_en-au.js" />
     <Content Include="Scripts\angular\angular-material.min.js" />
     <Content Include="Scripts\angular\angular-messages.min.js" />
     <Content Include="Scripts\angular\angular-route.min.js" />
