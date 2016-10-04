@@ -1,23 +1,30 @@
-﻿<div ng-controller="workshops">
+﻿<div ng-controller="FindWorkshops">
 
     <md-card>
+
+        <md-table-pagination md-limit="filter.PageSize" md-limit-options="[5, 10, 15]" md-page="filter.Page" md-total="{{count()}}" md-on-paginate="loadWorkshops" md-page-select></md-table-pagination>
+
         <md-table-container>
             <table md-table>
                 <thead md-head md-order="tableOptions.order">
                     <tr md-row>
-                        <th md-column md-order-by="topic">Topic</th>
-                        <th md-column md-order-by="type">Type</th>
-                        <th md-column md-order-by="campus">Campus</th>
-                        <th md-column md-order-by="StartDate">Start Date</th>
+                        <th md-column>Select</th>
+                        <th md-column md-order-by="topic">Topics</th>
+                        <th md-column md-order-by="StartDate">Start - End Date</th>
+                        <th md-column>Start - End Time</th>
+                        <th md-column>Places Avaliable</th>
                     </tr>
                 </thead>
                 <tbody md-body>
                     <!-- we can let ng-repeat sort the columns for us -->
                     <tr md-row ng-repeat="workshop in workshops | orderBy: tableOptions.order">
-                        <td md-cell>{{workshop.topic}}</td>
-                        <td md-cell>{{workshop.type}}</td>
-                        <td md-cell>{{workshop.campus}}</td>
-                        <td md-cell>{{workshop.StartDate | date:'medium'}}</td>
+                        <td md-cell>
+                            <md-button aria-label="Select Workshop" class=" md-primary" layout="column" ng-click="">Details</md-button>
+                        </td>
+                        <td md-cell style="min-width:150px;">{{workshop.topic}}</td>
+                        <td md-cell style="min-width:80px;">{{workshop.StartDate | date:'mediumDate'}} - {{workshop.EndDate | date:'mediumDate'}}</td>
+                        <td md-cell style="min-width:80px;">{{workshop.StartDate | date:'shortTime'}} - {{workshop.EndDate | date:'shortTime'}}</td>
+                        <td md-cell>{{(workshop.maximum - workshop.BookingCount)}}</td>
                     </tr>
                 </tbody>
             </table>

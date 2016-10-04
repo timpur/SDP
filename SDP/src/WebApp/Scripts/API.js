@@ -242,16 +242,20 @@ var API = new function () {
         API.callAPIGet(url, data, success, error);
     };
     this.workshop.search.dataObj = function () {
+        var ss = new Date(2014, 1, 1);
+        var se = new Date(2014, 1, 1);
+        se.setDate(new Date().getDate() + 14);
+
         this.WorkshopSetId = null;
         this.Topic = null;
-        this.StartingDtBegin = null;
-        this.StartingDtEnd = null;
+        this.StartingDtBegin = ss.toJSON();
+        this.StartingDtEnd = se.toJSON();
         this.EndingDtBegin = null;
         this.EndingDtEnd = null;
         this.CampusId = null;
         this.Active = null;
-        this.Page = null;
-        this.PageSize = null;
+        this.Page = 1;
+        this.PageSize = 10;
     };
 
     //Account OAUTH

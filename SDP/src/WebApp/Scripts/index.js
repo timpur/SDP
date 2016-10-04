@@ -82,7 +82,9 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
 var MenuController = app.controller('Menubar', function ($scope, $rootScope, $timeout, $mdSidenav) {
     $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
 
-    $scope.location = "loc";
+    $scope.PageName = function () {
+        return $rootScope.PageName;
+    };
 
     function buildDelayedToggler(navID) {
         return debounce(function () {
@@ -129,7 +131,7 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
     $scope.Pages = [
         { name: "Dashboard", URL: "#", icon: "img/icons/dashboard.svg", enable: activeFunction },
         { name: "My Information", URL: "#myinfo", icon: "img/icons/info.svg", enable: enableFunction },
-        { name: "WorkShops", URL: "#workshops", icon: "img/icons/find.svg", enable: activeFunction }
+        { name: "Workshops", URL: "#workshops", icon: "img/icons/find.svg", enable: activeFunction }
     ];
 });
 
@@ -144,6 +146,8 @@ var ContentController = app.controller('Content', function ($scope, $rootScope) 
 
 
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
+    $rootScope.PageName = "My Information";
+
     $scope.infoForm = {};
     $scope.myInfo = {};
     $scope.updateInfo = new API.student.update.dataObj();
@@ -214,12 +218,23 @@ function Login_DialogController($scope, $rootScope, $mdDialog) {
 }
 
 
-app.controller("workshops", function ($scope, $rootScope) {
+app.controller("FindWorkshops", function ($scope, $rootScope) {
+    $rootScope.PageName = "Find Workshops";
 
     $scope.workshops = [];
     $scope.filter = new API.workshop.search.dataObj();
+    $scope.count = function () {
+        var count = $scope.filter.PageSize * $scope.filter.Page;
+        if ($scope.workshops.length == $scope.filter.PageSize) {
+            return count + $scope.filter.PageSize;
+        }
+        else
+            return count;
+    };
     $scope.tableOptions = {
-        order: 'topic'
+        order: 'topic',
+        limit: 5,
+        page: 1
     }
 
 
