@@ -65,6 +65,7 @@
     <Content Include="Scripts\angular\md-data-table.min.js" />
     <Content Include="Scripts\API.js" />
     <Content Include="Scripts\intellisense\angular.js" />
+    <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Scripts\intellisense\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\intellisense\jquery-3.1.0.js" />

@@ -90,6 +90,7 @@
           <ScalarProperty Name="degree_details" ColumnName="degree_details" />
           <ScalarProperty Name="alternative_contact" ColumnName="alternative_contact" />
           <ScalarProperty Name="preferred_name" ColumnName="preferred_name" />
+          <ScalarProperty Name="year" ColumnName="year" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -266,5 +267,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prcUpdateStudent" FunctionName="HELPSModel.Store.prcUpdateStudent" />
+    <FunctionImportMapping FunctionImportName="prcStudentActive" FunctionName="HELPSModel.Store.prcStudentActive" />
   </EntityContainerMapping>
 </Mapping>

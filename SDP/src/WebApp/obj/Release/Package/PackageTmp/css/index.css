@@ -1,0 +1,30 @@
+﻿.menubar-heading {
+    padding-left: 20px;
+}
+
+.UserCard .card-media {
+    margin-right: 16px;
+    margin-top:-10px;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 50px;
+    width: 50px;
+}
+
+.UserCard .md-subhead.description {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.UserCard .card-media md-icon {
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.UserCard md-card-title-text {
+    margin-top: -20px;
+}
+
+table.md-table th.md-column {
+    white-space: normal;
+}

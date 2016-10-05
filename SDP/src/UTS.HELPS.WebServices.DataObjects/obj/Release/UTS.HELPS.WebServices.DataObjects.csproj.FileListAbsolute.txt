@@ -2,3 +2,6 @@ C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObje
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\bin\Release\UTS.HELPS.WebServices.DataObjects.pdb
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\obj\Release\UTS.HELPS.WebServices.DataObjects.dll
 C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\obj\Release\UTS.HELPS.WebServices.DataObjects.pdb
+C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\bin\Release\Newtonsoft.Json.dll
+C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\bin\Release\Newtonsoft.Json.xml
+C:\Users\timothy.TPF\Documents\GitHub\SDP\SDP\src\UTS.HELPS.WebServices.DataObjects\obj\Release\UTS.HELPS.WebServices.DataObjects.csprojResolveAssemblyReference.cache

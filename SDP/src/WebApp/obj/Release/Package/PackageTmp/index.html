@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/angular-material.min.css" rel="stylesheet" />
+    <link href="css/md-data-table.min.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+
+    <script src="Scripts/jQuery/jquery-3.1.0.min.js"></script>
+    <script src="Scripts/angular/angular.min.js"></script>
+    <script src="Scripts/angular/angular-locale_en-au.js"></script>
+    <script src="Scripts/angular/angular-route.min.js"></script>
+    <script src="Scripts/angular/angular-animate.min.js"></script>
+    <script src="Scripts/angular/angular-aria.min.js"></script>
+    <script src="Scripts/angular/angular-messages.min.js"></script>
+    <script src="Scripts/angular/angular-material.min.js"></script>
+    <script src="Scripts/angular/md-data-table.min.js"></script>
+
+    <script src="Scripts/index.js"></script>
+    <script src="Scripts/API.js"></script>
+
+    <title>Home</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+</head>
+<body ng-app="App" ng-controller="Main" ng-cloak layout="column">
+
+    <md-toolbar layout="row" class="md-hue-2" ng-controller="Menubar">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeftNav()" hide-gt-md>
+                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+            </md-button>
+            <h2 class="menubar-heading">UTS HELPS - <span>{{PageName()}}</span></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="More" hide>
+                <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left" md-component-id="LeftNav" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+            <div ng-controller="LeftNav">
+                <md-toolbar class="md-tall">
+                    <div class="md-toolbar-tools">
+                        <h1>Navigation</h1>
+                        <span flex></span>
+                        <md-button class="md-icon-button" aria-label="Close" ng-click="close()" hide-gt-md>
+                            <md-icon md-svg-icon="img/icons/close.svg"></md-icon>
+                        </md-button>
+                    </div>
+                    <md-card class="UserCard" md-colors="::{backgroundColor: 'default-primary-700'}">
+                        <md-card-title>
+                            <md-card-title-media>
+                                <div class="md-media-sm card-media" layout md-colors="::{background: 'default-accent'}">
+                                    <md-icon md-svg-icon="img/icons/account.svg"></md-icon>
+                                </div>
+                            </md-card-title-media>
+                            <md-card-title-text>
+                                <span class="md-headline">{{User().ID}}</span>
+                                <span class="md-subhead description">{{User().FirstName}} {{User().LastName}}</span>
+                            </md-card-title-text>
+                            <md-card-title-media>
+                                <md-button class="md-icon-button" aria-label="Logout" ng-click="logout()">
+                                    <md-icon md-svg-icon="img/icons/exit.svg"></md-icon>
+                                </md-button>
+                            </md-card-title-media>
+                        </md-card-title>
+                    </md-card>
+                </md-toolbar>
+                <md-content layout-padding>
+                    <md-list>
+                        <md-list-item ng-repeat="page in Pages" ng-href="{{page.URL}}" ng-click="close()" ng-show="page.enable()">
+                            <img ng-src="{{page.icon}}" class="md-avatar" alt="Page Icon" />
+                            <div class="md-list-item-text" layout="column">{{page.name}}</div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </div>
+        </md-sidenav>
+        <md-content layout="column" layout-padding flex ng-controller="Content">
+            <ng-view flex>
+            </ng-view>
+        </md-content>
+    </section>
+
+</body>
+</html>

@@ -373,7 +373,7 @@
             <Parameter Name="foundationcourse_mark" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="prcStudentActive" ReturnType="Collection(Boolean)">
-            <Parameter Name="studentID" Mode="In" Type="String" />
+          <Parameter Name="studentID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SessionType">
