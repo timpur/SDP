@@ -23,8 +23,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
 app.config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-      .primaryPalette('red')
-      .accentPalette('orange');
+      .primaryPalette("red")
+      .accentPalette("amber")
+      .warnPalette("pink");
 });
 
 
@@ -223,19 +224,39 @@ app.controller("FindWorkshops", function ($scope, $rootScope) {
 
     $scope.workshops = [];
     $scope.filter = new API.workshop.search.dataObj();
-    $scope.count = function () {
-        var count = $scope.filter.PageSize * $scope.filter.Page;
+    $scope.order = 'topic';
+
+    $scope.moreWorkshops = function () {
         if ($scope.workshops.length == $scope.filter.PageSize) {
-            return count + $scope.filter.PageSize;
+            return true;
         }
-        else
-            return count;
+        else {
+            return false;
+        }
     };
-    $scope.tableOptions = {
-        order: 'topic',
-        limit: 5,
-        page: 1
-    }
+    $scope.getPages = function () {
+        var num = $scope.filter.Page;
+        if ($scope.moreWorkshops()) num++;
+        var pages = [];
+
+        for (var i = 0; i < num; i++) {
+            pages[i] = i + 1;
+        }
+
+        return pages;
+    };
+    $scope.previousPage = function () {
+        $scope.filter.Page--;
+        $scope.loadWorkshops()
+    };
+    $scope.nextPage = function () {
+        $scope.filter.Page++;
+        $scope.loadWorkshops()
+    };
+    $scope.resetPages = function () {
+        $scope.filter.Page = 1;
+        $scope.loadWorkshops()
+    };
 
 
     $scope.loadWorkshops = function () {
@@ -249,7 +270,7 @@ app.controller("FindWorkshops", function ($scope, $rootScope) {
             }, null);
         }
     }
-    $scope.loadWorkshops();
+    $scope.loadWorkshops();  
 
 })
 

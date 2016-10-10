@@ -10,22 +10,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/WebApp.dll">
-      <publishTime>10/05/2016 09:53:23</publishTime>
+      <publishTime>10/10/2016 21:27:41</publishTime>
     </File>
     <File Include="content/findworkshops.html">
-      <publishTime>10/05/2016 16:27:42</publishTime>
+      <publishTime>10/10/2016 21:27:14</publishTime>
     </File>
     <File Include="content/logindialog.html">
       <publishTime>09/17/2016 13:35:38</publishTime>
     </File>
     <File Include="content/myinfo.html">
-      <publishTime>10/04/2016 18:12:57</publishTime>
+      <publishTime>10/08/2016 15:00:07</publishTime>
     </File>
     <File Include="css/angular-material.min.css">
       <publishTime>08/29/2016 18:29:39</publishTime>
     </File>
     <File Include="css/index.css">
-      <publishTime>10/04/2016 21:16:18</publishTime>
+      <publishTime>10/10/2016 20:27:51</publishTime>
     </File>
     <File Include="css/md-data-table.min.css">
       <publishTime>10/04/2016 21:09:09</publishTime>
@@ -48,14 +48,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="img/icons/info.svg">
       <publishTime>09/26/2016 11:13:42</publishTime>
     </File>
+    <File Include="img/icons/left.svg">
+      <publishTime>10/10/2016 20:40:39</publishTime>
+    </File>
     <File Include="img/icons/menu.svg">
       <publishTime>08/29/2016 21:37:28</publishTime>
     </File>
     <File Include="img/icons/more_vert.svg">
       <publishTime>08/29/2016 21:40:50</publishTime>
     </File>
+    <File Include="img/icons/right.svg">
+      <publishTime>10/10/2016 20:40:32</publishTime>
+    </File>
     <File Include="index.html">
-      <publishTime>10/04/2016 19:43:56</publishTime>
+      <publishTime>10/10/2016 17:53:24</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/29/2016 18:29:39</publishTime>
@@ -88,7 +94,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2016 20:50:19</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>10/04/2016 20:48:38</publishTime>
+      <publishTime>10/10/2016 21:27:08</publishTime>
     </File>
     <File Include="Scripts/intellisense/angular.js">
       <publishTime>08/22/2016 17:52:44</publishTime>

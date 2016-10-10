@@ -1,32 +1,49 @@
 ﻿<div ng-controller="FindWorkshops">
 
+    <md-toolbar class="md-accent" layout="row">
+        <h2 class="md-toolbar-tools">Filter</h2>
+        <span flex></span>
+        <div layout="row">
+            <span class="lable md-body-1">Page:</span>
+            <md-select class="md-body-1" ng-model="filter.Page" ng-change="loadWorkshops()">
+                <md-option ng-repeat="i in getPages() track by $index" ng-value="i" ng-bind="i"></md-option>
+            </md-select>
+        </div>
+        <div layout="row">
+            <span class="lable md-body-1">Rows per Page:</span>
+            <md-select class="md-body-1" ng-model="filter.PageSize  " ng-change="resetPages()">
+                <md-option ng-repeat="i in [5, 10, 15] track by $index" ng-value="i">{{i}}</md-option>
+            </md-select>
+        </div>
+        <md-button class="md-icon-button" aria-label="Left" ng-click="previousPage()" ng-disabled="filter.Page==1">
+            <md-icon md-svg-icon="img/icons/left.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Right" ng-click="nextPage()" ng-disabled="!moreWorkshops()">
+            <md-icon md-svg-icon="img/icons/right.svg"></md-icon>
+        </md-button>
+    </md-toolbar>
 
-    <md-table-container>
-        <table md-table>
-            <thead md-head md-order="tableOptions.order">
-                <tr md-row>
-                    <th md-column>Select</th>
-                    <th md-column md-order-by="topic">Topics</th>
-                    <th md-column md-order-by="StartDate">Start - End Date</th>
-                    <th md-column>Start - End Time</th>
-                    <th md-column>Places Avaliable</th>
-                </tr>
-            </thead>
-            <tbody md-body>
-                <!-- we can let ng-repeat sort the columns for us -->
-                <tr md-row ng-repeat="workshop in workshops | orderBy: tableOptions.order">
-                    <td md-cell>
-                        <md-button aria-label="Select Workshop" class=" md-primary" layout="column" ng-click="">Details</md-button>
-                    </td>
-                    <td md-cell style="min-width:150px;">{{workshop.topic}}</td>
-                    <td md-cell style="min-width:80px;">{{workshop.StartDate | date:'mediumDate'}} - {{workshop.EndDate | date:'mediumDate'}}</td>
-                    <td md-cell style="min-width:80px;">{{workshop.StartDate | date:'shortTime'}} - {{workshop.EndDate | date:'shortTime'}}</td>
-                    <td md-cell>{{(workshop.maximum - workshop.BookingCount)}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </md-table-container>
-    <md-table-pagination md-limit="filter.PageSize" md-limit-options="[5, 10, 15]" md-page="filter.Page" md-total="{{count()}}" md-on-paginate="loadWorkshops" md-page-select></md-table-pagination>
 
+    <section layout="row" layout-wrap>
+        <div flex="100" flex-gt-xs="50" flex-gt-sm="33" flex-gt-lg="25" ng-repeat="workshop in workshops">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline" ng-bind="workshop.topic">{</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <p>Details:</p>
+                    <p><b ng-bind="workshop.StartDate | date:'mediumDate'"></b> to <b ng-bind="workshop.EndDate | date:'mediumDate'"></b></p>
+                    <p><b ng-bind="workshop.StartDate | date:'shortTime'"></b> to <b ng-bind="workshop.EndDate | date:'shortTime'"></b></p>
+                </md-card-content>
+                <md-card-actions layout="row">
+                    <md-button class="md-primary">Details</md-button>
+                    <span flex></span>
+                    <span class="count" md-colors="{:: background: 'default-accent'}" ng-bind="workshop.maximum - workshop.BookingCount"></span>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </section>
 
 </div>
