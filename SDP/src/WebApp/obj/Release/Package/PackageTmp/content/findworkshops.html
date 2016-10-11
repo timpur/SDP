@@ -1,30 +1,5 @@
-﻿<div ng-controller="FindWorkshops">
-
-    <md-toolbar class="md-accent" layout="row">
-        <h2 class="md-toolbar-tools">Filter</h2>
-        <span flex></span>
-        <div layout="row">
-            <span class="lable md-body-1">Page:</span>
-            <md-select class="md-body-1" ng-model="filter.Page" ng-change="loadWorkshops()">
-                <md-option ng-repeat="i in getPages() track by $index" ng-value="i" ng-bind="i"></md-option>
-            </md-select>
-        </div>
-        <div layout="row">
-            <span class="lable md-body-1">Rows per Page:</span>
-            <md-select class="md-body-1" ng-model="filter.PageSize  " ng-change="resetPages()">
-                <md-option ng-repeat="i in [5, 10, 15] track by $index" ng-value="i">{{i}}</md-option>
-            </md-select>
-        </div>
-        <md-button class="md-icon-button" aria-label="Left" ng-click="previousPage()" ng-disabled="filter.Page==1">
-            <md-icon md-svg-icon="img/icons/left.svg"></md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="Right" ng-click="nextPage()" ng-disabled="!moreWorkshops()">
-            <md-icon md-svg-icon="img/icons/right.svg"></md-icon>
-        </md-button>
-    </md-toolbar>
-
-
-    <section layout="row" layout-wrap>
+﻿<md-content layout-margin>
+    <section layout="row" layout-wrap >
         <div flex="100" flex-gt-xs="50" flex-gt-sm="33" flex-gt-lg="25" ng-repeat="workshop in workshops">
             <md-card>
                 <md-card-title>
@@ -45,5 +20,36 @@
             </md-card>
         </div>
     </section>
+</md-content>
 
-</div>
+<md-sidenav id="rightSidebar" md-component-id="rightSidebar" class="md-sidenav-right" md-whiteframe="4" data-btn-icon="filter.svg">
+    <md-toolbar class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Close" ng-click="closeSidebar()">
+            <md-icon md-svg-icon="img/icons/close.svg"></md-icon>
+        </md-button>
+        <span flex></span>
+        <h1>Filter Workshops</h1>
+        <span flex></span>
+    </md-toolbar>
+    <md-content layout-padding>
+        <div class="md-body-1" layout="row" layout-align="start center">
+            <span class="lable">Select Page:</span>
+            <md-select class="nomargin" ng-model="filter.Page" ng-change="loadWorkshops()">
+                <md-option ng-repeat="i in getPages() track by $index" ng-value="i" ng-bind="i"></md-option>
+            </md-select>
+            <md-button class="md-icon-button" aria-label="Left" ng-click="previousPage()" ng-disabled="filter.Page==1">
+                <md-icon md-svg-icon="img/icons/left.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Right" ng-click="nextPage()" ng-disabled="!moreWorkshops()">
+                <md-icon md-svg-icon="img/icons/right.svg"></md-icon>
+            </md-button>
+        </div>
+        <div class="md-body-1" layout="row" layout-align="start center">
+            <span class="lable">Select Rows per Page:</span>
+            <md-select class="nomargin" ng-model="filter.PageSize  " ng-change="resetPages()">
+                <md-option ng-repeat="i in [5, 10, 15] track by $index" ng-value="i">{{i}}</md-option>
+            </md-select>
+        </div>
+
+    </md-content>
+</md-sidenav>

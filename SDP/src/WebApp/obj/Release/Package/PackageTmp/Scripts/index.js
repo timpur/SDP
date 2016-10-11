@@ -13,12 +13,17 @@
 var app = angular.module("App", ["ngMaterial", "md.data.table", "ngRoute", "ngMessages"]);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    // Routes
     $routeProvider.when("/myinfo", {
-        templateUrl: "content/myinfo.html"
+        templateUrl: "content/myinfo.html",
+        controller: "MyInfo"
     })
     $routeProvider.when("/workshops", {
-        templateUrl: "content/findworkshops.html"
+        templateUrl: "content/findworkshops.html",
+        controller: 'FindWorkshops'
     })
+
+
 }]);
 
 app.config(function ($mdThemingProvider) {
@@ -45,6 +50,16 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
         }
         $scope.$apply();
     };
+    $scope.ShowLoginDialog = function () {
+        $mdDialog.show({
+            templateUrl: 'content/logindialog.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: false,
+            escapeToClose: false,
+            fullscreen: true,
+            controller: Login_DialogController
+        });
+    };
     var CheckAccountActive = function () {
         API.student.active(API.key.ID, function (data) {
             var active = data.isStudentAccountActive;
@@ -66,44 +81,41 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             .hideDelay(3000)
         );
     };
-    $scope.ShowLoginDialog = function () {
-        $mdDialog.show({
-            templateUrl: 'content/logindialog.html',
-            parent: angular.element(document.body),
-            clickOutsideToClose: false,
-            escapeToClose: false,
-            fullscreen: true,
-            controller: Login_DialogController
-        });
-    };
+
 });
 
 
 
 var MenuController = app.controller('Menubar', function ($scope, $rootScope, $timeout, $mdSidenav) {
-    $scope.toggleLeftNav = buildDelayedToggler('LeftNav');
+    $scope.toggleLeftNav = function () {
+        $mdSidenav("LeftNav").toggle();
+    }
+    $scope.rightSidebar = {
+        showBTN: function () {
+            var sidebar = $("#rightSidebar");
+            if (sidebar.length > 0)
+                return true;
+            else
+                return false;
+        },
+        icon: function () {
+            var sidebar = $("#rightSidebar");
+            var text = sidebar.data("btnIcon");
+            if (text != null && text != "")
+                return text;
+            else
+                return "more_vert.svg";
+        },
+        show: function () {
+            $mdSidenav("rightSidebar").toggle();
+        }
+    };
 
     $scope.PageName = function () {
         return $rootScope.PageName;
     };
 
-    function buildDelayedToggler(navID) {
-        return debounce(function () {
-            $mdSidenav(navID).toggle();
-        }, 200);
-    }
-    function debounce(func, wait, context) {
-        var timer;
-        return function debounced() {
-            var context = $scope,
-                args = Array.prototype.slice.call(arguments);
-            $timeout.cancel(timer);
-            timer = $timeout(function () {
-                timer = undefined;
-                func.apply(context, args);
-            }, wait || 10);
-        };
-    }
+
 });
 
 
@@ -219,7 +231,7 @@ function Login_DialogController($scope, $rootScope, $mdDialog) {
 }
 
 
-app.controller("FindWorkshops", function ($scope, $rootScope) {
+app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
     $rootScope.PageName = "Find Workshops";
 
     $scope.workshops = [];
@@ -258,6 +270,11 @@ app.controller("FindWorkshops", function ($scope, $rootScope) {
         $scope.loadWorkshops()
     };
 
+    $scope.closeSidebar = function () {
+        $mdSidenav("rightSidebar").close();
+    }
+
+
 
     $scope.loadWorkshops = function () {
         if (!API.key.validKey) {
@@ -270,9 +287,32 @@ app.controller("FindWorkshops", function ($scope, $rootScope) {
             }, null);
         }
     }
-    $scope.loadWorkshops();  
+    $scope.loadWorkshops();
 
 })
+
+// Global Functions
+
+function buildSidebarDelayedToggler($mdSidenav, navID, time) {
+    if (time == null) time = 0;
+    return debounce(function () {
+        $mdSidenav(navID).toggle();
+    }, time);
+}
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+        var context = this, args = arguments;
+        var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};
 
 
 // Admin only

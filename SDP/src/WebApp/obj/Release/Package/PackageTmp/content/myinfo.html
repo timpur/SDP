@@ -1,203 +1,205 @@
-﻿<form name="infoForm" ng-controller="MyInfo">
-    <h1>My Information</h1>
-    <p md-colors="{color:'red'}" ng-hide="key.active">Please Update your Information to Activate your Account</p>
-    <p>This page displays your profile. Please update it whenever necessary (especially your contact details).</p>
+﻿<md-content layout-margin flex>
+    <form name="infoForm">
+        <h1>My Information</h1>
+        <p md-colors="{color:'red'}" ng-hide="key.active">Please Update your Information to Activate your Account</p>
+        <p>This page displays your profile. Please update it whenever necessary (especially your contact details).</p>
 
-    <!--ID, first/last name, preferred name-->
-    <div layout="row" layout-xs="column">
-        <md-input-container flex>
-            <label>ID</label>
-            <input ng-model="myInfo.studentID" ng-readonly="true">
-        </md-input-container>
-        <md-input-container flex>
-            <label>Name</label>
-            <input value="{{myInfo.firstName}} {{myInfo.lastName}}" ng-readonly="true">
-        </md-input-container>
-        <md-input-container flex>
-            <label>Preferred First Name</label>
-            <input ng-model="myInfo.preferred_name">
-        </md-input-container>
-    </div>
-    <!--DOB, gender , phone number-->
-    <div layout="row">
-        <md-input-container flex>
-            <label>Data of Birth</label>
-            <input ng-readonly="true" value="{{myInfo.dob | date:'d/M/y'}}">
-        </md-input-container>
-        <md-input-container flex>
-            <label>Gender</label>
-            <md-select ng-model="myInfo.gender">
-                <md-option ng-repeat="option in options.gender" ng-value="option.value">
-                    {{option.name}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container flex>
-            <label>Best Contact Number</label>
-            <input name="number" ng-model="myInfo.alternative_contact" ng-pattern="/^[0-9]*$/" md-maxlength="10" required>
-            <div ng-messages="infoForm.number.$error">
-                <div ng-message="pattern">Please enter a valid phone number.</div>
-                <div ng-message="md-maxlength">Max 10 didgets</div>
-            </div>
-        </md-input-container>
-    </div>
-    <!--Degree info-->
-    <div layout="row">
-        <md-input-container flex>
-            <label>Degree</label>
-            <md-select  ng-model="myInfo.degree" required >
-                <md-option name="degree" ng-repeat="option in options.degree" ng-value="option.value">
-                    {{option.name}}
-                </md-option>
-            </md-select>
-            
-            
-        </md-input-container>
-        <md-input-container flex>
-            <label>Year</label>
-            <md-select ng-model="myInfo.year" required>
-                <md-option ng-repeat="option in options.year" ng-value="option.value">
-                    {{option.name}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container flex>
-            <label>Status</label>
-            <md-select ng-model="myInfo.status" required>
-                <md-option ng-repeat="option in options.status" ng-value="option.value">
-                    {{option.name}}
-                </md-option>
-            </md-select>
-            
-        </md-input-container>
-    </div>
-    <!--First Language-->
-    <div layout="row">
-        <md-input-container flex>
-            <label>First Language</label>
-            <md-select ng-model="myInfo.first_language" required>
-                <md-option ng-repeat="option in options.language" ng-value="option">
-                    {{option}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container flex>
-            <label>Country of Origin</label>
-            <md-select ng-model="myInfo.country_origin">
-                <md-option ng-repeat="option in options.country" ng-value="option">
-                    {{option}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-    </div>
-    <!--HSC-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.HSC" aria-label="HSC">HSC</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.HSC" flex>
-            <label>HSC Mark</label>
-            <input name="HSCMark" ng-model="myInfo.HSC_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.HSCMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
-    <!--IELTS-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.IELTS" aria-label="IELTS">IELTS</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.IELTS" flex>
-            <label>IELTS Mark</label>
-            <input name="IELTSMark" ng-model="myInfo.IELTS_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.IELTSMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
-    <!--TOEFL-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.TOEFL" aria-label="TOEFL">TOEFL</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.TOEFL" flex>
-            <label>HSC Mark</label>
-            <input name="TOEFLMARK" ng-model="myInfo.TOEFL_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.TOEFLMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
-    <!--TAFE-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.TAFE" aria-label="TAFE">TAFE</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.TAFE" flex>
-            <label>TAFE Mark</label>
-            <input name="TAFEMark" ng-model="myInfo.TAFE_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.TAFEMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
-    <!--CULT-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.CULT" aria-label="CULT">CULT</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.CULT" flex>
-            <label>CULT Mark</label>
-            <input name="CULTMark" ng-model="myInfo.CULT_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.CULTMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
-    <!--Insearch Deep-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.InsearchDEEP" aria-label="InsearchDEEP">InsearchDEEP</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.InsearchDEEP" flex>
-            <label>InsearchDEEP Mark</label>
-            <input name="InsearchDEEPMark" ng-model="myInfo.InsearchDEEP_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.InsearchDEEPMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
+        <!--ID, first/last name, preferred name-->
+        <div layout="row" layout-xs="column">
+            <md-input-container flex>
+                <label>ID</label>
+                <input ng-model="myInfo.studentID" ng-readonly="true">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Name</label>
+                <input value="{{myInfo.firstName}} {{myInfo.lastName}}" ng-readonly="true">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Preferred First Name</label>
+                <input ng-model="myInfo.preferred_name">
+            </md-input-container>
+        </div>
+        <!--DOB, gender , phone number-->
+        <div layout="row">
+            <md-input-container flex>
+                <label>Data of Birth</label>
+                <input ng-readonly="true" value="{{myInfo.dob | date:'d/M/y'}}">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Gender</label>
+                <md-select ng-model="myInfo.gender">
+                    <md-option ng-repeat="option in options.gender" ng-value="option.value">
+                        {{option.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Best Contact Number</label>
+                <input name="number" ng-model="myInfo.alternative_contact" ng-pattern="/^[0-9]*$/" md-maxlength="10" required>
+                <div ng-messages="infoForm.number.$error">
+                    <div ng-message="pattern">Please enter a valid phone number.</div>
+                    <div ng-message="md-maxlength">Max 10 didgets</div>
+                </div>
+            </md-input-container>
+        </div>
+        <!--Degree info-->
+        <div layout="row">
+            <md-input-container flex>
+                <label>Degree</label>
+                <md-select ng-model="myInfo.degree" required>
+                    <md-option name="degree" ng-repeat="option in options.degree" ng-value="option.value">
+                        {{option.name}}
+                    </md-option>
+                </md-select>
 
-    <!--Insearch Diploma-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.InsearchDiploma" aria-label="InsearchDiploma">InsearchDiploma</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.InsearchDiploma" flex>
-            <label>InsearchDiploma Mark</label>
-            <input name="InsearchDiplomaMark" ng-model="myInfo.InsearchDiploma_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.InsearchDiplomaMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
 
-    <!--Foundation Course-->
-    <div layout="row">
-        <md-input-container flex>
-            <md-checkbox ng-model="myInfo.FoundationCourse" aria-label="FoundationCourse">FoundationCourse</md-checkbox>
-        </md-input-container>
-        <md-input-container ng-show="myInfo.FoundationCourse" flex>
-            <label>FoundationCourse Mark</label>
-            <input name="FoundationCourseMark" ng-model="myInfo.FoundationCourse_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
-            <div ng-messages="infoForm.FoundationCourseMark.$error">
-                <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
-            </div>
-        </md-input-container>
-    </div>
-    <md-button type="submit" aria-label="Submit" class="md-raised md-primary" layout="column" ng-click="updateMyInfo()" ng-switch="key.active">
-        <span ng-switch-when="true">Update Information</span>
-        <span ng-switch-when="false">Activate Account</span>
-    </md-button>
-</form>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Year</label>
+                <md-select ng-model="myInfo.year" required>
+                    <md-option ng-repeat="option in options.year" ng-value="option.value">
+                        {{option.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Status</label>
+                <md-select ng-model="myInfo.status" required>
+                    <md-option ng-repeat="option in options.status" ng-value="option.value">
+                        {{option.name}}
+                    </md-option>
+                </md-select>
+
+            </md-input-container>
+        </div>
+        <!--First Language-->
+        <div layout="row">
+            <md-input-container flex>
+                <label>First Language</label>
+                <md-select ng-model="myInfo.first_language" required>
+                    <md-option ng-repeat="option in options.language" ng-value="option">
+                        {{option}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Country of Origin</label>
+                <md-select ng-model="myInfo.country_origin">
+                    <md-option ng-repeat="option in options.country" ng-value="option">
+                        {{option}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <!--HSC-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.HSC" aria-label="HSC">HSC</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.HSC" flex>
+                <label>HSC Mark</label>
+                <input name="HSCMark" ng-model="myInfo.HSC_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.HSCMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+        <!--IELTS-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.IELTS" aria-label="IELTS">IELTS</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.IELTS" flex>
+                <label>IELTS Mark</label>
+                <input name="IELTSMark" ng-model="myInfo.IELTS_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.IELTSMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+        <!--TOEFL-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.TOEFL" aria-label="TOEFL">TOEFL</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.TOEFL" flex>
+                <label>HSC Mark</label>
+                <input name="TOEFLMARK" ng-model="myInfo.TOEFL_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.TOEFLMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+        <!--TAFE-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.TAFE" aria-label="TAFE">TAFE</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.TAFE" flex>
+                <label>TAFE Mark</label>
+                <input name="TAFEMark" ng-model="myInfo.TAFE_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.TAFEMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+        <!--CULT-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.CULT" aria-label="CULT">CULT</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.CULT" flex>
+                <label>CULT Mark</label>
+                <input name="CULTMark" ng-model="myInfo.CULT_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.CULTMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+        <!--Insearch Deep-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.InsearchDEEP" aria-label="InsearchDEEP">InsearchDEEP</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.InsearchDEEP" flex>
+                <label>InsearchDEEP Mark</label>
+                <input name="InsearchDEEPMark" ng-model="myInfo.InsearchDEEP_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.InsearchDEEPMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+
+        <!--Insearch Diploma-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.InsearchDiploma" aria-label="InsearchDiploma">InsearchDiploma</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.InsearchDiploma" flex>
+                <label>InsearchDiploma Mark</label>
+                <input name="InsearchDiplomaMark" ng-model="myInfo.InsearchDiploma_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.InsearchDiplomaMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+
+        <!--Foundation Course-->
+        <div layout="row">
+            <md-input-container flex>
+                <md-checkbox ng-model="myInfo.FoundationCourse" aria-label="FoundationCourse">FoundationCourse</md-checkbox>
+            </md-input-container>
+            <md-input-container ng-show="myInfo.FoundationCourse" flex>
+                <label>FoundationCourse Mark</label>
+                <input name="FoundationCourseMark" ng-model="myInfo.FoundationCourse_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <div ng-messages="infoForm.FoundationCourseMark.$error">
+                    <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
+                </div>
+            </md-input-container>
+        </div>
+        <md-button type="submit" aria-label="Submit" class="md-raised md-primary" layout="column" ng-click="updateMyInfo()" ng-switch="key.active">
+            <span ng-switch-when="true">Update Information</span>
+            <span ng-switch-when="false">Activate Account</span>
+        </md-button>
+    </form>
+</md-content>

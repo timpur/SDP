@@ -32,19 +32,21 @@
             <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeftNav()" hide-gt-md>
                 <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
             </md-button>
+            <span flex></span>
             <h2 class="menubar-heading">UTS HELPS - <span>{{PageName()}}</span></h2>
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="More" hide>
-                <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+            <md-button class="md-icon-button" aria-label="More" ng-click="rightSidebar.show()" ng-show="rightSidebar.showBTN()">
+                <md-icon md-svg-icon="img/icons/{{rightSidebar.icon()}}"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
 
-    <section layout="row" flex>
-        <md-sidenav class="md-sidenav-left" md-component-id="LeftNav" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+    <md-content layout="row" flex>
+        <md-sidenav md-component-id="LeftNav" class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
             <div ng-controller="LeftNav">
                 <md-toolbar class="md-tall">
                     <div class="md-toolbar-tools">
+                        <span flex></span>
                         <h1>Navigation</h1>
                         <span flex></span>
                         <md-button class="md-icon-button" aria-label="Close" ng-click="close()" hide-gt-md>
@@ -80,11 +82,9 @@
                 </md-content>
             </div>
         </md-sidenav>
-        <md-content layout="column" layout-padding flex ng-controller="Content">
-            <ng-view flex>
-            </ng-view>
-        </md-content>
-    </section>
+        <section layout="row" flex ng-view>
+        </section>
+    </md-content>
 
 </body>
 </html>
