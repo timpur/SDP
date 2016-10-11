@@ -34,7 +34,7 @@
     <md-content layout-padding>
         <div class="md-body-1" layout="row" layout-align="start center">
             <span class="lable">Select Page:</span>
-            <md-select class="nomargin" ng-model="filter.Page" ng-change="loadWorkshops()">
+            <md-select class="nomargin" aria-label="Select Page" ng-model="filter.Page" ng-change="loadWorkshops()">
                 <md-option ng-repeat="i in getPages() track by $index" ng-value="i" ng-bind="i"></md-option>
             </md-select>
             <md-button class="md-icon-button" aria-label="Left" ng-click="previousPage()" ng-disabled="filter.Page==1">
@@ -46,7 +46,7 @@
         </div>
         <div class="md-body-1" layout="row" layout-align="start center">
             <span class="lable">Select Rows per Page:</span>
-            <md-select class="nomargin" ng-model="filter.PageSize  " ng-change="resetPages()">
+            <md-select class="nomargin"  aria-label="Select Num Per Page" ng-model="filter.PageSize  " ng-change="resetPages()">
                 <md-option ng-repeat="i in [5, 10, 15] track by $index" ng-value="i">{{i}}</md-option>
             </md-select>
         </div>

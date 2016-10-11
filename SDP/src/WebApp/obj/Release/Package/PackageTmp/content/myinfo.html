@@ -35,10 +35,10 @@
             </md-input-container>
             <md-input-container flex>
                 <label>Best Contact Number</label>
-                <input name="number" ng-model="myInfo.alternative_contact" ng-pattern="/^[0-9]*$/" md-maxlength="10" required>
+                <input name="number" type="number" string-to-number ng-model="myInfo.alternative_contact" ng-pattern="/^[0-9]*$/" maxlength="10" required>
                 <div ng-messages="infoForm.number.$error">
                     <div ng-message="pattern">Please enter a valid phone number.</div>
-                    <div ng-message="md-maxlength">Max 10 didgets</div>
+                    <div ng-message="maxlength">Max 10 didgets</div>
                 </div>
             </md-input-container>
         </div>
@@ -98,7 +98,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.HSC" flex>
                 <label>HSC Mark</label>
-                <input name="HSCMark" ng-model="myInfo.HSC_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="HSCMark" type="number" string-to-number ng-model="myInfo.HSC_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.HSCMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
@@ -111,7 +111,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.IELTS" flex>
                 <label>IELTS Mark</label>
-                <input name="IELTSMark" ng-model="myInfo.IELTS_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="IELTSMark" type="number" string-to-number ng-model="myInfo.IELTS_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.IELTSMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
@@ -124,7 +124,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.TOEFL" flex>
                 <label>HSC Mark</label>
-                <input name="TOEFLMARK" ng-model="myInfo.TOEFL_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="TOEFLMARK" type="number" string-to-number ng-model="myInfo.TOEFL_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.TOEFLMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
@@ -137,7 +137,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.TAFE" flex>
                 <label>TAFE Mark</label>
-                <input name="TAFEMark" ng-model="myInfo.TAFE_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="TAFEMark" type="number" string-to-number ng-model="myInfo.TAFE_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.TAFEMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
@@ -150,7 +150,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.CULT" flex>
                 <label>CULT Mark</label>
-                <input name="CULTMark" ng-model="myInfo.CULT_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="CULTMark" type="number" string-to-number ng-model="myInfo.CULT_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.CULTMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
@@ -163,7 +163,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.InsearchDEEP" flex>
                 <label>InsearchDEEP Mark</label>
-                <input name="InsearchDEEPMark" ng-model="myInfo.InsearchDEEP_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="InsearchDEEPMark" type="number" string-to-number ng-model="myInfo.InsearchDEEP_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.InsearchDEEPMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
@@ -177,7 +177,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.InsearchDiploma" flex>
                 <label>InsearchDiploma Mark</label>
-                <input name="InsearchDiplomaMark" ng-model="myInfo.InsearchDiploma_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="InsearchDiplomaMark" type="number" string-to-number ng-model="myInfo.InsearchDiploma_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.InsearchDiplomaMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
@@ -191,7 +191,7 @@
             </md-input-container>
             <md-input-container ng-show="myInfo.FoundationCourse" flex>
                 <label>FoundationCourse Mark</label>
-                <input name="FoundationCourseMark" ng-model="myInfo.FoundationCourse_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
+                <input name="FoundationCourseMark" type="number" string-to-number ng-model="myInfo.FoundationCourse_mark" ng-pattern="/^(0*(?:[1-9][0-9]?|100))$/">
                 <div ng-messages="infoForm.FoundationCourseMark.$error">
                     <div ng-message="pattern">Please enter a valid result. 1 to 100</div>
                 </div>
