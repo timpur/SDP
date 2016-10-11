@@ -274,12 +274,13 @@
     <Property Type="DateTime" Name="ending" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="maximum" Nullable="true" />
     <Property Type="Int32" Name="cutoff" Nullable="true" />
-    <Property Type="Int32" Name="workshopsetid" Nullable="true" />
     <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="reminder_num" Nullable="true" />
     <Property Type="Int32" Name="reminder_sent" Nullable="true" />
     <Property Type="Int32" Name="BookingCount" Nullable="true" />
     <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+    <Property Type="String" Name="campus" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="WorkShopSetID" Nullable="true" />
   </ComplexType>
   <ComplexType Name="BasicWorkshopWaiting">
     <Property Type="Int32" Name="id" Nullable="false" />

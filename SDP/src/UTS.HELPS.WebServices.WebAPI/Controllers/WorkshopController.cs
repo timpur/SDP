@@ -38,7 +38,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         [Route("api/workshop/booking/create")]
         public Response CreateWorkshopBooking(int workshopId, string studentId, int userId)
         {
@@ -108,7 +108,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         [Route("api/workshop/wait/create")]
         public Response CreateWorkshopWaiting(int workshopId, string studentId, int userId, int? priority = null)
         {
@@ -179,7 +179,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         [Route("api/workshop/booking/cancel")]
         public Response CancelWorkshopBooking(int workshopId, string studentId, int userId)
         {
@@ -289,7 +289,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
         }
 
         [Authorize]
-        [HttpPut]
+        [HttpPost]
         [Route("api/workshop/booking/update")]
         public Response UpdateWorkshopBooking(UpdateWorkshopBooking update)
         {
@@ -322,6 +322,33 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
             {
                 IsSuccess = true
             };
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/workshop/{ID}")]
+        public WorkshopResponse GetWorkshop(int ID)
+        {
+            try
+            {
+                base.CheckApplicationKey();
+
+                BasicWorkshop item = WorkshopDb.GetWorkshop(ID);
+                return new WorkshopResponse()
+                {
+                    IsSuccess = true,
+                    Result = item
+                };
+            }
+            catch (Exception e)
+            {
+                string msg = CreateExceptionMessage(e);
+                return new WorkshopResponse()
+                {
+                    IsSuccess = false,
+                    DisplayMessage = string.Format(ErrorMessages.WORKSHOP_NOT_FOUND, msg)
+                };
+            }
         }
     }
 }

@@ -14,14 +14,22 @@ var app = angular.module("App", ["ngMaterial", "md.data.table", "ngRoute", "ngMe
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     // Routes
+    $routeProvider.when("/", {
+        templateUrl: "content/dashboard.html",
+        controller: "Dashboard"
+    });
     $routeProvider.when("/myinfo", {
         templateUrl: "content/myinfo.html",
         controller: "MyInfo"
-    })
+    });
     $routeProvider.when("/workshops", {
         templateUrl: "content/findworkshops.html",
         controller: 'FindWorkshops'
-    })
+    });
+    $routeProvider.when("/workshop/:workshopID", {
+        templateUrl: "content/workshop.html",
+        controller: 'Workshop'
+    });
 
 
 }]);
@@ -291,6 +299,65 @@ app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
 
 })
 
+app.controller("Workshop", function ($scope, $rootScope, $routeParams) {
+    $rootScope.PageName = "Workshop Details";
+
+    $scope.workshopID = Number.parseInt($routeParams.workshopID);
+    $scope.workshop = {};
+
+    $scope.loadWorkshop = function () {
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", $scope.loadWorkshop);
+        }
+        else {
+            API.workshop.get($scope.workshopID, function (data) {
+                $scope.workshop = data.Result;
+                $scope.$apply();
+            }, null);
+        }
+    }
+    $scope.loadWorkshop();
+
+    $scope.bookWorkshop = function () {
+        API.workshop.booking.create($scope.workshopID,
+        function (data) {
+            //Success
+            if (data.IsSuccess == true)
+                $rootScope.showMessage("Booking was SUCCESSFULL");
+        },
+        function (data) {
+            //Error
+            if (data.IsSuccess == false) {
+                alert(data.DisplayMessage);
+            }
+        });
+    }
+
+});
+
+app.controller("Dashboard", function ($scope, $rootScope) {
+    $rootScope.PageName = "DashBoard";
+
+    $scope.workshopBooking = {};
+
+    $scope.loadWorkshops = function () {
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", $scope.loadWorkshops);
+        }
+        else {
+            var data = new API.workshop.booking.search.dataObj();
+            data.StudentId = API.key.ID;
+            API.workshop.booking.search(data, function (data) {
+                $scope.workshopBooking = data.Results;
+                $scope.$apply();
+            }, null);
+        }
+    }
+    $scope.loadWorkshops();
+
+
+});
+
 // Global Functions
 
 function buildSidebarDelayedToggler($mdSidenav, navID, time) {
@@ -314,14 +381,14 @@ function debounce(func, wait, immediate) {
     };
 };
 
-app.directive('stringToNumber', function() {
+app.directive('stringToNumber', function () {
     return {
         require: 'ngModel',
-        link: function(scope, element, attrs, ngModel) {
-            ngModel.$parsers.push(function(value) {
+        link: function (scope, element, attrs, ngModel) {
+            ngModel.$parsers.push(function (value) {
                 return '' + value;
             });
-            ngModel.$formatters.push(function(value) {
+            ngModel.$formatters.push(function (value) {
                 return parseFloat(value);
             });
         }

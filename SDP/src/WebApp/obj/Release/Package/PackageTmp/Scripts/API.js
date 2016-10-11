@@ -237,6 +237,10 @@ var API = new function () {
     //Workshop API
 
     this.workshop = { url: this.baseUrl + "/workshop" };
+    this.workshop.get = function (ID, success, error) {
+        var url = this.url + "/" + JSON.stringify(ID);
+        API.callAPIGet(url, null, success, error);
+    }
     this.workshop.search = function (data, success, error) {
         var url = this.url + "/search";
         API.callAPIGet(url, data, success, error);
@@ -256,6 +260,24 @@ var API = new function () {
         this.Active = null;
         this.Page = 1;
         this.PageSize = 10;
+    };
+    this.workshop.booking = { url: this.workshop.url + "/booking" }
+    this.workshop.booking.create = function (workshopID, success, error) {
+        var url = this.url + "/create";
+        var data = {
+            workshopId: workshopID,
+            studentId: API.key.ID,
+            userId: API.key.ID
+        }
+        API.callAPIGet(url, data, success, error);
+    };
+    this.workshop.booking.search = function (data, success, error) {
+        var url = this.url + "/search";
+        API.callAPIGet(url, data, success, error);
+    };
+    this.workshop.booking.search.dataObj = function () {
+        this.StudentId = null;
+
     };
 
     //Account OAUTH

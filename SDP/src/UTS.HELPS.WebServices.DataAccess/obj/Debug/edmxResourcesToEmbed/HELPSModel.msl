@@ -106,12 +106,13 @@
           <ScalarProperty Name="ending" ColumnName="ending" />
           <ScalarProperty Name="maximum" ColumnName="maximum" />
           <ScalarProperty Name="cutoff" ColumnName="cutoff" />
-          <ScalarProperty Name="workshopsetid" ColumnName="workshopsetid" />
           <ScalarProperty Name="type" ColumnName="type" />
           <ScalarProperty Name="reminder_num" ColumnName="reminder_num" />
           <ScalarProperty Name="reminder_sent" ColumnName="reminder_sent" />
           <ScalarProperty Name="BookingCount" ColumnName="BookingCount" />
           <ScalarProperty Name="archived" ColumnName="archived" />
+          <ScalarProperty Name="campus" ColumnName="campus" />
+          <ScalarProperty Name="WorkShopSetID" ColumnName="WorkShopSetID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

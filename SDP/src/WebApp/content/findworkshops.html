@@ -13,7 +13,7 @@
                     <p><b ng-bind="workshop.StartDate | date:'shortTime'"></b> to <b ng-bind="workshop.EndDate | date:'shortTime'"></b></p>
                 </md-card-content>
                 <md-card-actions layout="row">
-                    <md-button class="md-primary">Details</md-button>
+                    <md-button class="md-primary" aria-label="Get Details" ng-href="{{'#workshop/' + workshop.WorkshopId}}">Details</md-button>
                     <span flex></span>
                     <span class="count" md-colors="{:: background: 'default-accent'}" ng-bind="workshop.maximum - workshop.BookingCount"></span>
                 </md-card-actions>

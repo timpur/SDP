@@ -10,16 +10,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/WebApp.dll">
-      <publishTime>10/11/2016 13:43:40</publishTime>
+      <publishTime>10/11/2016 21:30:21</publishTime>
+    </File>
+    <File Include="content/dashboard.html">
+      <publishTime>10/11/2016 21:27:04</publishTime>
     </File>
     <File Include="content/findworkshops.html">
-      <publishTime>10/11/2016 13:49:09</publishTime>
+      <publishTime>10/11/2016 19:09:04</publishTime>
     </File>
     <File Include="content/logindialog.html">
       <publishTime>09/17/2016 13:35:38</publishTime>
     </File>
     <File Include="content/myinfo.html">
       <publishTime>10/11/2016 14:29:02</publishTime>
+    </File>
+    <File Include="content/workshop.html">
+      <publishTime>10/11/2016 20:07:20</publishTime>
     </File>
     <File Include="css/angular-material.min.css">
       <publishTime>08/29/2016 18:29:39</publishTime>
@@ -94,10 +100,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2016 21:42:53</publishTime>
     </File>
     <File Include="Scripts/API.js">
-      <publishTime>10/04/2016 20:50:19</publishTime>
+      <publishTime>10/11/2016 20:59:18</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>10/11/2016 14:42:21</publishTime>
+      <publishTime>10/11/2016 21:01:45</publishTime>
     </File>
     <File Include="Scripts/intellisense/angular.js">
       <publishTime>08/22/2016 17:52:44</publishTime>

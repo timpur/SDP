@@ -1,0 +1,19 @@
+﻿<md-content layout-margin>
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline" ng-bind="workshop.topic"></span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>            
+            <p>Date: <b ng-bind="workshop.starting | date:'mediumDate'"></b> to <b ng-bind="workshop.ending | date:'mediumDate'"></b></p>
+            <p>Time: <b ng-bind="workshop.starting | date:'shortTime'"></b> to <b ng-bind="workshop.ending | date:'shortTime'"></b></p>
+            <p>Places available: <span class="count" md-colors="{:: background: 'default-accent'}" ng-bind="workshop.maximum - workshop.BookingCount"></span></p>
+            <p>Campus: <span ng-bind="workshop.campus"></span></p>
+            <p ng-bind="workshop.description"></p>
+        </md-card-content>
+        <md-card-actions>
+            <md-button class="md-raised md-primary" aria-label="Book Workshop" ng-click="bookWorkshop()">Book This Workshop</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>

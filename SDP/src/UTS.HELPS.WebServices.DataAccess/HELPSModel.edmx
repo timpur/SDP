@@ -466,12 +466,13 @@
           <Property Type="DateTime" Name="ending" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="maximum" Nullable="true" />
           <Property Type="Int32" Name="cutoff" Nullable="true" />
-          <Property Type="Int32" Name="workshopsetid" Nullable="true" />
           <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="reminder_num" Nullable="true" />
           <Property Type="Int32" Name="reminder_sent" Nullable="true" />
           <Property Type="Int32" Name="BookingCount" Nullable="true" />
           <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
+          <Property Type="String" Name="campus" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="WorkShopSetID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="BasicWorkshopWaiting">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -687,12 +688,13 @@
                 <ScalarProperty Name="ending" ColumnName="ending" />
                 <ScalarProperty Name="maximum" ColumnName="maximum" />
                 <ScalarProperty Name="cutoff" ColumnName="cutoff" />
-                <ScalarProperty Name="workshopsetid" ColumnName="workshopsetid" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="reminder_num" ColumnName="reminder_num" />
                 <ScalarProperty Name="reminder_sent" ColumnName="reminder_sent" />
                 <ScalarProperty Name="BookingCount" ColumnName="BookingCount" />
                 <ScalarProperty Name="archived" ColumnName="archived" />
+                <ScalarProperty Name="campus" ColumnName="campus" />
+                <ScalarProperty Name="WorkShopSetID" ColumnName="WorkShopSetID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

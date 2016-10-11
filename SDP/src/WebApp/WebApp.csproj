@@ -41,8 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="content\dashboard.html" />
     <Content Include="content\findworkshops.html" />
     <Content Include="content\myinfo.html" />
+    <Content Include="content\workshop.html" />
     <Content Include="css\angular-material.min.css" />
     <Content Include="css\index.css" />
     <Content Include="css\md-data-table.min.css" />

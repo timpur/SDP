@@ -22,11 +22,12 @@ namespace UTS.HELPS.WebServices.DataAccess
         public Nullable<System.DateTime> ending { get; set; }
         public Nullable<int> maximum { get; set; }
         public Nullable<int> cutoff { get; set; }
-        public Nullable<int> workshopsetid { get; set; }
         public string type { get; set; }
         public Nullable<int> reminder_num { get; set; }
         public Nullable<int> reminder_sent { get; set; }
         public Nullable<int> BookingCount { get; set; }
         public Nullable<System.DateTime> archived { get; set; }
+        public string campus { get; set; }
+        public Nullable<int> WorkShopSetID { get; set; }
     }
 }

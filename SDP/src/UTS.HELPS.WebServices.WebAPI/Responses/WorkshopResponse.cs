@@ -4,6 +4,6 @@ namespace UTS.HELPS.WebServices.WebAPI.Responses
 {
     public class WorkshopResponse : Response
     {
-        Workshop Result { get; set; }
+        public BasicWorkshop Result { get; set; }
     }
 }
