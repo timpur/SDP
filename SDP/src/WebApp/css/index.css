@@ -25,18 +25,19 @@
     margin-top: -20px;
 }
 
-table.md-table th.md-column {
-    white-space: normal;
+.count {
+    padding: 10px;
+    border-radius: 50%;
 }
 
-.count {
-    padding:10px;
-    border-radius:50%;
+.lable {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    margin-left: 20px;
+    white-space: nowrap;
 }
-.lable{
-    margin-top:auto;
-    margin-bottom:auto;
-    margin-right:10px;
-    margin-left:20px;
-    white-space:nowrap;
+
+.nomargin{
+    margin:0;
 }
