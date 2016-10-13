@@ -15,7 +15,7 @@
                 <md-card-actions layout="row">
                     <md-button class="md-primary" aria-label="Get Details" ng-href="{{'#workshop/' + workshop.WorkshopId}}">Details</md-button>
                     <span flex></span>
-                    <span class="count" md-colors="{:: background: 'default-accent'}" ng-bind="workshop.maximum - workshop.BookingCount"></span>
+                    <span class="count" md-colors="{:: background: 'default-accent'}" ng-bind="pos(workshop.cutoff, workshop.BookingCount)"></span>
                 </md-card-actions>
             </md-card>
         </div>

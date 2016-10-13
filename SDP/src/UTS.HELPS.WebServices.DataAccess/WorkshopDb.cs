@@ -26,7 +26,7 @@ namespace UTS.HELPS.WebServices.DataAccess
         {
             using (HELPSEntities ctx = new HELPSEntities())
             {
-                return ctx.prcGetWorkshopBooking(workshopId, studentId).FirstOrDefault();
+                return ctx.prcGetWorkshopBooking(workshopId, studentId).LastOrDefault();
             }            
         }
 

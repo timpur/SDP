@@ -32,5 +32,6 @@ namespace UTS.HELPS.WebServices.DataAccess
         public Nullable<int> reminder_sent { get; set; }
         public Nullable<System.DateTime> WorkshopArchived { get; set; }
         public Nullable<System.DateTime> BookingArchived { get; set; }
+        public string campus { get; set; }
     }
 }

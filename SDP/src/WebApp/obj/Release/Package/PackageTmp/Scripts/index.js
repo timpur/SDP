@@ -30,6 +30,13 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         templateUrl: "content/workshop.html",
         controller: 'Workshop'
     });
+    $routeProvider.when("/past", {
+        templateUrl: "content/past.html",
+        controller: 'PastBookings'
+    });
+    $routeProvider.when("/help", {
+        templateUrl: "content/help.html"
+    });
 
 
 }]);
@@ -89,6 +96,7 @@ var MainController = app.controller("Main", function ($scope, $rootScope, $mdDia
             .hideDelay(3000)
         );
     };
+    $scope.pos = pos;
 
 });
 
@@ -150,9 +158,11 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
     }
 
     $scope.Pages = [
-        { name: "Dashboard", URL: "#", icon: "img/icons/dashboard.svg", enable: activeFunction },
+        { name: "Dashboard", URL: "#/", icon: "img/icons/dashboard.svg", enable: activeFunction },
         { name: "My Information", URL: "#myinfo", icon: "img/icons/info.svg", enable: enableFunction },
-        { name: "Workshops", URL: "#workshops", icon: "img/icons/find.svg", enable: activeFunction }
+        { name: "Workshops", URL: "#workshops", icon: "img/icons/find.svg", enable: activeFunction },
+        { name: "PastBookings", URL: "#past", icon: "img/icons/history.svg", enable: activeFunction },
+        { name: "Help", URL: "#help", icon: "img/icons/help.svg", enable: activeFunction }
     ];
 });
 
@@ -335,7 +345,7 @@ app.controller("Workshop", function ($scope, $rootScope, $routeParams) {
 
 });
 
-app.controller("Dashboard", function ($scope, $rootScope) {
+app.controller("Dashboard", function ($scope, $rootScope, $mdDialog) {
     $rootScope.PageName = "DashBoard";
 
     $scope.workshopBooking = {};
@@ -355,7 +365,46 @@ app.controller("Dashboard", function ($scope, $rootScope) {
     }
     $scope.loadWorkshops();
 
+    $scope.cancelBooking = function (ev, index) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+              .title('Would you like to cancel this Booking?')
+              .textContent('This will remove your booking from the system')
+              .ariaLabel('Cancel Booking')
+              .targetEvent(ev)
+              .ok('Okay')
+              .cancel('Cancel');
 
+        $mdDialog.show(confirm).then(function () {
+            API.workshop.booking.cancel($scope.workshopBooking[index].workshopID, function (data) {
+                $rootScope.showMessage("Cancele Booking was SUCCESSFULL");
+                $scope.loadWorkshops();
+            }, null);
+        });
+    };
+
+});
+
+app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
+    $rootScope.PageName = "Past Bookings";
+
+    $scope.workshopBooking = {};
+
+    $scope.loadWorkshops = function () {
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", $scope.loadWorkshops);
+        }
+        else {
+            var data = new API.workshop.booking.search.dataObj();            
+            data.StudentId = API.key.ID;
+            data.Active = false;
+            API.workshop.booking.search(data, function (data) {
+                $scope.workshopBooking = data.Results;
+                $scope.$apply();
+            }, null);
+        }
+    }
+    $scope.loadWorkshops();
 });
 
 // Global Functions
@@ -380,6 +429,14 @@ function debounce(func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 };
+
+function pos(num1, num2) {
+    var num = num1 - num2;
+    if (num < 0)
+        return 0;
+    else
+        return num;
+}
 
 app.directive('stringToNumber', function () {
     return {

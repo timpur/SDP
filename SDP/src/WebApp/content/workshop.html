@@ -1,5 +1,5 @@
-﻿<md-content layout-margin>
-    <md-card>
+﻿<md-content layout-margin flex>
+    <md-card flex>
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline" ng-bind="workshop.topic"></span>
@@ -8,8 +8,8 @@
         <md-card-content>            
             <p>Date: <b ng-bind="workshop.starting | date:'mediumDate'"></b> to <b ng-bind="workshop.ending | date:'mediumDate'"></b></p>
             <p>Time: <b ng-bind="workshop.starting | date:'shortTime'"></b> to <b ng-bind="workshop.ending | date:'shortTime'"></b></p>
-            <p>Places available: <span class="count" md-colors="{:: background: 'default-accent'}" ng-bind="workshop.maximum - workshop.BookingCount"></span></p>
-            <p>Campus: <span ng-bind="workshop.campus"></span></p>
+            <p>Places available: <span class="count" md-colors="{:: background: 'default-accent'}" ng-bind="pos(workshop.cutoff, workshop.BookingCount)"></span></p>
+            <p>Campus: <b ng-bind="workshop.campus"></b></p>
             <p ng-bind="workshop.description"></p>
         </md-card-content>
         <md-card-actions>

@@ -41,6 +41,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="content\help.html" />
+    <Content Include="content\past.html" />
     <Content Include="content\dashboard.html" />
     <Content Include="content\findworkshops.html" />
     <Content Include="content\myinfo.html" />
@@ -54,6 +56,8 @@
     <Content Include="img\icons\close.svg" />
     <Content Include="img\icons\filter.svg" />
     <Content Include="img\icons\find.svg" />
+    <Content Include="img\icons\help.svg" />
+    <Content Include="img\icons\history.svg" />
     <Content Include="img\icons\info.svg" />
     <Content Include="img\icons\left.svg" />
     <Content Include="img\icons\menu.svg" />

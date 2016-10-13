@@ -10,13 +10,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/WebApp.dll">
-      <publishTime>10/11/2016 21:30:21</publishTime>
+      <publishTime>10/13/2016 21:08:48</publishTime>
     </File>
     <File Include="content/dashboard.html">
-      <publishTime>10/11/2016 21:27:04</publishTime>
+      <publishTime>10/13/2016 21:07:01</publishTime>
     </File>
     <File Include="content/findworkshops.html">
-      <publishTime>10/11/2016 19:09:04</publishTime>
+      <publishTime>10/13/2016 20:45:48</publishTime>
+    </File>
+    <File Include="content/help.html">
+      <publishTime>10/13/2016 21:02:13</publishTime>
     </File>
     <File Include="content/logindialog.html">
       <publishTime>09/17/2016 13:35:38</publishTime>
@@ -24,8 +27,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="content/myinfo.html">
       <publishTime>10/11/2016 14:29:02</publishTime>
     </File>
+    <File Include="content/past.html">
+      <publishTime>10/13/2016 21:07:16</publishTime>
+    </File>
     <File Include="content/workshop.html">
-      <publishTime>10/11/2016 20:07:20</publishTime>
+      <publishTime>10/13/2016 20:45:00</publishTime>
     </File>
     <File Include="css/angular-material.min.css">
       <publishTime>08/29/2016 18:29:39</publishTime>
@@ -53,6 +59,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="img/icons/find.svg">
       <publishTime>09/26/2016 11:13:29</publishTime>
+    </File>
+    <File Include="img/icons/help.svg">
+      <publishTime>10/13/2016 21:03:39</publishTime>
+    </File>
+    <File Include="img/icons/history.svg">
+      <publishTime>10/13/2016 21:03:30</publishTime>
     </File>
     <File Include="img/icons/info.svg">
       <publishTime>09/26/2016 11:13:42</publishTime>
@@ -100,10 +112,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2016 21:42:53</publishTime>
     </File>
     <File Include="Scripts/API.js">
-      <publishTime>10/11/2016 20:59:18</publishTime>
+      <publishTime>10/13/2016 20:35:24</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>10/11/2016 21:01:45</publishTime>
+      <publishTime>10/13/2016 21:03:54</publishTime>
     </File>
     <File Include="Scripts/intellisense/angular.js">
       <publishTime>08/22/2016 17:52:44</publishTime>

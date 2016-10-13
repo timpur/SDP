@@ -1,0 +1,26 @@
+﻿<md-content layout="row" layout-margin layout-wrap flex>
+    <section class="nomargin" flex="100" flex-gt-sm="50" style="max-height:initial;">
+        <h1 class="md-display-2" layout="row" layout-align="center center">Workshop Bookings</h1>
+        <section layout="row" layout-wrap>
+            <div flex="100" flex-gt-sm="50" ng-repeat="booking in workshopBooking">
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" ng-bind="booking.topic">{</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p><b ng-bind="booking.starting | date:'mediumDate'"></b> to <b ng-bind="booking.ending | date:'mediumDate'"></b></p>
+                        <p><b ng-bind="booking.starting | date:'shortTime'"></b> to <b ng-bind="booking.ending | date:'shortTime'"></b></p>
+                        <p>Campus: <b ng-bind="booking.campus"></b></p>
+                    </md-card-content>
+                    <md-card-actions layout="row">
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </section>
+    </section>
+    <section class="nomargin" flex="100" flex-gt-sm="50" style="max-height:initial;">
+        <h1 class="md-display-2" layout="row" layout-align="center center">Session Bookings</h1>
+    </section>
+</md-content>

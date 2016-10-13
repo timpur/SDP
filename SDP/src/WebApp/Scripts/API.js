@@ -257,7 +257,7 @@ var API = new function () {
         this.EndingDtBegin = null;
         this.EndingDtEnd = null;
         this.CampusId = null;
-        this.Active = null;
+        this.Active = true;
         this.Page = 1;
         this.PageSize = 10;
     };
@@ -277,7 +277,23 @@ var API = new function () {
     };
     this.workshop.booking.search.dataObj = function () {
         this.StudentId = null;
-
+        this.StartingDtBegin = null
+        this.StartingDtEnd = null
+        this.EndingDtBegin = null;
+        this.EndingDtEnd = null;
+        this.CampusId = null;
+        this.Active = true;
+        this.Page = 1;
+        this.PageSize = 10;
+    };
+    this.workshop.booking.cancel = function (workshopID, success, error) {
+        var url = this.url + "/cancel";
+        var data = {
+            workshopId: workshopID,
+            studentId: API.key.ID,
+            userId: API.key.ID
+        }
+        API.callAPIGet(url, data, success, error);
     };
 
     //Account OAUTH
