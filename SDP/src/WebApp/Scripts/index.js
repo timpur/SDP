@@ -235,6 +235,7 @@ function Login_DialogController($scope, $rootScope, $mdDialog) {
     $scope.User = { ID: "", Password: "" };
     $scope.errorMsg = "";
     $scope.Login = function () {
+        vibrate();
         API.account.Login($scope.User.ID, $scope.User.Password, function () {
             $scope.close();
             $(document).trigger("CheckAccountActive");
@@ -329,6 +330,7 @@ app.controller("Workshop", function ($scope, $rootScope, $routeParams) {
     $scope.loadWorkshop();
 
     $scope.bookWorkshop = function () {
+        vibrate();
         API.workshop.booking.create($scope.workshopID,
         function (data) {
             //Success
@@ -366,7 +368,7 @@ app.controller("Dashboard", function ($scope, $rootScope, $mdDialog) {
     $scope.loadWorkshops();
 
     $scope.cancelBooking = function (ev, index) {
-        // Appending dialog to document.body to cover sidenav in docs app
+        vibrate();
         var confirm = $mdDialog.confirm()
               .title('Would you like to cancel this Booking?')
               .textContent('This will remove your booking from the system')
@@ -436,6 +438,14 @@ function pos(num1, num2) {
         return 0;
     else
         return num;
+}
+
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+function vibrate() {
+    vibrateTime(50);
+}
+function vibrateTime(num){
+    navigator.vibrate(num);
 }
 
 app.directive('stringToNumber', function () {
