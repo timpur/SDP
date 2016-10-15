@@ -10,7 +10,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/WebApp.dll">
-      <publishTime>10/13/2016 21:08:48</publishTime>
+      <publishTime>10/15/2016 18:23:17</publishTime>
+    </File>
+    <File Include="content/barcode.html">
+      <publishTime>10/15/2016 17:51:36</publishTime>
     </File>
     <File Include="content/dashboard.html">
       <publishTime>10/13/2016 21:07:01</publishTime>
@@ -82,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/10/2016 20:40:32</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>10/11/2016 13:56:19</publishTime>
+      <publishTime>10/15/2016 17:50:08</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/29/2016 18:29:39</publishTime>
@@ -115,7 +118,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/13/2016 20:35:24</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>10/13/2016 21:03:54</publishTime>
+      <publishTime>10/15/2016 18:17:52</publishTime>
     </File>
     <File Include="Scripts/intellisense/angular.js">
       <publishTime>08/22/2016 17:52:44</publishTime>
@@ -125,6 +128,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jQuery/jquery-3.1.0.min.js">
       <publishTime>08/22/2016 17:49:10</publishTime>
+    </File>
+    <File Include="Scripts/jQuery/quagga.min.js">
+      <publishTime>10/15/2016 17:49:51</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>10/05/2016 09:53:23</publishTime>

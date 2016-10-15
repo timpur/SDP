@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="content\barcode.html" />
     <Content Include="content\help.html" />
     <Content Include="content\past.html" />
     <Content Include="content\dashboard.html" />
@@ -89,6 +90,7 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="content\logindialog.html" />
+    <Content Include="Scripts\jQuery\quagga.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

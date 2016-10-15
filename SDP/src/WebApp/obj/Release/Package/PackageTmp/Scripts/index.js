@@ -3,6 +3,7 @@
 /// <reference path="intellisense/jquery-3.1.0.js" />
 /// <reference path="intellisense/jquery-3.1.0.intellisense.js" />
 /// <reference path="intellisense/angular.js" />
+/// <reference path="jQuery/quagga.min.js" />
 /// <reference path="API.js" />
 
 
@@ -24,18 +25,22 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     });
     $routeProvider.when("/workshops", {
         templateUrl: "content/findworkshops.html",
-        controller: 'FindWorkshops'
+        controller: "FindWorkshops"
     });
     $routeProvider.when("/workshop/:workshopID", {
         templateUrl: "content/workshop.html",
-        controller: 'Workshop'
+        controller: "Workshop"
     });
     $routeProvider.when("/past", {
         templateUrl: "content/past.html",
-        controller: 'PastBookings'
+        controller: "PastBookings"
     });
     $routeProvider.when("/help", {
         templateUrl: "content/help.html"
+    });
+    $routeProvider.when("/code", {
+        templateUrl: "content/barcode.html",
+        controller: "Barcode"
     });
 
 
@@ -131,7 +136,6 @@ var MenuController = app.controller('Menubar', function ($scope, $rootScope, $ti
         return $rootScope.PageName;
     };
 
-
 });
 
 
@@ -165,15 +169,6 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
         { name: "Help", URL: "#help", icon: "img/icons/help.svg", enable: activeFunction }
     ];
 });
-
-
-
-
-var ContentController = app.controller('Content', function ($scope, $rootScope) {
-
-
-});
-
 
 
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
@@ -235,6 +230,7 @@ function Login_DialogController($scope, $rootScope, $mdDialog) {
     $scope.User = { ID: "", Password: "" };
     $scope.errorMsg = "";
     $scope.Login = function () {
+        vibrate();
         API.account.Login($scope.User.ID, $scope.User.Password, function () {
             $scope.close();
             $(document).trigger("CheckAccountActive");
@@ -292,8 +288,6 @@ app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
         $mdSidenav("rightSidebar").close();
     }
 
-
-
     $scope.loadWorkshops = function () {
         if (!API.key.validKey) {
             $(document).on("Authenticated", $scope.loadWorkshops);
@@ -329,6 +323,7 @@ app.controller("Workshop", function ($scope, $rootScope, $routeParams) {
     $scope.loadWorkshop();
 
     $scope.bookWorkshop = function () {
+        vibrate();
         API.workshop.booking.create($scope.workshopID,
         function (data) {
             //Success
@@ -366,7 +361,7 @@ app.controller("Dashboard", function ($scope, $rootScope, $mdDialog) {
     $scope.loadWorkshops();
 
     $scope.cancelBooking = function (ev, index) {
-        // Appending dialog to document.body to cover sidenav in docs app
+        vibrate();
         var confirm = $mdDialog.confirm()
               .title('Would you like to cancel this Booking?')
               .textContent('This will remove your booking from the system')
@@ -395,7 +390,7 @@ app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
             $(document).on("Authenticated", $scope.loadWorkshops);
         }
         else {
-            var data = new API.workshop.booking.search.dataObj();            
+            var data = new API.workshop.booking.search.dataObj();
             data.StudentId = API.key.ID;
             data.Active = false;
             API.workshop.booking.search(data, function (data) {
@@ -405,6 +400,56 @@ app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
         }
     }
     $scope.loadWorkshops();
+});
+
+
+app.controller("Barcode", function ($scope, $rootScope) {   
+
+    $scope.loadConfig = function () {
+        var obj = $("#barcodelive")[0];
+        var cores = navigator.hardwareConcurrency | 1;
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: obj
+            },
+            decoder: {
+                readers: ["code_128_reader"]
+            },
+            numOfWorkers: cores,
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            console.log("Initialization finished. Ready to start");
+            Quagga.start();
+        });
+        Quagga.onDetected($scope.onCode);
+    }
+
+    $scope.onCode = function (data) {
+        var code = data.codeResult.code;
+        Quagga.stop();
+        alert(code);
+    };
+
+
+
+    $scope.loadBarcode = function () {
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", $scope.loadBarcode);
+        }
+        else {
+            $scope.loadConfig();
+        }
+    }
+    $scope.loadBarcode();
+
+    $scope.$on("$destroy", function () {
+        Quagga.stop();
+    });
 });
 
 // Global Functions
@@ -436,6 +481,14 @@ function pos(num1, num2) {
         return 0;
     else
         return num;
+}
+
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+function vibrate() {
+    vibrateTime(50);
+}
+function vibrateTime(num) {
+    navigator.vibrate(num);
 }
 
 app.directive('stringToNumber', function () {

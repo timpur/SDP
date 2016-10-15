@@ -3,6 +3,7 @@
 /// <reference path="intellisense/jquery-3.1.0.js" />
 /// <reference path="intellisense/jquery-3.1.0.intellisense.js" />
 /// <reference path="intellisense/angular.js" />
+/// <reference path="jQuery/quagga.min.js" />
 /// <reference path="API.js" />
 
 
@@ -24,18 +25,22 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     });
     $routeProvider.when("/workshops", {
         templateUrl: "content/findworkshops.html",
-        controller: 'FindWorkshops'
+        controller: "FindWorkshops"
     });
     $routeProvider.when("/workshop/:workshopID", {
         templateUrl: "content/workshop.html",
-        controller: 'Workshop'
+        controller: "Workshop"
     });
     $routeProvider.when("/past", {
         templateUrl: "content/past.html",
-        controller: 'PastBookings'
+        controller: "PastBookings"
     });
     $routeProvider.when("/help", {
         templateUrl: "content/help.html"
+    });
+    $routeProvider.when("/code", {
+        templateUrl: "content/barcode.html",
+        controller: "Barcode"
     });
 
 
@@ -131,7 +136,6 @@ var MenuController = app.controller('Menubar', function ($scope, $rootScope, $ti
         return $rootScope.PageName;
     };
 
-
 });
 
 
@@ -165,15 +169,6 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
         { name: "Help", URL: "#help", icon: "img/icons/help.svg", enable: activeFunction }
     ];
 });
-
-
-
-
-var ContentController = app.controller('Content', function ($scope, $rootScope) {
-
-
-});
-
 
 
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
@@ -293,8 +288,6 @@ app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
         $mdSidenav("rightSidebar").close();
     }
 
-
-
     $scope.loadWorkshops = function () {
         if (!API.key.validKey) {
             $(document).on("Authenticated", $scope.loadWorkshops);
@@ -397,7 +390,7 @@ app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
             $(document).on("Authenticated", $scope.loadWorkshops);
         }
         else {
-            var data = new API.workshop.booking.search.dataObj();            
+            var data = new API.workshop.booking.search.dataObj();
             data.StudentId = API.key.ID;
             data.Active = false;
             API.workshop.booking.search(data, function (data) {
@@ -407,6 +400,100 @@ app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
         }
     }
     $scope.loadWorkshops();
+});
+
+
+app.controller("Barcode", function ($scope, $rootScope) {
+
+    $scope.barcodeReady = false;
+    $scope.loadConfig = function () {
+        var obj = $("#barcodelive")[0];
+        var cores = navigator.hardwareConcurrency | 1;
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: obj
+            },
+            decoder: {
+                readers: ["code_128_reader"]
+            },
+            numOfWorkers: cores,
+            locate: true,
+            locator: {
+                halfSample: true,
+                patchSize: "medium"
+            }
+        }, function (err) {
+            $scope.barcodeReady = true;            
+        });
+        Quagga.onProcessed(function (result) {
+            var drawingCtx = Quagga.canvas.ctx.overlay,
+                drawingCanvas = Quagga.canvas.dom.overlay;
+
+            if (result) {
+                if (result.boxes) {
+                    drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                    result.boxes.filter(function (box) {
+                        return box !== result.box;
+                    }).forEach(function (box) {
+                        Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
+                    });
+                }
+
+                if (result.box) {
+                    Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
+                }
+
+                if (result.codeResult && result.codeResult.code) {
+                    Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+                }
+            }
+        });
+        Quagga.onDetected($scope.onCode);
+    }
+    $scope.onCode = function (data) {
+        var code = data.codeResult.code;
+
+        if ($scope.code.val != code) {
+            $scope.code.count = 0;
+            $scope.code.val = code;
+        }
+        else if ($scope.code.count != 10) {
+            $scope.code.count++;
+        }
+
+        if ($scope.code.count == 10) {
+            $scope.stop();
+        }
+
+        $scope.$apply();
+    };
+    $scope.start = function () {
+        Quagga.start();
+    }
+    $scope.stop = function () {
+        Quagga.stop();
+    }
+    $scope.code = {
+        val: "",
+        count: 0
+    };
+
+
+    $scope.loadBarcode = function () {
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", $scope.loadBarcode);
+        }
+        else {
+            $scope.loadConfig();
+        }
+    }
+    $scope.loadBarcode();
+
+    $scope.$on("$destroy", function () {
+        Quagga.stop();
+    });
 });
 
 // Global Functions
@@ -444,7 +531,7 @@ navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mo
 function vibrate() {
     vibrateTime(50);
 }
-function vibrateTime(num){
+function vibrateTime(num) {
     navigator.vibrate(num);
 }
 
