@@ -35,5 +35,7 @@
 
         public static readonly string STUDENT_UPDATE_ERROR = "Error Updating student Information: {0}";
         public static readonly string STUDENT_ACCOUNT_ACTIVE_ERROR = "Error Getting Student's Account Active Information: {0}";
+
+        public static readonly string WORKSHOP_BOOKING_ATTENDANCE_ERROR = "Error Validating Attendance: {0}";
     }
 }

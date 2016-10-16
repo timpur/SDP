@@ -270,5 +270,17 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="prcUpdateStudent" FunctionName="HELPSModel.Store.prcUpdateStudent" />
     <FunctionImportMapping FunctionImportName="prcStudentActive" FunctionName="HELPSModel.Store.prcStudentActive" />
+    <FunctionImportMapping FunctionImportName="prcGetWorkshopBookingByID" FunctionName="HELPSModel.Store.prcGetWorkshopBookingByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HELPSModel.BasicWorkshopBooking">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="workshopID" ColumnName="workshopID" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="canceled" ColumnName="canceled" />
+          <ScalarProperty Name="attended" ColumnName="attended" />
+          <ScalarProperty Name="archived" ColumnName="archived" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

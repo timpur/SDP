@@ -328,7 +328,7 @@ namespace UTS.HELPS.WebServices.DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BasicSessionBooking>("prcGetSessionBooking", sessionIdParameter, studentIDParameter);
         }
     
-        public virtual ObjectResult<WorkshopBooking> prcSearchWorkshopBookings(string studentID, Nullable<System.DateTime> startingDtBegin, Nullable<System.DateTime> startingDtEnd, Nullable<System.DateTime> endingDtBegin, Nullable<System.DateTime> endingDtEnd, Nullable<int> campusId, Nullable<bool> active, Nullable<int> page, Nullable<int> pageSize)
+        public virtual ObjectResult<WorkshopBooking> prcSearchWorkshopBookings(string studentID, Nullable<System.DateTime> startingDtBegin, Nullable<System.DateTime> startingDtEnd, Nullable<System.DateTime> endingDtBegin, Nullable<System.DateTime> endingDtEnd, Nullable<int> campusID, Nullable<bool> active, Nullable<int> page, Nullable<int> pageSize)
         {
             var studentIDParameter = studentID != null ?
                 new ObjectParameter("studentID", studentID) :
@@ -350,9 +350,9 @@ namespace UTS.HELPS.WebServices.DataAccess
                 new ObjectParameter("endingDtEnd", endingDtEnd) :
                 new ObjectParameter("endingDtEnd", typeof(System.DateTime));
     
-            var campusIdParameter = campusId.HasValue ?
-                new ObjectParameter("campusId", campusId) :
-                new ObjectParameter("campusId", typeof(int));
+            var campusIDParameter = campusID.HasValue ?
+                new ObjectParameter("campusID", campusID) :
+                new ObjectParameter("campusID", typeof(int));
     
             var activeParameter = active.HasValue ?
                 new ObjectParameter("active", active) :
@@ -366,7 +366,7 @@ namespace UTS.HELPS.WebServices.DataAccess
                 new ObjectParameter("pageSize", pageSize) :
                 new ObjectParameter("pageSize", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WorkshopBooking>("prcSearchWorkshopBookings", studentIDParameter, startingDtBeginParameter, startingDtEndParameter, endingDtBeginParameter, endingDtEndParameter, campusIdParameter, activeParameter, pageParameter, pageSizeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WorkshopBooking>("prcSearchWorkshopBookings", studentIDParameter, startingDtBeginParameter, startingDtEndParameter, endingDtBeginParameter, endingDtEndParameter, campusIDParameter, activeParameter, pageParameter, pageSizeParameter);
         }
     
         public virtual ObjectResult<Workshop> prcSearchWorkshops(Nullable<int> workshopSetId, string topic, Nullable<System.DateTime> startingDtBegin, Nullable<System.DateTime> startingDtEnd, Nullable<System.DateTime> endingDtBegin, Nullable<System.DateTime> endingDtEnd, Nullable<int> campusID, Nullable<bool> active, Nullable<int> page, Nullable<int> pageSize)
@@ -685,6 +685,15 @@ namespace UTS.HELPS.WebServices.DataAccess
                 new ObjectParameter("studentID", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("prcStudentActive", studentIDParameter);
+        }
+    
+        public virtual ObjectResult<BasicWorkshopBooking> prcGetWorkshopBookingByID(Nullable<int> workshopBookingID)
+        {
+            var workshopBookingIDParameter = workshopBookingID.HasValue ?
+                new ObjectParameter("WorkshopBookingID", workshopBookingID) :
+                new ObjectParameter("WorkshopBookingID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BasicWorkshopBooking>("prcGetWorkshopBookingByID", workshopBookingIDParameter);
         }
     }
 }

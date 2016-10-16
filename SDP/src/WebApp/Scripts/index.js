@@ -38,7 +38,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     $routeProvider.when("/help", {
         templateUrl: "content/help.html"
     });
-    $routeProvider.when("/code", {
+    $routeProvider.when("/code/:bookingID", {
         templateUrl: "content/barcode.html",
         controller: "Barcode"
     });
@@ -403,7 +403,10 @@ app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
 });
 
 
-app.controller("Barcode", function ($scope, $rootScope) {
+app.controller("Barcode", function ($scope, $rootScope, $routeParams) {
+    $rootScope.PageName = "Submit Attendance";
+
+    $scope.bookingID = Number.parseInt($routeParams.bookingID);
 
     $scope.barcodeReady = false;
     $scope.loadConfig = function () {
@@ -425,7 +428,8 @@ app.controller("Barcode", function ($scope, $rootScope) {
                 patchSize: "medium"
             }
         }, function (err) {
-            $scope.barcodeReady = true;            
+            $scope.barcodeReady = true;
+            $scope.$apply();
         });
         Quagga.onProcessed(function (result) {
             var drawingCtx = Quagga.canvas.ctx.overlay,
@@ -464,6 +468,7 @@ app.controller("Barcode", function ($scope, $rootScope) {
         }
 
         if ($scope.code.count == 10) {
+            $scope.code.valid = true;
             $scope.stop();
         }
 
@@ -477,7 +482,8 @@ app.controller("Barcode", function ($scope, $rootScope) {
     }
     $scope.code = {
         val: "",
-        count: 0
+        count: 0,
+        valid: false
     };
 
 
@@ -490,6 +496,14 @@ app.controller("Barcode", function ($scope, $rootScope) {
         }
     }
     $scope.loadBarcode();
+
+    $scope.submit = function () {
+        API.workshop.booking.attendance($scope.bookingID, $scope.code.val, function () {
+            $rootScope.showMessage("Attendance Submitted SUCCESSFULLY");
+        }, function () {
+            $rootScope.showMessage("Attendance Submitted FAILD");
+        });
+    }
 
     $scope.$on("$destroy", function () {
         Quagga.stop();

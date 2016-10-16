@@ -38,6 +38,26 @@
     white-space: nowrap;
 }
 
-.nomargin{
-    margin:0;
+.nomargin {
+    margin: 0;
 }
+
+#barcodelive {
+    max-width: 640px;
+    max-height: 480px;
+    width: 100%;
+    position: relative;
+}
+
+    #barcodelive video {
+        width: 100%;
+    }
+
+    #barcodelive canvas {
+        max-width: 640px;
+        max-height: 480px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }

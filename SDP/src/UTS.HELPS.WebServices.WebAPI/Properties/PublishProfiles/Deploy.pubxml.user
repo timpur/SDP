@@ -162,13 +162,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/UTS.HELPS.WebServices.DataAccess.dll">
-      <publishTime>10/13/2016 21:08:54</publishTime>
+      <publishTime>10/16/2016 18:48:00</publishTime>
     </File>
     <File Include="bin/UTS.HELPS.WebServices.DataObjects.dll">
       <publishTime>10/05/2016 09:52:18</publishTime>
     </File>
     <File Include="bin/UTS.HELPS.WebServices.WebAPI.dll">
-      <publishTime>10/13/2016 21:08:55</publishTime>
+      <publishTime>10/16/2016 18:48:01</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>

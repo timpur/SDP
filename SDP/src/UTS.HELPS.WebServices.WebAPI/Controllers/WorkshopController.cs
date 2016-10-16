@@ -350,5 +350,47 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 };
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/workshop/booking/attendance")]
+        public Response BookingAttendance(int BookingID, string AttendanceKey,string StudentID)
+        {
+            try
+            {
+                base.CheckApplicationKey();
+
+                BasicWorkshopBooking booking = WorkshopDb.GetWorkshopBooking(BookingID);
+
+                string key = booking.id.ToString();
+
+                if (key != AttendanceKey)
+                {
+                    throw new Exception("Key Not Valid");
+                }
+
+                WorkshopDb.UpdateWorkshopBooking(new UpdateWorkshopBooking()
+                {
+                    Attended = 1,
+                    StudentId = StudentID,
+                    WorkshopId = booking.workshopID.Value,
+                    UserId = int.Parse(StudentID)
+                });
+
+                return new WorkshopResponse()
+                {
+                    IsSuccess = true
+                };
+            }
+            catch (Exception e)
+            {
+                string msg = CreateExceptionMessage(e);
+                return new WorkshopResponse()
+                {
+                    IsSuccess = false,
+                    DisplayMessage = string.Format(ErrorMessages.WORKSHOP_BOOKING_ATTENDANCE_ERROR, msg)
+                };
+            }
+        }
     }
 }

@@ -295,6 +295,15 @@ var API = new function () {
         }
         API.callAPIGet(url, data, success, error);
     };
+    this.workshop.booking.attendance = function (bookingID, key, success, error) {
+        var url = this.url + "/attendance";
+        var data = {
+            BookingID: bookingID,
+            AttendanceKey: key,
+            StudentID: API.key.ID
+        }
+        API.callAPIGet(url, data, success, error);
+    };
 
     //Account OAUTH
 

@@ -38,7 +38,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     $routeProvider.when("/help", {
         templateUrl: "content/help.html"
     });
-    $routeProvider.when("/code", {
+    $routeProvider.when("/code/:bookingID", {
         templateUrl: "content/barcode.html",
         controller: "Barcode"
     });
@@ -403,8 +403,12 @@ app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
 });
 
 
-app.controller("Barcode", function ($scope, $rootScope) {   
+app.controller("Barcode", function ($scope, $rootScope, $routeParams) {
+    $rootScope.PageName = "Submit Attendance";
 
+    $scope.bookingID = Number.parseInt($routeParams.bookingID);
+
+    $scope.barcodeReady = false;
     $scope.loadConfig = function () {
         var obj = $("#barcodelive")[0];
         var cores = navigator.hardwareConcurrency | 1;
@@ -418,23 +422,69 @@ app.controller("Barcode", function ($scope, $rootScope) {
                 readers: ["code_128_reader"]
             },
             numOfWorkers: cores,
-        }, function (err) {
-            if (err) {
-                console.log(err);
-                return
+            locate: true,
+            locator: {
+                halfSample: true,
+                patchSize: "medium"
             }
-            console.log("Initialization finished. Ready to start");
-            Quagga.start();
+        }, function (err) {
+            $scope.barcodeReady = true;
+            $scope.$apply();
+        });
+        Quagga.onProcessed(function (result) {
+            var drawingCtx = Quagga.canvas.ctx.overlay,
+                drawingCanvas = Quagga.canvas.dom.overlay;
+
+            if (result) {
+                if (result.boxes) {
+                    drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                    result.boxes.filter(function (box) {
+                        return box !== result.box;
+                    }).forEach(function (box) {
+                        Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
+                    });
+                }
+
+                if (result.box) {
+                    Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
+                }
+
+                if (result.codeResult && result.codeResult.code) {
+                    Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+                }
+            }
         });
         Quagga.onDetected($scope.onCode);
     }
-
     $scope.onCode = function (data) {
         var code = data.codeResult.code;
-        Quagga.stop();
-        alert(code);
-    };
 
+        if ($scope.code.val != code) {
+            $scope.code.count = 0;
+            $scope.code.val = code;
+        }
+        else if ($scope.code.count != 10) {
+            $scope.code.count++;
+        }
+
+        if ($scope.code.count == 10) {
+            $scope.code.valid = true;
+            $scope.stop();
+        }
+
+        $scope.$apply();
+    };
+    $scope.start = function () {
+        Quagga.start();
+    }
+    $scope.stop = function () {
+        Quagga.stop();
+    }
+    $scope.code = {
+        val: "",
+        count: 0,
+        valid: false
+    };
 
 
     $scope.loadBarcode = function () {
@@ -446,6 +496,14 @@ app.controller("Barcode", function ($scope, $rootScope) {
         }
     }
     $scope.loadBarcode();
+
+    $scope.submit = function () {
+        API.workshop.booking.attendance($scope.bookingID, $scope.code.val, function () {
+            $rootScope.showMessage("Attendance Submitted SUCCESSFULLY");
+        }, function () {
+            $rootScope.showMessage("Attendance Submitted FAILD");
+        });
+    }
 
     $scope.$on("$destroy", function () {
         Quagga.stop();

@@ -30,6 +30,14 @@ namespace UTS.HELPS.WebServices.DataAccess
             }            
         }
 
+        public static BasicWorkshopBooking GetWorkshopBooking(int WorkshopBookingID)
+        {
+            using (HELPSEntities ctx = new HELPSEntities())
+            {
+                return ctx.prcGetWorkshopBookingByID(WorkshopBookingID).LastOrDefault();
+            }
+        }
+
         public static BasicWorkshopWaiting GetWorkshopWaiting(int workshopId, string studentId)
         {
             using (HELPSEntities ctx = new HELPSEntities())

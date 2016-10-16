@@ -91,7 +91,7 @@
       <Parameter Name="startingDtEnd" Mode="In" Type="DateTime" />
       <Parameter Name="endingDtBegin" Mode="In" Type="DateTime" />
       <Parameter Name="endingDtEnd" Mode="In" Type="DateTime" />
-      <Parameter Name="campusId" Mode="In" Type="Int32" />
+      <Parameter Name="campusID" Mode="In" Type="Int32" />
       <Parameter Name="active" Mode="In" Type="Boolean" />
       <Parameter Name="page" Mode="In" Type="Int32" />
       <Parameter Name="pageSize" Mode="In" Type="Int32" />
@@ -182,6 +182,9 @@
     </FunctionImport>
     <FunctionImport Name="prcStudentActive" ReturnType="Collection(Boolean)">
       <Parameter Name="studentID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prcGetWorkshopBookingByID" ReturnType="Collection(HELPSModel.BasicWorkshopBooking)">
+      <Parameter Name="WorkshopBookingID" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SessionType">

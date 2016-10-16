@@ -64,6 +64,9 @@
     <Parameter Name="workshopId" Type="int" Mode="In" />
     <Parameter Name="studentId" Type="char" Mode="In" />
   </Function>
+  <Function Name="prcGetWorkshopBookingByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="WorkshopBookingID" Type="int" Mode="In" />
+  </Function>
   <Function Name="prcGetWorkshopWaiting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="workshopId" Type="int" Mode="In" />
     <Parameter Name="studentId" Type="char" Mode="In" />
@@ -105,7 +108,7 @@
     <Parameter Name="startingDtEnd" Type="datetime" Mode="In" />
     <Parameter Name="endingDtBegin" Type="datetime" Mode="In" />
     <Parameter Name="endingDtEnd" Type="datetime" Mode="In" />
-    <Parameter Name="campusId" Type="int" Mode="In" />
+    <Parameter Name="campusID" Type="int" Mode="In" />
     <Parameter Name="active" Type="bit" Mode="In" />
     <Parameter Name="page" Type="int" Mode="In" />
     <Parameter Name="pageSize" Type="int" Mode="In" />

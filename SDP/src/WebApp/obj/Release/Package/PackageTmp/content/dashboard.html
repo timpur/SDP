@@ -15,7 +15,9 @@
                         <p>Campus: <b ng-bind="booking.campus"></b></p>
                     </md-card-content>
                     <md-card-actions layout="row">
-                        <md-button class="md-raised md-primary" aria-label="Cancel Workshop Booking" ng-click="cancelBooking($event, $index)">Cancel this Booking</md-button>
+                        <md-button class="md-primary md-raised" aria-label="Attendance" ng-href="{{'#code/' + booking.BookingId}}" ng-hide="booking.attended==1">Submit Attendance</md-button>
+                        <span flex></span>
+                        <md-button class="md-primary" aria-label="Cancel Workshop Booking" ng-click="cancelBooking($event, $index)">Cancel Booking</md-button>                       
                     </md-card-actions>
                 </md-card>
             </div>
