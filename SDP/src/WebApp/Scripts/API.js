@@ -246,8 +246,8 @@ var API = new function () {
         API.callAPIGet(url, data, success, error);
     };
     this.workshop.search.dataObj = function () {
-        var ss = new Date(2014, 1, 1);
-        var se = new Date(2014, 1, 1);
+        var ss = new Date();
+        var se = new Date(ss.valueOf());
         se.setDate(new Date().getDate() + 14);
 
         this.WorkshopSetId = null;
