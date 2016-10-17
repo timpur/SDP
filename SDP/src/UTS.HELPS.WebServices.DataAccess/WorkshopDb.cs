@@ -100,5 +100,30 @@ namespace UTS.HELPS.WebServices.DataAccess
                     update.Canceled, update.Attended, update.UserId);
             }
         }
+
+        public static List<Notification> GetWorkshopBookingNotifications(int bookingID)
+        {
+            using (HELPSEntities ctx = new HELPSEntities())
+            {
+                return ctx.Notifications.Where(x => x.bookingID == bookingID).ToList();
+            }
+        }
+
+        public static void SetWorkshopBookingNotifcations(BookingNotification request)
+        {
+            int bookingID = request.bookingID;
+            List<Notification> notifications = request.Notifications.Select(x => new Notification()
+            {
+                bookingID = bookingID,
+                time = x.time
+            }).ToList();
+
+            using (HELPSEntities ctx = new HELPSEntities())
+            {
+                ctx.Notifications.RemoveRange(ctx.Notifications.Where(x => x.bookingID == bookingID));
+                ctx.Notifications.AddRange(notifications);
+                ctx.SaveChanges();
+            }
+        }
     }
 }

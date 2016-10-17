@@ -42,6 +42,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         templateUrl: "content/barcode.html",
         controller: "Barcode"
     });
+    $routeProvider.when("/booking/settings/:bookingID", {
+        templateUrl: "content/bookingsettings.html",
+        controller: "BookingSettings"
+    });
 
 
 }]);
@@ -509,6 +513,48 @@ app.controller("Barcode", function ($scope, $rootScope, $routeParams) {
         Quagga.stop();
     });
 });
+
+
+app.controller("BookingSettings", function ($scope, $rootScope, $routeParams) {
+    $rootScope.PageName = "Booking Settings";
+
+    $scope.bookingID = Number.parseInt($routeParams.bookingID);
+
+    $scope.notifications = [];
+    $scope.times = [
+        { val: 1, text: "30 Min" }, { val: 2, text: "1 HR" }, { val: 4, text: "2 HR" }, { val: 4, text: "4 HR" }, { val: 5, text: "6 HR" },
+        { val: 6, text: "12 HR" }, { val: 7, text: "1 Day" }, { val: 8, text: "2 Day" }, { val: 9, text: "3 Day" }, { val: 10, text: "4 Day" }
+    ];
+
+
+    $scope.loadNotifications = function () {
+        if (!API.key.validKey) {
+            $(document).on("Authenticated", $scope.loadNotifications);
+        }
+        else {
+            API.workshop.booking.notification.get($scope.bookingID, function (data) {
+                $scope.notifications = data.Results;
+                $scope.$apply();
+            }, null);
+        }
+    }
+    $scope.loadNotifications();
+
+    $scope.add = function () {
+        $scope.notifications.push({ time: 1 });
+    };
+    $scope.remove = function (index) {
+        $scope.notifications.splice(index, 1);
+    }
+
+    $scope.save = function () {
+        API.workshop.booking.notification.set($scope.bookingID, $scope.notifications, function (data) {
+            $rootScope.showMessage("Notifications Set SUCCESSFULLY");
+        },null);
+    }
+
+});
+
 
 // Global Functions
 

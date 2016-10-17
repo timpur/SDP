@@ -109,6 +109,9 @@
     </Compile>
     <Compile Include="MiscDb.cs" />
     <Compile Include="MyExtensions.cs" />
+    <Compile Include="Notification.cs">
+      <DependentUpon>HELPSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionBooking.cs">
       <DependentUpon>HELPSModel.tt</DependentUpon>

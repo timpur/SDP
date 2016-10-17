@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="HELPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="HELPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="notification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bookingID" Type="int" Nullable="false" />
+    <Property Name="time" Type="int" Nullable="false" />
+  </EntityType>
   <Function Name="prcCancelWorkshopBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="workshopId" Type="int" Mode="In" />
     <Parameter Name="studentId" Type="char" Mode="In" />
@@ -185,5 +193,7 @@
     <Parameter Name="attended" Type="int" Mode="In" />
     <Parameter Name="userId" Type="int" Mode="In" />
   </Function>
-  <EntityContainer Name="HELPSModelStoreContainer" />
+  <EntityContainer Name="HELPSModelStoreContainer">
+    <EntitySet Name="notification" EntityType="Self.notification" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
 </Schema>

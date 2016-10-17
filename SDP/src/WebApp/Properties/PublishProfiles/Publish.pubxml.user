@@ -10,16 +10,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/WebApp.dll">
-      <publishTime>10/15/2016 18:23:17</publishTime>
+      <publishTime>10/17/2016 20:55:30</publishTime>
     </File>
     <File Include="content/barcode.html">
-      <publishTime>10/16/2016 19:11:24</publishTime>
+      <publishTime>10/16/2016 19:15:11</publishTime>
+    </File>
+    <File Include="content/bookingsettings.html">
+      <publishTime>10/17/2016 20:51:42</publishTime>
     </File>
     <File Include="content/dashboard.html">
-      <publishTime>10/16/2016 18:57:42</publishTime>
+      <publishTime>10/17/2016 19:04:37</publishTime>
     </File>
     <File Include="content/findworkshops.html">
-      <publishTime>10/13/2016 20:45:48</publishTime>
+      <publishTime>10/17/2016 20:26:11</publishTime>
     </File>
     <File Include="content/help.html">
       <publishTime>10/13/2016 21:02:13</publishTime>
@@ -84,6 +87,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="img/icons/right.svg">
       <publishTime>10/10/2016 20:40:32</publishTime>
     </File>
+    <File Include="img/icons/settings.svg">
+      <publishTime>10/17/2016 19:04:23</publishTime>
+    </File>
     <File Include="index.html">
       <publishTime>10/15/2016 17:50:08</publishTime>
     </File>
@@ -115,10 +121,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2016 21:42:53</publishTime>
     </File>
     <File Include="Scripts/API.js">
-      <publishTime>10/16/2016 18:46:42</publishTime>
+      <publishTime>10/17/2016 19:58:10</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>10/16/2016 19:12:10</publishTime>
+      <publishTime>10/17/2016 20:52:03</publishTime>
     </File>
     <File Include="Scripts/intellisense/angular.js">
       <publishTime>08/22/2016 17:52:44</publishTime>

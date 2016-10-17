@@ -304,6 +304,22 @@ var API = new function () {
         }
         API.callAPIGet(url, data, success, error);
     };
+    this.workshop.booking.notification = { url: this.workshop.booking.url + "/notification" }
+    this.workshop.booking.notification.get = function (bookingID, success, error) {
+        var url = this.url;
+        var data = {
+            bookingID: bookingID
+        }
+        API.callAPIGet(url, data, success, error);
+    };
+    this.workshop.booking.notification.set = function (bookingID, notifications, success, error) {
+        var url = this.url;
+        var data = {
+            bookingID: bookingID,
+            Notifications:notifications
+        }
+        API.callAPIPost(url, data, success, error);
+    };
 
     //Account OAUTH
 

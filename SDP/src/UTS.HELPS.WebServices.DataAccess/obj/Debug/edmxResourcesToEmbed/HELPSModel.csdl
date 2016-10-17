@@ -186,6 +186,7 @@
     <FunctionImport Name="prcGetWorkshopBookingByID" ReturnType="Collection(HELPSModel.BasicWorkshopBooking)">
       <Parameter Name="WorkshopBookingID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="Notifications" EntityType="HELPSModel.Notification" />
   </EntityContainer>
   <ComplexType Name="SessionType">
     <Property Type="Int32" Name="id" Nullable="false" />
@@ -389,4 +390,13 @@
     <Property Type="Boolean" Name="inactive" Nullable="true" />
     <Property Type="DateTime" Name="archived" Nullable="true" Precision="23" />
   </ComplexType>
+  <EnumType Name="NotifcationTime" a:ExternalTypeName="UTS.HELPS.WebServices.DataObjects.Enums.NotifcationTime" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bookingID" Type="Int32" Nullable="false" />
+    <Property Name="time" Type="HELPSModel.NotifcationTime" Nullable="false" />
+  </EntityType>
 </Schema>

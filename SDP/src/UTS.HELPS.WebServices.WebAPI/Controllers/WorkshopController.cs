@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Threading.Tasks;
 using UTS.HELPS.WebServices.DataAccess;
 using UTS.HELPS.WebServices.DataObjects.Requests;
 using UTS.HELPS.WebServices.WebAPI.Constants;
 using UTS.HELPS.WebServices.WebAPI.Responses;
+using UTS.HELPS.WebServices.WebAPI.Models;
 
 namespace UTS.HELPS.WebServices.WebAPI.Controllers
 {
@@ -90,6 +92,9 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 }
 
                 WorkshopDb.CreateWorkshopBooking(workshopId, studentId, userId);
+
+                 Task EmailTask = EmailHelper.sendEmailAsync("Booking Confirmation", String.Format("You have successfully created a booking for workshop {0}, starting at {1}",
+                    workshop.topic, workshop.starting.Value.ToString("f")));
             }
             catch (Exception e)
             {
@@ -199,6 +204,10 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 }
 
                 WorkshopDb.CancelWorkshopBooking(workshopId, studentId, userId);
+
+                BasicWorkshop workshop = WorkshopDb.GetWorkshop(workshopId);
+                Task EmailTask = EmailHelper.sendEmailAsync("Booking Cancelation Confirmation", String.Format("You have successfully canceled booking for workshop {0} starting at {1}",
+                    workshop.topic, workshop.starting.Value.ToString("f")));
             }
             catch (Exception e)
             {
@@ -354,7 +363,7 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
         [Authorize]
         [HttpGet]
         [Route("api/workshop/booking/attendance")]
-        public Response BookingAttendance(int BookingID, string AttendanceKey,string StudentID)
+        public Response BookingAttendance(int BookingID, string AttendanceKey, string StudentID)
         {
             try
             {
@@ -389,6 +398,61 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 {
                     IsSuccess = false,
                     DisplayMessage = string.Format(ErrorMessages.WORKSHOP_BOOKING_ATTENDANCE_ERROR, msg)
+                };
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/workshop/booking/notification")]
+        public NotifcationsResponse getBookingNotifications(int bookingID)
+        {
+            try
+            {
+                base.CheckApplicationKey();
+
+                List<Notification> Notifications = WorkshopDb.GetWorkshopBookingNotifications(bookingID);
+
+                return new NotifcationsResponse()
+                {
+                    IsSuccess = true,
+                    Results = Notifications
+                };
+            }
+            catch (Exception e)
+            {
+                string msg = CreateExceptionMessage(e);
+                return new NotifcationsResponse()
+                {
+                    IsSuccess = false,
+                    DisplayMessage = string.Format(ErrorMessages.WORKSHOP_BOOKING_NOTIFICATION_GET_ERROR, msg)
+                };
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/workshop/booking/notification")]
+        public Response setBookingNotifications(BookingNotification request)
+        {
+            try
+            {
+                base.CheckApplicationKey();
+
+                WorkshopDb.SetWorkshopBookingNotifcations(request);
+
+                return new Response()
+                {
+                    IsSuccess = true
+                };
+            }
+            catch (Exception e)
+            {
+                string msg = CreateExceptionMessage(e);
+                return new Response()
+                {
+                    IsSuccess = false,
+                    DisplayMessage = string.Format(ErrorMessages.WORKSHOP_BOOKING_NOTIFICATION_GET_ERROR, msg)
                 };
             }
         }

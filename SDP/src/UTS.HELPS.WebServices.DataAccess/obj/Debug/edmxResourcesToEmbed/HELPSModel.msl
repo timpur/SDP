@@ -282,5 +282,14 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="HELPSModel.Notification">
+        <MappingFragment StoreEntitySet="notification">
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="bookingID" ColumnName="bookingID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

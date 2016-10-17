@@ -33,4 +33,18 @@ namespace UTS.HELPS.WebServices.DataObjects.Enums
         Permanent = 0,
         International = 1
     }
+
+    public enum NotifcationTime
+    {
+        Min_30 = 1,
+        Hr_1 = 2,
+        Hr_2 = 3,
+        Hr_4 = 4,
+        Hr_6 = 5,
+        Hr_12 = 6,
+        D_1 = 7,
+        D_2 = 8,
+        D_3 = 9,
+        D_4 = 10
+    }
 }

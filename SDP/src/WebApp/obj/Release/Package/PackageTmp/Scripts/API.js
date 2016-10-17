@@ -246,8 +246,8 @@ var API = new function () {
         API.callAPIGet(url, data, success, error);
     };
     this.workshop.search.dataObj = function () {
-        var ss = new Date(2014, 1, 1);
-        var se = new Date(2014, 1, 1);
+        var ss = new Date();
+        var se = new Date(ss.valueOf());
         se.setDate(new Date().getDate() + 14);
 
         this.WorkshopSetId = null;
@@ -303,6 +303,22 @@ var API = new function () {
             StudentID: API.key.ID
         }
         API.callAPIGet(url, data, success, error);
+    };
+    this.workshop.booking.notification = { url: this.workshop.booking.url + "/notification" }
+    this.workshop.booking.notification.get = function (bookingID, success, error) {
+        var url = this.url;
+        var data = {
+            bookingID: bookingID
+        }
+        API.callAPIGet(url, data, success, error);
+    };
+    this.workshop.booking.notification.set = function (bookingID, notifications, success, error) {
+        var url = this.url;
+        var data = {
+            bookingID: bookingID,
+            Notifications:notifications
+        }
+        API.callAPIPost(url, data, success, error);
     };
 
     //Account OAUTH

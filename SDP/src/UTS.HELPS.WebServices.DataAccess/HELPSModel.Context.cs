@@ -27,6 +27,7 @@ namespace UTS.HELPS.WebServices.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Notification> Notifications { get; set; }
     
         public virtual int prcCreateStudent(string studentID, Nullable<System.DateTime> dob, string gender, string degree, string year, string status, string first_language, string country_origin, string background, Nullable<bool> hSC, string hSC_mark, Nullable<bool> iELTS, string iELTS_mark, Nullable<bool> tOEFL, string tOEFL_mark, Nullable<bool> tAFE, string tAFE_mark, Nullable<bool> cULT, string cULT_mark, Nullable<bool> insearchDEEP, string insearchDEEP_mark, Nullable<bool> insearchDiploma, string insearchDiploma_mark, Nullable<bool> foundationcourse, string foundationcourse_mark, Nullable<int> creatorID, string degree_details, string alternative_contact, string preferred_name)
         {

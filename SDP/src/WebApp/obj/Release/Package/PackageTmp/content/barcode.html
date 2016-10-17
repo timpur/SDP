@@ -1,8 +1,6 @@
 ﻿<md-content id="barcode" layout="column" layout-align="start center" flex>
     <section id="barcodelive"></section>
     <md-button class="md-raised md-primary" aria-label="Start" ng-click="start()" ng-show="barcodeReady">Start Scaning</md-button>
-    <section>
-        <p>Barcode Code: {{code.val}}</p>
-        <md-button class="md-raised md-primary" aria-label="Submit" ng-click="submit()" ng-show="code.valid">Submit</md-button>
-    </section>
+    <p ng-show="code.valid">Barcode Code: {{code.val}}</p>
+    <md-button class="md-raised md-primary" aria-label="Submit" ng-click="submit()" ng-show="code.valid">Submit</md-button>
 </md-content>

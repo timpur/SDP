@@ -170,9 +170,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -220,6 +218,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Responses\AppointmentListResponse.cs" />
@@ -227,6 +226,7 @@
     <Compile Include="Responses\AuthResponse.cs" />
     <Compile Include="Responses\CampusListResponse.cs" />
     <Compile Include="Responses\LecturerListResponse.cs" />
+    <Compile Include="Responses\Notifcations.cs" />
     <Compile Include="Responses\SessionBookingListResponse.cs" />
     <Compile Include="Responses\Response.cs" />
     <Compile Include="Responses\SessionTypeListResponse.cs" />

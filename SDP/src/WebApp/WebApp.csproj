@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="content\barcode.html" />
+    <Content Include="content\bookingsettings.html" />
     <Content Include="content\help.html" />
     <Content Include="content\past.html" />
     <Content Include="content\dashboard.html" />
@@ -64,6 +65,7 @@
     <Content Include="img\icons\menu.svg" />
     <Content Include="img\icons\more_vert.svg" />
     <Content Include="img\icons\right.svg" />
+    <Content Include="img\icons\settings.svg" />
     <Content Include="packages.config" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
     <Content Include="Scripts\angular\angular-aria.min.js" />

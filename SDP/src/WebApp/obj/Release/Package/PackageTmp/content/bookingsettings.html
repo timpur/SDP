@@ -1,0 +1,30 @@
+﻿<md-content layout="column" layout-align="top center" flex>
+    <md-card id="notifications">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Booking Notifications</span>
+                <span class="md-subhead">Email Reminders</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <div ng-repeat="notification in notifications" layout="row" layout-align='start center'>
+                <md-input-container>
+                    <label>Time</label>
+                    <md-select ng-model="notification.time">
+                        <md-option ng-repeat="time in times" ng-value="time.val">{{time.text}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <p>Before Booking</p>
+                <span flex></span>
+                <md-button class="md-primary" aria-label="Remove Time" ng-click="remove($index)">
+                    <md-icon md-svg-icon="img/icons/close.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-card-content>
+        <md-card-actions layout="row">
+            <md-button class="md-primary" aria-label="Add Time" ng-click="add()">Add Time</md-button>
+            <span flex></span>
+            <md-button class="md-primary md-raised" aria-label="Save" ng-click="save()">Save</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>

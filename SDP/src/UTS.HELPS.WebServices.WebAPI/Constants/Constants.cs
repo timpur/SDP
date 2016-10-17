@@ -37,5 +37,8 @@
         public static readonly string STUDENT_ACCOUNT_ACTIVE_ERROR = "Error Getting Student's Account Active Information: {0}";
 
         public static readonly string WORKSHOP_BOOKING_ATTENDANCE_ERROR = "Error Validating Attendance: {0}";
+
+        public static readonly string WORKSHOP_BOOKING_NOTIFICATION_GET_ERROR = "Error Getting Notifications: {0}";
+        public static readonly string WORKSHOP_BOOKING_NOTIFICATION_SET_ERROR = "Error Setting Notifications: {0}";
     }
 }
