@@ -189,8 +189,8 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
         year: [{ name: "Not Set", value: "NotSet" }, { name: "1st Year", value: "Year1" }, { name: "2nd Year", value: "Year2" },
         { name: "3rd Year", value: "Year3" }, { name: "4th Year", value: "Year4" }, { name: "5th Year", value: "Year5" }],
         status: [{ name: "Permanent", value: "Permanent" }, { name: "International", value: "International" }],
-        language: ["English", "Test"],
-        country: ["Australia", "Test"]
+        language: ["English", "..."],
+        country: ["Australia", "USA", "...", ]
     };
 
     $scope.updateMyInfo = function () {
@@ -255,6 +255,7 @@ app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
     $scope.workshops = [];
     $scope.filter = new API.workshop.search.dataObj();
     $scope.order = 'topic';
+    $scope.workshopSets = [];
 
     $scope.moreWorkshops = function () {
         if ($scope.workshops.length == $scope.filter.PageSize) {
@@ -301,6 +302,11 @@ app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
                 $scope.workshops = data.Results;
                 $scope.$apply();
             }, null);
+            if ($scope.workshopSets.length == 0) {
+                API.workshop.getSets(true, function (data) {
+                    $scope.workshopSets = data.Results;
+                }, null);
+            }
         }
     }
     $scope.loadWorkshops();

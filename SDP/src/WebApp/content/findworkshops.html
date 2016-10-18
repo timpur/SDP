@@ -33,7 +33,19 @@
     </md-toolbar>
     <md-content layout-padding>
         <div class="md-body-1" layout="row" layout-align="start center">
-
+            <form>
+                <md-input-container>
+                    <label>Topic</label>
+                    <input ng-model="filter.Topic">
+                </md-input-container>
+                <md-button type="submit" class="md-primary" aria-label="Search" ng-click="loadWorkshops()">Search</md-button>
+            </form>
+        </div>
+        <div class="md-body-1" layout="row" layout-align="start center">
+            <span class="lable">Select Set:</span>
+            <md-select class="nomargin" aria-label="Select Page" ng-model="filter.WorkshopSetId" ng-change="loadWorkshops()">
+                <md-option ng-repeat="set in workshopSets" ng-value="set.id" ng-bind="set.name"></md-option>
+            </md-select>
         </div>
         <div class="md-body-1" layout="row" layout-align="start center">
             <span class="lable">Select Page:</span>

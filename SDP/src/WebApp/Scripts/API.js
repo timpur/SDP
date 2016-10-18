@@ -241,6 +241,10 @@ var API = new function () {
         var url = this.url + "/" + JSON.stringify(ID);
         API.callAPIGet(url, null, success, error);
     }
+    this.workshop.getSets = function (active, success, error) {
+        var url = this.url + "/workshopSets/" + JSON.stringify(active);
+        API.callAPIGet(url, null, success, error);
+    }
     this.workshop.search = function (data, success, error) {
         var url = this.url + "/search";
         API.callAPIGet(url, data, success, error);

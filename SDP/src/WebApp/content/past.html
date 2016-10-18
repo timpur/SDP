@@ -13,6 +13,7 @@
                         <p><b ng-bind="booking.starting | date:'mediumDate'"></b> to <b ng-bind="booking.ending | date:'mediumDate'"></b></p>
                         <p><b ng-bind="booking.starting | date:'shortTime'"></b> to <b ng-bind="booking.ending | date:'shortTime'"></b></p>
                         <p>Campus: <b ng-bind="booking.campus"></b></p>
+                        <p>Attended: <b ng-bind="booking.attended==true?'Yes':'No'"></b></p>
                     </md-card-content>
                     <md-card-actions layout="row">
                     </md-card-actions>
