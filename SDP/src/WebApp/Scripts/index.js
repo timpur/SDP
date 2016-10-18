@@ -14,7 +14,7 @@
 var app = angular.module("App", ["ngMaterial", "md.data.table", "ngRoute", "ngMessages"]);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-    // Routes
+    // Set up Routes
     $routeProvider.when("/", {
         templateUrl: "content/dashboard.html",
         controller: "Dashboard"
@@ -50,6 +50,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
 }]);
 
+// Theaming Configeration
 app.config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette("red")
@@ -57,7 +58,8 @@ app.config(function ($mdThemingProvider) {
       .warnPalette("pink");
 });
 
-
+// Main Controller of app
+// Authtication
 var MainController = app.controller("Main", function ($scope, $rootScope, $mdDialog, $mdToast, $location) {
     $(document).ready(function () {
         Authenticate();
@@ -143,7 +145,7 @@ var MenuController = app.controller('Menubar', function ($scope, $rootScope, $ti
 });
 
 
-
+// Controller for Nav Bar
 var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, $mdSidenav) {
     $scope.close = function () {
         $mdSidenav('LeftNav').close();
@@ -174,7 +176,7 @@ var LeftNavController = app.controller('LeftNav', function ($scope, $rootScope, 
     ];
 });
 
-
+// Controller for Register / Update info
 var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
     $rootScope.PageName = "My Information";
 
@@ -226,7 +228,7 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
 });
 
 
-
+// Login Controller to authenticate
 function Login_DialogController($scope, $rootScope, $mdDialog) {
     $scope.close = function () {
         $mdDialog.hide();
@@ -248,7 +250,7 @@ function Login_DialogController($scope, $rootScope, $mdDialog) {
     };
 }
 
-
+// Controller for Finding workshops
 app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
     $rootScope.PageName = "Find Workshops";
 
@@ -313,6 +315,7 @@ app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
 
 })
 
+// Controller for details / Booking workshop
 app.controller("Workshop", function ($scope, $rootScope, $routeParams, $mdDialog) {
     $rootScope.PageName = "Workshop Details";
 
@@ -379,6 +382,7 @@ app.controller("Workshop", function ($scope, $rootScope, $routeParams, $mdDialog
 
 });
 
+// Controller for the dashboard
 app.controller("Dashboard", function ($scope, $rootScope, $mdDialog) {
     $rootScope.PageName = "DashBoard";
 
@@ -419,6 +423,7 @@ app.controller("Dashboard", function ($scope, $rootScope, $mdDialog) {
 
 });
 
+// Controller for past bookings
 app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
     $rootScope.PageName = "Past Bookings";
 
@@ -442,6 +447,7 @@ app.controller("PastBookings", function ($scope, $rootScope, $mdDialog) {
 });
 
 
+// Conttroller for Attendance
 app.controller("Barcode", function ($scope, $rootScope, $routeParams) {
     $rootScope.PageName = "Submit Attendance";
 
@@ -549,7 +555,7 @@ app.controller("Barcode", function ($scope, $rootScope, $routeParams) {
     });
 });
 
-
+// Controller for booking settings - notification
 app.controller("BookingSettings", function ($scope, $rootScope, $routeParams) {
     $rootScope.PageName = "Booking Settings";
 
@@ -622,6 +628,7 @@ function pos(num1, num2) {
         return num;
 }
 
+//Vibrate function for mobile
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 function vibrate() {
     vibrateTime(50);
@@ -646,6 +653,7 @@ app.directive('stringToNumber', function () {
 
 
 // Admin only
+// Create user to simulate UTS Single sign on
 function createUser() {
     var dataObj = new API.account.Register.dataObj();
     dataObj.UserName = "98077175";

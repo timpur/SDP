@@ -168,7 +168,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/17/2016 20:55:40</publishTime>
     </File>
     <File Include="bin/UTS.HELPS.WebServices.WebAPI.dll">
-      <publishTime>10/17/2016 20:55:41</publishTime>
+      <publishTime>10/18/2016 21:18:45</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>

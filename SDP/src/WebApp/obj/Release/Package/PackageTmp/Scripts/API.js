@@ -3,7 +3,7 @@
 /// <reference path="intellisense/angular.js" />
 
 
-
+// API for Web Service
 var API = new function () {
     // API Stuff
     this.header = { AppKey: "123456", Authorization: "" };
@@ -241,6 +241,10 @@ var API = new function () {
         var url = this.url + "/" + JSON.stringify(ID);
         API.callAPIGet(url, null, success, error);
     }
+    this.workshop.getSets = function (active, success, error) {
+        var url = this.url + "/workshopSets/" + JSON.stringify(active);
+        API.callAPIGet(url, null, success, error);
+    }
     this.workshop.search = function (data, success, error) {
         var url = this.url + "/search";
         API.callAPIGet(url, data, success, error);
@@ -316,9 +320,20 @@ var API = new function () {
         var url = this.url;
         var data = {
             bookingID: bookingID,
-            Notifications:notifications
+            Notifications: notifications
         }
         API.callAPIPost(url, data, success, error);
+    };
+    this.workshop.waiting = { url: this.workshop.url + "/wait" };
+    this.workshop.waiting.create = function (workshopID, success, error) {
+        var url = this.url + "/create";
+        var data = {
+            workshopId: workshopID,
+            studentId: API.key.ID,
+            userId: API.key.ID,
+            priority: null
+        }
+        API.callAPIGet(url, data, success, error);
     };
 
     //Account OAUTH
