@@ -316,9 +316,20 @@ var API = new function () {
         var url = this.url;
         var data = {
             bookingID: bookingID,
-            Notifications:notifications
+            Notifications: notifications
         }
         API.callAPIPost(url, data, success, error);
+    };
+    this.workshop.waiting = { url: this.workshop.url + "/wait" };
+    this.workshop.waiting.create = function (workshopID, success, error) {
+        var url = this.url + "/create";
+        var data = {
+            workshopId: workshopID,
+            studentId: API.key.ID,
+            userId: API.key.ID,
+            priority: null
+        }
+        API.callAPIGet(url, data, success, error);
     };
 
     //Account OAUTH

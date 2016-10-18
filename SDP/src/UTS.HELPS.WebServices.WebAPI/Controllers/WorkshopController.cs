@@ -93,8 +93,8 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
 
                 WorkshopDb.CreateWorkshopBooking(workshopId, studentId, userId);
 
-                 Task EmailTask = EmailHelper.sendEmailAsync("Booking Confirmation", String.Format("You have successfully created a booking for workshop {0}, starting at {1}",
-                    workshop.topic, workshop.starting.Value.ToString("f")));
+                Task EmailTask = EmailHelper.sendEmailAsync("Booking Confirmation", String.Format("You have successfully created a booking for workshop {0}, starting at {1}",
+                   workshop.topic, workshop.starting.Value.ToString("f")));
             }
             catch (Exception e)
             {
@@ -204,6 +204,11 @@ namespace UTS.HELPS.WebServices.WebAPI.Controllers
                 }
 
                 WorkshopDb.CancelWorkshopBooking(workshopId, studentId, userId);
+                WorkshopDb.SetWorkshopBookingNotifcations(new BookingNotification()
+                {
+                    bookingID = workshopBooking.id,
+                    Notifications = new List<NotificationRequest>()
+                });
 
                 BasicWorkshop workshop = WorkshopDb.GetWorkshop(workshopId);
                 Task EmailTask = EmailHelper.sendEmailAsync("Booking Cancelation Confirmation", String.Format("You have successfully canceled booking for workshop {0} starting at {1}",

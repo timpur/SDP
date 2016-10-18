@@ -307,7 +307,7 @@ app.controller("FindWorkshops", function ($scope, $rootScope, $mdSidenav) {
 
 })
 
-app.controller("Workshop", function ($scope, $rootScope, $routeParams) {
+app.controller("Workshop", function ($scope, $rootScope, $routeParams, $mdDialog) {
     $rootScope.PageName = "Workshop Details";
 
     $scope.workshopID = Number.parseInt($routeParams.workshopID);
@@ -326,21 +326,50 @@ app.controller("Workshop", function ($scope, $rootScope, $routeParams) {
     }
     $scope.loadWorkshop();
 
-    $scope.bookWorkshop = function () {
+    $scope.bookWorkshop = function (ev) {
         vibrate();
         API.workshop.booking.create($scope.workshopID,
-        function (data) {
-            //Success
-            if (data.IsSuccess == true)
-                $rootScope.showMessage("Booking was SUCCESSFULL");
-        },
-        function (data) {
-            //Error
-            if (data.IsSuccess == false) {
-                alert(data.DisplayMessage);
-            }
-        });
+            function (data) {
+                //Success
+                if (data.IsSuccess == true)
+                    $rootScope.showMessage("Booking was SUCCESSFULL");
+            },
+            function (data) {
+                //Error
+                if (data.IsSuccess == false) {
+                    var message = data.DisplayMessage;
+                    if (message.includes("cut-off")) {
+                        $scope.bookWaiting(ev);
+                    }
+                    else {
+                        $rootScope.showMessage(message);
+                    }
+                }
+            });
     }
+
+    $scope.bookWaiting = function (ev) {
+        var confirm = $mdDialog.confirm()
+              .title('The Workshop is Full')
+              .textContent(' Would you like to add the booking request to the waiting list?')
+              .ariaLabel('Waiting Request')
+              .targetEvent(ev)
+              .ok('Add To Waiting')
+              .cancel('Cancel Request');
+
+        $mdDialog.show(confirm).then(function () {
+            API.workshop.waiting.create($scope.workshopID,
+                function (data) {
+                    //Success
+                    $rootScope.showMessage("Booking was added to waiting list SUCCESSFULL");
+                },
+                function (data) {
+                    //Error
+                    if (data.IsSuccess == false)
+                        tScope.showMessage(data.DisplayMessage);
+                });
+        });
+    };
 
 });
 
@@ -550,7 +579,7 @@ app.controller("BookingSettings", function ($scope, $rootScope, $routeParams) {
     $scope.save = function () {
         API.workshop.booking.notification.set($scope.bookingID, $scope.notifications, function (data) {
             $rootScope.showMessage("Notifications Set SUCCESSFULLY");
-        },null);
+        }, null);
     }
 
 });
@@ -611,10 +640,10 @@ app.directive('stringToNumber', function () {
 
 
 // Admin only
-
 function createUser() {
     var dataObj = new API.account.Register.dataObj();
     dataObj.UserName = "98077175";
+    //dataObj.UserName = "98077176";
     dataObj.Password = "testtest";
     dataObj.ConfirmPassword = "testtest";
     dataObj.FirstName = "Timothy"
