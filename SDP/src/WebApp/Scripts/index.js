@@ -192,7 +192,7 @@ var MyInfoController = app.controller('MyInfo', function ($scope, $rootScope) {
         { name: "3rd Year", value: "Year3" }, { name: "4th Year", value: "Year4" }, { name: "5th Year", value: "Year5" }],
         status: [{ name: "Permanent", value: "Permanent" }, { name: "International", value: "International" }],
         language: ["English", "..."],
-        country: ["Australia", "USA", "..." ]
+        country: ["Australia", "USA", "..."]
     };
 
     $scope.updateMyInfo = function () {
@@ -634,7 +634,8 @@ function vibrate() {
     vibrateTime(50);
 }
 function vibrateTime(num) {
-    navigator.vibrate(num);
+    if (navigator.vibrate != null)
+        navigator.vibrate(num);
 }
 
 app.directive('stringToNumber', function () {
